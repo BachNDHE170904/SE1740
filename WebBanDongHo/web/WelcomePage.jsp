@@ -4,9 +4,6 @@
     Author     : ADMIN
 --%>
 
-<%@page import="model.Watch"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="DAL.WatchDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,8 +17,9 @@
         <div class="row1">
             <div class="collapse navbar-collapse" id="navbar">
                 <a href="WelcomePage.jsp">Home</a> 
-                <a href="Login.html">Login</a>
+                <a href="WelcomePage.jsp">Login</a>
                 <a href="#">Shop</a>
+                <a href="#">Menu</a>
                 <a href="#">About us</a>
 
 
@@ -35,29 +33,104 @@
         <div class="watchesContainer">
             <div class="row">
                 <h3>Wrist Watches</h3>
-                <%
-                    WatchDAO db = new WatchDAO();
-                    ArrayList<Watch> watches = db.getWatches();
-                    if (watches == null) {
-                        out.println("Cannot get the data");
-                    } else {
-                        for (Watch w : watches) {
-                %>
-                <a class="itembox" id="<%= w.getId()%>" href="PreviewWatch">
-                    <img class="itemimg" src="images/<%= w.getName()%>.jpg" width="290" height="290"/>
+                <a class="itembox" href="">
+                    <img class="itemimg" src="images/Inverness - Walnut & Black Leather.jpg" width="290" height="290"/>
                     <div class="itemcontent">
-                        <h5><%= w.getName()%></h5>
+                        <h5>Inverness - Walnut & Black Leather</h5>
                         <div class="itemprice">
-                            <strong>$<%= w.getPrice()%></strong>
+                            <strong>5.500.500d</strong>
+                        </div>
+                        <div class="itemrating">
+                            <p>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                            </p>
+                            <p class="item-rating-total">9</p>
                         </div>
                     </div>
                 </a>
-                <%
-                        }
-                    }
-                %>
+                <a class="itembox" href="">
+                    <img class="itemimg" src="images/Inverness - Walnut & Black Leather.jpg" width="290" height="290"/>
+                    <div class="itemcontent">
+                        <h5>Inverness - Walnut & Black Leather</h5>
+                        <div class="itemprice">
+                            <strong>5.500.500d</strong>
+                        </div>
+                        <div class="itemrating">
+                            <p>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                            </p>
+                            <p class="item-rating-total">9</p>
+                        </div>
+                    </div>
+                </a>
+                <a class="itembox" href="">
+                    <img class="itemimg" src="images/Inverness - Walnut & Black Leather.jpg" width="290" height="290"/>
+                    <div class="itemcontent">
+                        <h5>Inverness - Walnut & Black Leather</h5>
+                        <div class="itemprice">
+                            <strong>5.500.500d</strong>
+                        </div>
+                        <div class="itemrating">
+                            <p>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                            </p>
+                            <p class="item-rating-total">9</p>
+                        </div>
+                    </div>
+                </a>
+                <a class="itembox" href="">
+                    <img class="itemimg" src="images/Inverness - Walnut & Black Leather.jpg" width="290" height="290"/>
+                    <div class="itemcontent">
+                        <h5>Inverness - Walnut & Black Leather</h5>
+                        <div class="itemprice">
+                            <strong>5.500.500d</strong>
+                        </div>
+                        <div class="itemrating">
+                            <p>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                            </p>
+                            <p class="item-rating-total">9</p>
+                        </div>
+                    </div>
+                </a>
+                <a class="itembox" href="">
+                    <img class="itemimg" src="images/Inverness - Walnut & Black Leather.jpg" width="290" height="290"/>
+                    <div class="itemcontent">
+                        <h5>Inverness - Walnut & Black Leather</h5>
+                        <div class="itemprice">
+                            <strong>5.500.500d</strong>
+                        </div>
+                        <div class="itemrating">
+                            <p>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                            </p>
+                            <p class="item-rating-total">9</p>
+                        </div>
+                    </div>
+                </a>
             </div>
 
         </div>
+
     </body>
 </html>
