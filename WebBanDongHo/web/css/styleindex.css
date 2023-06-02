@@ -1,0 +1,37 @@
+.row{
+    background-color: #cccccc;
+}
+.navbar-collapse{
+    padding-left: 500px;
+    margin-bottom: 50px;
+}
+.navbar-collapse a{
+    color: rgb(6, 187, 187);
+    padding-right: 10px;
+}
+.section-right1 h3{
+    padding-top: 30px;
+    color: rgb(252, 180, 46);
+    margin: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+.section-right1 p{
+    padding-top: 30px;
+    color: rgb(252, 180, 46);
+    margin: 10px;
+    margin-top: 10px;
+}
+.section-right1{
+    background-color: rgb(221, 255, 253);
+}
+.section-right1 img{
+    width: auto;
+    height: 100px;
+    margin-right: 20px;
+}
+.items{
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
