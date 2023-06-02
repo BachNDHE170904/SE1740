@@ -10,11 +10,15 @@
     </context-param>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>LoginServlet</servlet-class>
+        <servlet-class>controller.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>WelcomeServlet</servlet-name>
-        <servlet-class>WelcomeServlet</servlet-class>
+        <servlet-class>controller.WelcomeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PreviewWatch</servlet-name>
+        <servlet-class>controller.PreviewWatch</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -24,6 +28,10 @@
         <servlet-name>WelcomeServlet</servlet-name>
         <url-pattern>/WelcomeServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PreviewWatch</servlet-name>
+        <url-pattern>/PreviewWatch</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -31,6 +39,5 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>WelcomePage.jsp</welcome-file>
-        <welcome-file>Login.html</welcome-file>
     </welcome-file-list>
 </web-app>
