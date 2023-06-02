@@ -1,6 +1,4 @@
-.row{
-    background-color: #cccccc;
-}
+
 .navbar-collapse{
     padding-left: 500px;
     margin-bottom: 50px;
@@ -9,29 +7,32 @@
     color: rgb(6, 187, 187);
     padding-right: 10px;
 }
-.section-right1 h3{
-    padding-top: 30px;
-    color: rgb(252, 180, 46);
-    margin: 10px;
-    margin-top: 10px;
+.itembox{
+    padding: 0 6px;
+    float: left;
+    width: 20%;
+}
+.itemimg img{
+    width: 100%;
+    height: auto;
+}
+.itemimg{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+.itembox {
+  border: 1px solid #ccc;
+}
+.watchesContainer h3:first-child{
     text-align: center;
+    color: rgb(6, 187, 187);
 }
-.section-right1 p{
-    padding-top: 30px;
-    color: rgb(252, 180, 46);
-    margin: 10px;
-    margin-top: 10px;
+.itembox:hover {
+  border: 1px solid #777;
 }
-.section-right1{
-    background-color: rgb(221, 255, 253);
-}
-.section-right1 img{
-    width: auto;
-    height: 100px;
-    margin-right: 20px;
-}
-.items{
-    display: flex;
-    padding-top: 10px;
-    padding-bottom: 10px;
+.itemcontent{
+    padding: 15px;
+    text-align: center;
 }

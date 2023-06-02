@@ -14,7 +14,7 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <div class="row">
+        <div class="row1">
             <div class="collapse navbar-collapse" id="navbar">
                 <a href="WelcomePage.jsp">Home</a> 
                 <a href="WelcomePage.jsp">Login</a>
@@ -30,42 +30,107 @@
 
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-2 section-left1">
-                <h1>Filter by</h1>
-            </div>
-
-            <div class="col-md-10 section-right1">
-
+        <div class="watchesContainer">
+            <div class="row">
                 <h3>Wrist Watches</h3>
-
-                <div class="items">
-                    <img class="img" src="images/Inverness - Walnut & Black Leather.jpg"/>
-                    <p> Inverness - Walnut & Black Leather</p>
-                    <img class="img" src="images/Inverness - Walnut & Black Leather.jpg"/>
-                    <p> Inverness - Walnut & Black Leather</p>
-                    <img class="img" src="images/Inverness - Walnut & Black Leather.jpg"/>
-                    <p> Inverness - Walnut & Black Leather</p>
-                </div>
-                
-                <div class="items">
-                    <img class="img" src="images/Inverness - Walnut & Black Leather.jpg"/>
-                    <p> Inverness - Walnut & Black Leather</p>
-                    <img class="img" src="images/Inverness - Walnut & Black Leather.jpg"/>
-                    <p> Inverness - Walnut & Black Leather</p>
-                    <img class="img" src="images/Inverness - Walnut & Black Leather.jpg"/>
-                    <p> Inverness - Walnut & Black Leather</p>
-                </div>
-                
-                <div class="items">
-                    <img class="img" src="images/Inverness - Walnut & Black Leather.jpg"/>
-                    <p> Inverness - Walnut & Black Leather</p>
-                    <img class="img" src="images/Inverness - Walnut & Black Leather.jpg"/>
-                    <p> Inverness - Walnut & Black Leather</p>
-                    <img class="img" src="images/Inverness - Walnut & Black Leather.jpg"/>
-                    <p> Inverness - Walnut & Black Leather</p>
-                </div>
+                <a class="itembox" href="">
+                    <img class="itemimg" src="images/Inverness - Walnut & Black Leather.jpg" width="290" height="290"/>
+                    <div class="itemcontent">
+                        <h5>Inverness - Walnut & Black Leather</h5>
+                        <div class="itemprice">
+                            <strong>5.500.500d</strong>
+                        </div>
+                        <div class="itemrating">
+                            <p>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                            </p>
+                            <p class="item-rating-total">9</p>
+                        </div>
+                    </div>
+                </a>
+                <a class="itembox" href="">
+                    <img class="itemimg" src="images/Inverness - Walnut & Black Leather.jpg" width="290" height="290"/>
+                    <div class="itemcontent">
+                        <h5>Inverness - Walnut & Black Leather</h5>
+                        <div class="itemprice">
+                            <strong>5.500.500d</strong>
+                        </div>
+                        <div class="itemrating">
+                            <p>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                            </p>
+                            <p class="item-rating-total">9</p>
+                        </div>
+                    </div>
+                </a>
+                <a class="itembox" href="">
+                    <img class="itemimg" src="images/Inverness - Walnut & Black Leather.jpg" width="290" height="290"/>
+                    <div class="itemcontent">
+                        <h5>Inverness - Walnut & Black Leather</h5>
+                        <div class="itemprice">
+                            <strong>5.500.500d</strong>
+                        </div>
+                        <div class="itemrating">
+                            <p>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                            </p>
+                            <p class="item-rating-total">9</p>
+                        </div>
+                    </div>
+                </a>
+                <a class="itembox" href="">
+                    <img class="itemimg" src="images/Inverness - Walnut & Black Leather.jpg" width="290" height="290"/>
+                    <div class="itemcontent">
+                        <h5>Inverness - Walnut & Black Leather</h5>
+                        <div class="itemprice">
+                            <strong>5.500.500d</strong>
+                        </div>
+                        <div class="itemrating">
+                            <p>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                            </p>
+                            <p class="item-rating-total">9</p>
+                        </div>
+                    </div>
+                </a>
+                <a class="itembox" href="">
+                    <img class="itemimg" src="images/Inverness - Walnut & Black Leather.jpg" width="290" height="290"/>
+                    <div class="itemcontent">
+                        <h5>Inverness - Walnut & Black Leather</h5>
+                        <div class="itemprice">
+                            <strong>5.500.500d</strong>
+                        </div>
+                        <div class="itemrating">
+                            <p>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                                <i class="icontt-star"></i>
+                            </p>
+                            <p class="item-rating-total">9</p>
+                        </div>
+                    </div>
+                </a>
             </div>
+
         </div>
+
     </body>
 </html>
