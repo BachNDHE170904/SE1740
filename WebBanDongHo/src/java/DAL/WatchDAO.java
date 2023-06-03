@@ -30,7 +30,7 @@ public class WatchDAO extends BaseDAO<Watch> {
                 Watch s = new Watch();
                 s.setId(rs.getInt("id"));
                 s.setName(rs.getString("name"));
-                s.setPrice(rs.getInt("price"));
+                s.setPrice(rs.getFloat("price"));
                 watches.add(s);
             }
         } catch (SQLException ex) {
@@ -49,7 +49,7 @@ public class WatchDAO extends BaseDAO<Watch> {
                 Watch s = new Watch();
                 s.setId(rs.getInt("id"));
                 s.setName(rs.getString("name"));
-                s.setPrice(rs.getInt("price"));
+                s.setPrice(rs.getFloat("price"));
                 return s;
             }
 

@@ -13,20 +13,12 @@
         <servlet-class>controller.LoginServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>WelcomeServlet</servlet-name>
-        <servlet-class>controller.WelcomeServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>PreviewWatch</servlet-name>
         <servlet-class>controller.PreviewWatch</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>WelcomeServlet</servlet-name>
-        <url-pattern>/WelcomeServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PreviewWatch</servlet-name>

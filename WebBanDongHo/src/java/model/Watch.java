@@ -9,13 +9,14 @@ package model;
  * @author ADMIN
  */
 public class Watch {
-    private int id,price;
+    private int id;
+    private float price;
     private String name;
 
     public Watch() {
     }
 
-    public Watch(int id, int price, String name) {
+    public Watch(int id, float price, String name) {
         this.id = id;
         this.price = price;
         this.name = name;
@@ -29,11 +30,11 @@ public class Watch {
         this.id = id;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -44,6 +45,8 @@ public class Watch {
     public void setName(String name) {
         this.name = name;
     }
+
+    
 
     @Override
     public String toString() {
