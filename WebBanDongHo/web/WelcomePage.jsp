@@ -50,6 +50,7 @@
                         <div class="itemprice">
                             <strong>$<%= w.getPrice()%></strong>
                         </div>
+                        <button type="button">Add to cart</button>
                     </div>
                 </a>
                 <%

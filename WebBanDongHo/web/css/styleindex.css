@@ -8,11 +8,11 @@
     padding-right: 10px;
 }
 .itembox{
-    padding: 0 6px;
+    padding: 6px 6px;
     float: left;
     width: 20%;
-    padding-left: 30px;
     height: 393px;
+    margin: 30px 30px;
 }
 .itemimg img{
     width: 100%;
