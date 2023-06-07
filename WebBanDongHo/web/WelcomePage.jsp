@@ -13,7 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Welcome Page</title>
-        <link rel="stylesheet" href="css/styleindex.css">
+        <link rel="stylesheet" href="css/WelcomeStyleindex.css">
         <link href="css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
@@ -43,14 +43,14 @@
                     } else {
                         for (Watch w : watches) {
                 %>
-                <a class="itembox" id="<%= w.getId()%>" href="PreviewWatch">
+                <a class="itembox"href="PreviewWatch?watchid=<%= w.getId()%>" id="<%= w.getId()%>">
                     <img class="itemimg" src="images/<%= w.getName()%>.jpg" width="290" height="290"/>
                     <div class="itemcontent">
                         <h5><%= w.getName()%></h5>
                         <div class="itemprice">
                             <strong>$<%= w.getPrice()%></strong>
                         </div>
-                        <button type="button">Add to cart</button>
+                        <button href="addToCart" type="button">Add to cart</button>
                     </div>
                 </a>
                 <%

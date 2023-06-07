@@ -8,7 +8,6 @@
     padding-right: 10px;
 }
 .itembox{
-    padding: 6px 6px;
     float: left;
     width: 20%;
     height: 393px;
@@ -25,7 +24,7 @@
     width: 100%;
 }
 .itembox {
-  border: 1px solid #ccc;
+  border: 2px solid #73AD21;
 }
 .watchesContainer h3:first-child{
     text-align: center;
