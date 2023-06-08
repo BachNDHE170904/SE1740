@@ -19,15 +19,17 @@
     <body>
         <div class="row1">
             <div class="collapse navbar-collapse" id="navbar">
-                <a href="WelcomePage.jsp">Home</a> 
-                <a href="Login.html">Login</a>
-                <a href="#">Shop</a>
-                <a href="#">About us</a>
+                <ul>
+                    <li><a href="WelcomePage.ssp">Home</a></li>
+                    <li><a href="WelcomePage.jsp">Shop</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="about.jsp">About us</a></li>
+                </ul>
 
 
                 <form class="navbar-form navbar-right" role="search">
-                    <input type="text" class="form-control" placeholder="Search">
-                    <button type="submit" class="btn btn-default">search</button>
+                    <input type="text" placeholder="Search">
+                    <button type="submit">search</button>
                 </form>
 
             </div>

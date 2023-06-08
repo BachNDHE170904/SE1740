@@ -1,0 +1,23 @@
+.navbar-collapse ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.navbar-collapse li {
+    display: inline;
+}
+.navbar-collapse{
+    padding-left: 500px;
+    margin-bottom: 50px;
+}
+.navbar-collapse a{
+    color: rgb(6, 187, 187);
+    padding-right: 10px;
+}
+.watchesContainer{
+    margin-left: 300px;
+    margin-right: 300px;
+}
+.itemimg{
+    margin-top: 25px;
+}

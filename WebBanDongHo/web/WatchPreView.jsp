@@ -21,8 +21,8 @@
 
 
                 <form class="navbar-form navbar-right" role="search">
-                    <input type="text" class="form-control" placeholder="Search">
-                    <button type="submit" class="btn btn-default">search</button>
+                    <input type="text" placeholder="Search">
+                    <button type="submit">search</button>
                 </form>
 
             </div>
@@ -30,10 +30,23 @@
         <div class="watchesContainer">
             <div class="row">
                 <%
-                    Watch w=(Watch)request.getAttribute("previewwatch");
+                    Watch w = (Watch) request.getAttribute("previewwatch");
                 %>
-                <h3><%= w.getName() %></h3>
-                S
+                <div class="redirectwatch">
+                    <h5><a href=WelcomePage.jsp>Home</a>/<a href=PreviewWatch?watchid=<%= w.getId() - 1%>><%= w.getName()%></a></h5>
+                </div>
+                <div class="col-md-6 section-left">   
+                    <h3><%= w.getName()%></h3>
+                    <div class="itemprice">
+                        <strong>$<%= w.getPrice()%></strong>
+                    </div>
+                    <p>Quantity</p><br>
+                    <input type="number" pattern="[0-9]*" data-hook="number-input-spinner-input" value="1" aria-label="Quantity" max="50" min="1"><br>
+                    <button type="submit">Add to cart</button>
+                </div>
+                <div class="col-md-6 section-right">
+                    <img class="itemimg" src="images/<%= w.getName()%>.jpg" width="500" height="500"/>
+                </div>
             </div>
 
         </div>
