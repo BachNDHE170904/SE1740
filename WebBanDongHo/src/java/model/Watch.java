@@ -11,16 +11,20 @@ package model;
 public class Watch {
     private int id;
     private float price;
+    private String sku;
     private String name;
 
     public Watch() {
     }
 
-    public Watch(int id, float price, String name) {
+    public Watch(int id, float price, String sku, String name) {
         this.id = id;
         this.price = price;
+        this.sku = sku;
         this.name = name;
     }
+
+    
 
     public int getId() {
         return id;
@@ -44,6 +48,14 @@ public class Watch {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 
     

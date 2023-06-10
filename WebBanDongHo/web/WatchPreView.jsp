@@ -37,12 +37,19 @@
                 </div>
                 <div class="col-md-6 section-left">   
                     <h3><%= w.getName()%></h3>
-                    <div class="itemprice">
-                        <strong>$<%= w.getPrice()%></strong>
+                    <div class="itemsku">
+                        <p>Sku: <%= w.getSku()%>  </p>
                     </div>
-                    <p>Quantity</p><br>
-                    <input type="number" pattern="[0-9]*" data-hook="number-input-spinner-input" value="1" aria-label="Quantity" max="50" min="1"><br>
-                    <button type="submit">Add to cart</button>
+                    <div class="itemprice">
+                        <p>Price: $<%= w.getPrice()%></p>
+                    </div>
+                    <div class="itemquantity">
+                        <p>Quantity</p>
+                        <input type="number" pattern="[0-9]*" data-hook="number-input-spinner-input" value="1" aria-label="Quantity" max="50" min="1"><br>
+                    </div>
+                    <div class="addtocart">
+                        <button type="submit">Add to cart</button>
+                    </div>
                 </div>
                 <div class="col-md-6 section-right">
                     <img class="itemimg" src="images/<%= w.getName()%>.jpg" width="500" height="500"/>

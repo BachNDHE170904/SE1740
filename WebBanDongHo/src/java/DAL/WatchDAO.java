@@ -22,7 +22,7 @@ public class WatchDAO extends BaseDAO<Watch> {
     public ArrayList<Watch> getWatches() {
         ArrayList<Watch> watches = new ArrayList<>();
         try {
-            String sql =  "SELECT s.id,s.name,s.price FROM Watches s\n";
+            String sql =  "SELECT * FROM Watches s\n";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while(rs.next())
@@ -30,6 +30,7 @@ public class WatchDAO extends BaseDAO<Watch> {
                 Watch s = new Watch();
                 s.setId(rs.getInt("id"));
                 s.setName(rs.getString("name"));
+                s.setSku(rs.getString("sku"));
                 s.setPrice(rs.getFloat("price"));
                 watches.add(s);
             }
@@ -40,7 +41,7 @@ public class WatchDAO extends BaseDAO<Watch> {
     }
     public Watch getWatch(int id) {
         try {
-            String sql = "SELECT s.id,s.name,s.gender,s.dob FROM Watch s\n"
+            String sql = "SELECT * FROM Watch s\n"
                     + "WHERE s.id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
@@ -49,6 +50,7 @@ public class WatchDAO extends BaseDAO<Watch> {
                 Watch s = new Watch();
                 s.setId(rs.getInt("id"));
                 s.setName(rs.getString("name"));
+                s.setSku(rs.getString("sku"));
                 s.setPrice(rs.getFloat("price"));
                 return s;
             }
