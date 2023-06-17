@@ -15,10 +15,9 @@
         <div class="row1">
             <div class="collapse navbar-collapse" id="navbar">
                 <a href="WelcomePage.jsp">Home</a> 
+                <a href="WelcomePage.jsp">Shop</a>
                 <a href="Login.html">Login</a>
-                <a href="#">Shop</a>
                 <a href="#">About us</a>
-
 
                 <form class="navbar-form navbar-right" role="search">
                     <input type="text" placeholder="Search">

@@ -18,7 +18,6 @@ import model.Watch;
  */
 public class WatchDAO extends BaseDAO<Watch> {
 
-    @Override
     public ArrayList<Watch> getWatches() {
         ArrayList<Watch> watches = new ArrayList<>();
         try {

@@ -31,6 +31,4 @@ public abstract class BaseDAO<T> {
             Logger.getLogger(BaseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public abstract ArrayList<T> getWatches();
 }

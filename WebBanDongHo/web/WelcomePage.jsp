@@ -1,8 +1,4 @@
-<%-- 
-    Document   : WelcomePage
-    Created on : Jun 2, 2023, 3:23:56 AM
-    Author     : ADMIN
---%>
+
 
 <%@page import="model.Watch"%>
 <%@page import="java.util.ArrayList"%>
@@ -20,9 +16,10 @@
         <div class="row1">
             <div class="collapse navbar-collapse" id="navbar">
                 <ul>
-                    <li><a href="WelcomePage.ssp">Home</a></li>
+                    <li><a href="WelcomePage.jsp">Home</a></li>
                     <li><a href="WelcomePage.jsp">Shop</a></li>
-                    <li><a href="login.html">Login</a></li>
+                    <li><a href="Login.html">Login</a></li>
+                    <li><a href="Resgister.jsp">Register</a></li>
                     <li><a href="about.jsp">About us</a></li>
                 </ul>
 
