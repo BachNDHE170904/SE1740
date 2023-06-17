@@ -37,21 +37,25 @@ public class AccountDAO extends BaseDAO<Account> {
         return accounts;
     }
 
-    public Account searchAccount(Account s) {
-        Account finds = new Account();
+    public Account getAccount(String username,String password) {
         try {
-            String sql = "Select * from Accounts where id=? and name=? and pass=?";
+            String sql = "SELECT * FROM Accounts s\n"
+                    + "WHERE s.username = ? and s.password=?";
             PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, username);
+            statement.setString(2, password);
             ResultSet rs = statement.executeQuery();
-            while (rs.next()){
-                s.setId(rs.getInt("id"));
-                s.setUsername(rs.getString("name"));
-                s.setPassword(rs.getString("pass"));
+            if (rs.next()) {
+                Account s = new Account();
+                s.setUsername(rs.getString("username"));
+                s.setPassword(rs.getString("password"));
+                return s;
             }
+
         } catch (SQLException ex) {
-            Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return finds;
+        return null;
     }
 
     public void insertAccount(Account s) {

@@ -5,13 +5,17 @@ package controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
+import DAL.AccountDAO;
 import jakarta.servlet.ServletContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
@@ -20,28 +24,49 @@ import jakarta.servlet.http.HttpServletResponse;
 public class LoginServlet extends HttpServlet {
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            //Get data from HTML form  
-            String u = request.getParameter("user");
-            String p = request.getParameter("pass");
-            //Get data from XML
-            ServletContext sc = getServletContext();
-            String user = sc.getInitParameter("username");
-            String pass = sc.getInitParameter("password");
-            if (user.equals(u) && pass.equals(p)) {
-                response.sendRedirect("Welcome.jsp");
-            } else {
-                response.sendRedirect("Login.html");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        AccountDAO db = new AccountDAO();
+        Account account =  db.getAccount(username, password);
+        if(account != null) // login successful!
+        {
+            String remember = request.getParameter("remember");
+            if(remember !=null)
+            {
+                Cookie c_user = new Cookie("username", account.getUsername());
+                Cookie c_pass = new Cookie("password", account.getPassword());
+                c_user.setMaxAge(3600*24*30);
+                c_pass.setMaxAge(3600*24*30);
+                response.addCookie(c_pass);
+                response.addCookie(c_user);
             }
+            HttpSession session = request.getSession();
+            request.setAttribute("user", account);
+            session.setAttribute("user", account);
+            request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+        }
+        else //login fail
+        {
+            request.setAttribute("failedLogin", "fail");
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 }

@@ -1,5 +1,6 @@
 
 
+<%@page import="model.Account"%>
 <%@page import="model.Watch"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="DAL.WatchDAO"%>
@@ -13,12 +14,13 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
+        
         <div class="row1">
             <div class="collapse navbar-collapse" id="navbar">
                 <ul>
                     <li><a href="WelcomePage.jsp">Home</a></li>
                     <li><a href="WelcomePage.jsp">Shop</a></li>
-                    <li><a href="Login.html">Login</a></li>
+                    <li><a href="Login.jsp">Login</a></li>
                     <li><a href="Resgister.jsp">Register</a></li>
                     <li><a href="about.jsp">About us</a></li>
                 </ul>
