@@ -14,20 +14,23 @@
     <body>
         <div class="row1">
             <div class="collapse navbar-collapse" id="navbar">
-                <a href="WelcomePage.jsp">Home</a> 
-                <a href="WelcomePage.jsp">Shop</a>
-                <a href="Login.jsp">Login</a>
-                <a href="#">About us</a>
+                <ul>
+                    <li><a href="WelcomePage.jsp">Home</a></li>
+                    <li><a href="WelcomePage.jsp">Shop</a></li>
+                    <li><a href="Login.jsp">Login</a></li>
+                    <li><a href="Resgister.jsp">Register</a></li>
+                    <li><a href="about.jsp">About us</a></li>
+                </ul>
+
 
                 <form class="navbar-form navbar-right" role="search">
                     <input type="text" placeholder="Search">
-                    <button type="submit">search</button>
                 </form>
 
             </div>
         </div>
         <div class="watchesContainer">
-            <div class="row">
+            <div class="row2">
                 <%
                     Watch w = (Watch) request.getAttribute("previewwatch");
                 %>

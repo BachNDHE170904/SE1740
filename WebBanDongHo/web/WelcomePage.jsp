@@ -14,7 +14,7 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        
+
         <div class="row1">
             <div class="collapse navbar-collapse" id="navbar">
                 <ul>
@@ -28,13 +28,17 @@
 
                 <form class="navbar-form navbar-right" role="search">
                     <input type="text" placeholder="Search">
-                    <button type="submit">search</button>
                 </form>
 
             </div>
         </div>
         <div class="watchesContainer">
-            <div class="row">
+            <img class="itemimg" src="images/11062b_2a28ff5b16904be5bde7a89ad3d5fc25~mv2_d_3000_2000_s_2.webp"width="500" height="350"/>
+            <div class="col-md-4 section-left">
+                <h3>Filter by</h3>
+
+            </div>
+            <div class="col-md-8 section-right">
                 <h3>Wrist Watches</h3>
                 <%
                     WatchDAO db = new WatchDAO();
@@ -45,13 +49,17 @@
                         for (Watch w : watches) {
                 %>
                 <a class="itembox"href="PreviewWatch?watchid=<%= w.getId()%>" id="<%= w.getId()%>">
-                    <img class="itemimg" src="images/<%= w.getName()%>.jpg" width="290" height="290"/>
-                    <div class="itemcontent">
-                        <h5><%= w.getName()%></h5>
-                        <div class="itemprice">
-                            <strong>$<%= w.getPrice()%></strong>
+                    <img class="itemimg" src="images/<%= w.getName()%>.jpg"width="194" height="194"/>
+                    <div class="iteminfo">
+                        <div class="itemcontent">
+                            <h5 class="itemname"><%= w.getName()%></h5>
+                            <div class="itemprice">
+                                <strong>$<%= w.getPrice()%></strong>
+                            </div>
                         </div>
-                        <button href="addToCart" type="button">Add to cart</button>
+                        <div class="itemblock">
+                            <button class="addtocart" href="addToCart" type="button">Add to cart</button>
+                        </div>
                     </div>
                 </a>
                 <%

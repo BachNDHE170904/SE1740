@@ -7,7 +7,7 @@ CREATE TABLE Watches (
    price float	NOT NULL,
    PRIMARY KEY (id),
 );
-drop table Account
+drop table Accounts
 SET IDENTITY_INSERT Watches OFF
 insert into Watches(name,sku,price) values ('Inverness - Walnut & Black Leather','f4fc9661',124.00);
 insert into Watches(name,sku,price) values ('Inverness SS - Walnut','a21ad935#1',148.00);
@@ -18,8 +18,7 @@ insert into Watches(name,sku,price) values ('Inverness - Multi Bamboo Limited Ed
 insert into Watches(name,sku,price) values ('Kylemore - Bamboo Black Leather','f73fcfca',86.75);
 insert into Watches(name,sku,price) values ('Inverness SS - Walnut','a21ad935',148.00);
 CREATE TABLE Accounts (
-   id   INT    NOT NULL identity(1,1),
-   name NVARCHAR (50)     NOT NULL,
-   pass NVARCHAR (50)     NOT NULL,
-   PRIMARY KEY (id),
+   username NVARCHAR (50)     NOT NULL,
+   password NVARCHAR (50)     NOT NULL,
+   PRIMARY KEY (username),
 );
