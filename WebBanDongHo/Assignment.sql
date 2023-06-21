@@ -22,3 +22,4 @@ CREATE TABLE Accounts (
    password NVARCHAR (50)     NOT NULL,
    PRIMARY KEY (username),
 );
+select * from Watches

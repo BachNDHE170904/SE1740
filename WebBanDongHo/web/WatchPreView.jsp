@@ -18,7 +18,7 @@
                     <li><a href="WelcomePage.jsp">Home</a></li>
                     <li><a href="WelcomePage.jsp">Shop</a></li>
                     <li><a href="Login.jsp">Login</a></li>
-                    <li><a href="Resgister.jsp">Register</a></li>
+                    <li><a href="Register.jsp">Register</a></li>
                     <li><a href="about.jsp">About us</a></li>
                 </ul>
 

@@ -26,7 +26,6 @@ public class AccountDAO extends BaseDAO<Account> {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Account s = new Account();
-                s.setId(rs.getInt("id"));
                 s.setUsername(rs.getString("name"));
                 s.setPassword(rs.getString("pass"));
                 accounts.add(s);
@@ -60,20 +59,10 @@ public class AccountDAO extends BaseDAO<Account> {
 
     public void insertAccount(Account s) {
         try {
-            String sql = "SET IDENTITY_INSERT Accounts on\n"
-                    + "INSERT INTO [Accounts]\n"
-                    + "           ([id]\n"
-                    + "           ,[name]\n"
-                    + "           ,[pass]\n"
-                    + "     VALUES\n"
-                    + "           (?\n"
-                    + "           ,?\n"
-                    + "           ,?)"
-                    + "\nSET IDENTITY_INSERT Accounts off";
+            String sql ="insert into Accounts(username,password) values(?,?)\n;";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, s.getId());
-            statement.setString(2, s.getUsername());
-            statement.setString(3, s.getPassword());
+            statement.setString(1, s.getUsername());
+            statement.setString(2, s.getPassword());
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);

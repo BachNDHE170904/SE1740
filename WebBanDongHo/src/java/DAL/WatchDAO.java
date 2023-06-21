@@ -59,26 +59,23 @@ public class WatchDAO extends BaseDAO<Watch> {
         }
         return null;
     }
-    
+//    
 //    public void insertWatch(Watch s) {
 //        try {
-//            String sql = "SET IDENTITY_INSERT student on\n"+
-//                    "INSERT INTO [Watch]\n"
-//                    + "           ([id]\n"
-//                    + "           ,[name]\n"
-//                    + "           ,[dob]\n"
-//                    + "           ,[gender])\n"
+//            String sql = "SET IDENTITY_INSERT Watches on\n"+
+//                    "INSERT INTO [Watches]\n"
+//                    + "           ([name]\n"
+//                    + "           ,[sku]\n"
+//                    + "           ,[price]\n"
 //                    + "     VALUES\n"
 //                    + "           (?\n"
 //                    + "           ,?\n"
-//                    + "           ,?\n"
 //                    + "           ,?)"
-//            +"\nSET IDENTITY_INSERT student off";
+//            +"\nSET IDENTITY_INSERT Watches off";
 //            PreparedStatement statement = connection.prepareStatement(sql);
-//            statement.setInt(1, s.getId());
-//            statement.setString(2, s.getName());
-//            statement.setDate(3, s.getDob());
-//            statement.setBoolean(4,s.getGender().equals("Male"));
+//            statement.setString(1, s.getName());
+//            statement.setString(2, s.getSku());
+//            statement.setFloat(3, s.getPrice());
 //            statement.executeUpdate();
 //        } catch (SQLException ex) {
 //            Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);

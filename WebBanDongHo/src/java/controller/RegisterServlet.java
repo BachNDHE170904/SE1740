@@ -4,13 +4,17 @@
  */
 package controller;
 
+import DAL.AccountDAO;
 import jakarta.servlet.ServletContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
 
 /**
  *
@@ -19,28 +23,37 @@ import jakarta.servlet.http.HttpServletResponse;
 public class RegisterServlet extends HttpServlet {
 
     @Override
-    public void doGet(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response)
-            throws jakarta.servlet.ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     @Override
-    public void doPost(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response)
-            throws jakarta.servlet.ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            //Get data from HTML form  
-            String u = request.getParameter("user");
-            String p = request.getParameter("pass");
-            //Get data from XML
-            ServletContext sc = getServletContext();
-            String user = sc.getInitParameter("username");
-            String pass = sc.getInitParameter("password");
-            if (user.equals(u) && pass.equals(p)) {
-                response.sendRedirect("Welcome.jsp");
-            } else {
-                response.sendRedirect("Login.html");
-            }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        AccountDAO db = new AccountDAO();
+        Account account =  db.getAccount(username, password);
+        if(account == null) // No account found
+        {
+            db.insertAccount(new Account(username,password));
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+        }
+        else //Account already existed
+        {
+            request.setAttribute("failedRegister", "fail");
+            request.getRequestDispatcher("Register.jsp").forward(request, response);
         }
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 }

@@ -27,12 +27,12 @@
     color: black;
 }
 .navbar-collapse input[type=text] {
-    float: right;
-    padding: 6px;
-    border: none;
-    margin-top: 8px;
-    margin-right: 16px;
-    font-size: 17px;
+  float: right;
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
 }
 .Center{
     position: absolute;
@@ -54,7 +54,7 @@
 }
 form .txt_field{
     position: relative;
-    border-bottom: 2px solid #adadad;
+    border-bottom: 2px solid #adadad; 
     margin: 30px 0;
 }
 .txt_field input{
@@ -123,12 +123,6 @@ input[type="submit"]:hover{
 }
 .signup_link a:hover{
     text-decoration: underline;
-}
-.remember_button{
-    margin: 30px 0;
-    text-align: left;
-    font-size: 16px;
-    color: #666666;
 }
 .WrongLogin {
     margin: 30px 0;

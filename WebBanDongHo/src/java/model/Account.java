@@ -9,25 +9,14 @@ package model;
  * @author ADMIN
  */
 public class Account {
-
-    private int id;
     private String username, password;
 
     public Account() {
     }
 
-    public Account(int id, String username, String password) {
-        this.id = id;
+    public Account(String username, String password) {
         this.username = username;
         this.password = password;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -45,5 +34,5 @@ public class Account {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
 }

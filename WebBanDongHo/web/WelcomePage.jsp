@@ -5,6 +5,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="DAL.WatchDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,7 +22,7 @@
                     <li><a href="WelcomePage.jsp">Home</a></li>
                     <li><a href="WelcomePage.jsp">Shop</a></li>
                     <li><a href="Login.jsp">Login</a></li>
-                    <li><a href="Resgister.jsp">Register</a></li>
+                    <li><a href="Register.jsp">Register</a></li>
                     <li><a href="about.jsp">About us</a></li>
                 </ul>
 

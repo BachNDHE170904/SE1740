@@ -17,7 +17,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     <li><a href="WelcomePage.jsp">Home</a></li>
                     <li><a href="WelcomePage.jsp">Shop</a></li>
                     <li><a href="Login.jsp">Login</a></li>
-                    <li><a href="Resgister.jsp">Register</a></li>
+                    <li><a href="Register.jsp">Register</a></li>
                     <li><a href="about.jsp">About us</a></li>
                 </ul>
 
@@ -41,16 +41,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     <span></span>
                     <label>Password</label>
                 </div>
+                <div class="remember_button">
+                    <input type="checkbox" name ="remember" value="remember"/>Remember me <br/>
+                </div>
                 <input type="submit" value="Login"/>
                 <div class="signup_link">
-                    Don't have an account?<a href="SignUp.jsp">Sign up</a>
+                    Don't have an account?<a href="Register.jsp">Sign up</a>
                 </div>
                 <%
                     String failedLogin = (String) request.getAttribute("failedLogin");
                     if (failedLogin != null) {
                         if (failedLogin.equalsIgnoreCase("fail")) {
                 %> 
-                <br/>Wrong username or password
+                <div class="WrongLogin">
+                    <p>Wrong username or password</p>
+                </div>
                 <%
                         }
                     }
