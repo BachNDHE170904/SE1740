@@ -21,8 +21,29 @@
                 <ul>
                     <li><a href="WelcomePage.jsp">Home</a></li>
                     <li><a href="WelcomePage.jsp">Shop</a></li>
+                        <%
+                            Account accRem = (Account) session.getAttribute("user");
+                            Account accNotRem = (Account) request.getAttribute("user");
+                            if (accRem == null) {
+                                if (accNotRem == null) {
+                        %>
                     <li><a href="Login.jsp">Login</a></li>
                     <li><a href="Register.jsp">Register</a></li>
+                        <%} else {
+                        %>
+                    <li><p>Welcome <%= accNotRem.getUsername()%></p></li>
+                    <li><a href="LogOut.jsp">Log out</a></li>
+                    <li><a href="ViewOrders.jsp">View Orders</a></li>
+                        <%
+                            }
+                        } else {
+                        %>
+                    <li><p>Welcome <%= accRem.getUsername()%></p></li>
+                    <li><a href="LogOut.jsp">Log out</a></li>
+                    <li><a href="ViewOrders.jsp">View Orders</a></li>
+                        <%
+                            }
+                        %>
                     <li><a href="about.jsp">About us</a></li>
                 </ul>
 
@@ -34,7 +55,7 @@
             </div>
         </div>
         <div class="watchesContainer">
-            <img class="itemimg" src="images/11062b_2a28ff5b16904be5bde7a89ad3d5fc25~mv2_d_3000_2000_s_2.webp"width="500" height="350"/>
+            <img class="itemimg" src="images/11062b_2a28ff5b16904be5bde7a89ad3d5fc25~mv2_d_3000_2000_s_2.webp"width="500" height="500px"/>
             <div class="col-md-4 section-left">
                 <h3>Filter by</h3>
 
