@@ -15,31 +15,21 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-
         <div class="row1">
             <div class="collapse navbar-collapse" id="navbar">
                 <ul>
                     <li><a href="WelcomePage.jsp">Home</a></li>
                     <li><a href="WelcomePage.jsp">Shop</a></li>
                         <%
-                            Account accRem = (Account) session.getAttribute("user");
-                            Account accNotRem = (Account) request.getAttribute("user");
-                            if (accRem == null) {
-                                if (accNotRem == null) {
+                            Account acc = (Account) session.getAttribute("user");
+                            if (acc == null) {
                         %>
                     <li><a href="Login.jsp">Login</a></li>
                     <li><a href="Register.jsp">Register</a></li>
                         <%} else {
                         %>
-                    <li><p>Welcome <%= accNotRem.getUsername()%></p></li>
-                    <li><a href="LogOut.jsp">Log out</a></li>
-                    <li><a href="ViewOrders.jsp">View Orders</a></li>
-                        <%
-                            }
-                        } else {
-                        %>
-                    <li><p>Welcome <%= accRem.getUsername()%></p></li>
-                    <li><a href="LogOut.jsp">Log out</a></li>
+                    <li><p>Welcome <%= acc.getUsername()%></p></li>
+                    <li><a href="LogOutServlet">Log out</a></li>
                     <li><a href="ViewOrders.jsp">View Orders</a></li>
                         <%
                             }
@@ -70,7 +60,7 @@
                     } else {
                         for (Watch w : watches) {
                 %>
-                <a class="itembox"href="PreviewWatch?watchid=<%= w.getId()%>" id="<%= w.getId()%>">
+                <a class="itembox"href="PreviewWatch?watchid=<%= w.getId() - 1%>" id="<%= w.getId()%>">
                     <img class="itemimg" src="images/<%= w.getName()%>.jpg"width="194" height="194"/>
                     <div class="iteminfo">
                         <div class="itemcontent">

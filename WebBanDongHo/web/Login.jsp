@@ -41,9 +41,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     <span></span>
                     <label>Password</label>
                 </div>
-                <div class="remember_button">
-                    <input type="checkbox" name ="remember" value="remember"/>Remember me <br/>
-                </div>
                 <input type="submit" value="Login"/>
                 <div class="signup_link">
                     Don't have an account?<a href="Register.jsp">Sign up</a>

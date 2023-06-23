@@ -1,4 +1,5 @@
 
+<%@page import="model.Account"%>
 <%@page import="model.Watch"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="DAL.WatchDAO"%>
@@ -17,8 +18,20 @@
                 <ul>
                     <li><a href="WelcomePage.jsp">Home</a></li>
                     <li><a href="WelcomePage.jsp">Shop</a></li>
+                        <%
+                            Account acc = (Account) session.getAttribute("user");
+                            if (acc == null) {
+                        %>
                     <li><a href="Login.jsp">Login</a></li>
                     <li><a href="Register.jsp">Register</a></li>
+                        <%} else {
+                        %>
+                    <li><p>Welcome <%= acc.getUsername()%></p></li>
+                    <li><a href="LogOutServlet">Log out</a></li>
+                    <li><a href="ViewOrders.jsp">View Orders</a></li>
+                        <%
+                            }
+                        %>
                     <li><a href="about.jsp">About us</a></li>
                 </ul>
 
