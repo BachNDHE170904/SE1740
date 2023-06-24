@@ -58,9 +58,23 @@
 .itembox {
     border: 2px solid #73AD21;
 }
+.watchesContainer {
+    margin-left: 200px;
+    margin-right: 100px;
+}
 .watchesContainer h3:first-child{
     text-align: center;
     color: #353535;
+}
+.sort-by{
+    margin-left: 100px;
+}
+.sort-by select{
+    border: none;
+    text-align: center;
+}
+.item-list{
+    margin-left: 100px;
 }
 .itembox:hover {
     border: 1px solid #777;
