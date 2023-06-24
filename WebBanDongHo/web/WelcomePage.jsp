@@ -48,8 +48,27 @@
         </div>
         <div class="watchesContainer">
             <img class="itemimg" src="images/11062b_2a28ff5b16904be5bde7a89ad3d5fc25~mv2_d_3000_2000_s_2.webp"width="500" height="500px"/>
-            <div class="section-right">
+            <div class="sectioc-middle">
                 <h3>Wrist Watches</h3>
+                <%
+                    int pageId;
+                    try {
+                        pageId = Integer.parseInt(request.getParameter("page"));
+                    } catch (NumberFormatException e) {
+                        pageId = 1;
+                    }
+                %>
+                <div class="pagination">
+                    <p>Page</p>
+                    <a href="WelcomePage.jsp?page=<%= pageId - 1%>">&laquo;</a>
+                    <a href="WelcomePage.jsp?page=1">1</a>
+                    <a href="WelcomePage.jsp?page=2">2</a>
+                    <a href="WelcomePage.jsp?page=3">3</a>
+                    <a href="WelcomePage.jsp?page=4">4</a>
+                    <a href="WelcomePage.jsp?page=5">5</a>
+                    <a href="WelcomePage.jsp?page=6">6</a>
+                    <a href="WelcomePage.jsp?page=<%= pageId + 1%>">&raquo;</a>
+                </div>
                 <div class="sort-by">
                     Sort by:
                     <select name="sort" id="sortSelect">
@@ -76,7 +95,7 @@
                         if (sort == null || sort.equalsIgnoreCase("new")) {
                             Collections.sort(sortedWatches, new Comparator<Watch>() {
                                 public int compare(Watch o1, Watch o2) {
-                                    return (int) (o1.getId() - o2.getId());
+                                    return (int) (o1.getWatchId() - o2.getWatchId());
                                 }
                             });
                         } else if (sort.equalsIgnoreCase("high-to-low")) {
@@ -93,24 +112,23 @@
                             });
                         }
                         for (Watch w : sortedWatches) {
+                            if (w.getPageId() == pageId) {
                 %>
                 <div class="item-list" >
-                    <a class="itembox"href="PreviewWatch?watchid=<%= w.getId() - 1%>" id="<%= w.getId()%>">
-                        <img class="itemimg" src="images/<%= w.getName()%>.jpg"width="194" height="194"/>
+                    <a class="itembox"href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>" id="<%= w.getWatchId()%>">
+                        <img class="itemimg" src="images/<%= w.getName()%>.jpg"width="194" height="250"/>
                         <div class="iteminfo">
                             <div class="itemcontent">
-                                <h5 class="i                                                                temname"><%= w.getName()%></h5>
+                                <h5 class="itemname"><%= w.getName()%></h5>
                                 <div class="itemprice">
                                     <strong>$<%= w.getPrice()%></strong>
                                 </div>
-                            </div>
-                            <div class="itemblock">
-                                <button class="addtocart" href="addToCart" type="button">Add to cart</button>
                             </div>
                         </div>
                     </a>
                 </div>
                 <%
+                            }
                         }
                     }
                 %>

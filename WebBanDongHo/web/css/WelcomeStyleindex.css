@@ -58,23 +58,52 @@
 .itembox {
     border: 2px solid #73AD21;
 }
-.watchesContainer {
-    margin-left: 200px;
-    margin-right: 100px;
-}
 .watchesContainer h3:first-child{
     text-align: center;
-    color: #353535;
+    color: #3d4246;
+    font-family:Montserrat;
+    font-size:28px;
+    font-weight:600;
+    line-height:39.2px;
+    text-align:center;
+    text-transform:uppercase;
+}
+.pagination p{
+    float: left;
+    margin-left: 200px;
+    color: #3d4246;
+    line-height: 24px;
+}
+.pagination a {
+    color: black;
+    float: left;
+    padding: 0px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+/* Style the active/current link */
+.pagination a.active {
+    background-color: dodgerblue;
+    color: white;
+}
+
+/* Add a grey background color on mouse-over */
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
 }
 .sort-by{
-    margin-left: 100px;
+    float: right;
+    padding-right: 200px;
+    margin: 20px 0px;
 }
 .sort-by select{
     border: none;
     text-align: center;
 }
 .item-list{
-    margin-left: 100px;
+    margin-top: 10px;
+    margin-left: 200px;
 }
 .itembox:hover {
     border: 1px solid #777;
@@ -88,27 +117,6 @@
 }
 .itemcontent{
     align-items: flex-start;
-}
-.itemblock{
-    margin-top: 90px;
-    margin-left: 30px;
-    position: absolute;
-    padding-top: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-.addtocart{
-    width: 100%;
-    height: 50px;
-    border: 1px solid;
-    background: #2a7c6f;
-    font-size: 18px;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    outline: none;
-    margin-bottom: 20px;
 }
 .addtocart:hover{
     border-color: #2691d9;

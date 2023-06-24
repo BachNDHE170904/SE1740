@@ -27,7 +27,8 @@ public class WatchDAO extends BaseDAO<Watch> {
             while(rs.next())
             {
                 Watch s = new Watch();
-                s.setId(rs.getInt("id"));
+                s.setWatchId(rs.getInt("id"));
+                s.setPageId((s.getWatchId()/9)+1);
                 s.setName(rs.getString("name"));
                 s.setSku(rs.getString("sku"));
                 s.setPrice(rs.getFloat("price"));
@@ -47,7 +48,8 @@ public class WatchDAO extends BaseDAO<Watch> {
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 Watch s = new Watch();
-                s.setId(rs.getInt("id"));
+                s.setWatchId(rs.getInt("id"));
+                s.setPageId((s.getWatchId()/12)+1);
                 s.setName(rs.getString("name"));
                 s.setSku(rs.getString("sku"));
                 s.setPrice(rs.getFloat("price"));
@@ -109,12 +111,12 @@ public class WatchDAO extends BaseDAO<Watch> {
 //        } catch (SQLException ex) {
 //            Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-//    }
+////    }
 //        public static void main(String[] args) {
 //        WatchDAO db=new WatchDAO();
 //         ArrayList<Watch> watches = db.getWatches();db.getWatches();
 //         for(Watch w:watches){
-//             System.out.println(w.toString());
+//             System.out.println(w.getPageId());
 //         }
 //    }
 }

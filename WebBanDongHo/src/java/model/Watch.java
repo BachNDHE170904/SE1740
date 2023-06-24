@@ -9,7 +9,7 @@ package model;
  * @author ADMIN
  */
 public class Watch {
-    private int id;
+    private int watchId,pageId;
     private float price;
     private String sku;
     private String name;
@@ -17,22 +17,30 @@ public class Watch {
     public Watch() {
     }
 
-    public Watch(int id, float price, String sku, String name) {
-        this.id = id;
+    public Watch(int watchId, int pageId, float price, String sku, String name) {
+        this.watchId = watchId;
+        this.pageId = pageId;
         this.price = price;
         this.sku = sku;
         this.name = name;
     }
 
-    
-
-    public int getId() {
-        return id;
+    public int getWatchId() {
+        return watchId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setWatchId(int watchId) {
+        this.watchId = watchId;
     }
+
+    public int getPageId() {
+        return pageId;
+    }
+
+    public void setPageId(int pageId) {
+        this.pageId = pageId;
+    }
+
 
     public float getPrice() {
         return price;
@@ -58,11 +66,5 @@ public class Watch {
         this.sku = sku;
     }
 
-    
-
-    @Override
-    public String toString() {
-        return "Watch{" + "id=" + id + ", price=" + price + ", name=" + name + '}';
-    }
     
 }
