@@ -40,10 +40,10 @@
                 </ul>
 
 
-                <form class="navbar-form navbar-right" role="search">
-                    <input type="text" placeholder="Search">
+                <form class="navbar-form navbar-right" action="" role="search">
+                    <input id="searchbar" type="text" placeholder="Search">
                 </form>
-
+                <script src="js/search.js"></script>
             </div>
         </div>
         <div class="watchesContainer">
@@ -60,20 +60,20 @@
                 %>
                 <div class="pagination">
                     <p>Page</p>
-                    <a href="WelcomePage.jsp?page=<%= pageId - 1%>">&laquo;</a>
-                    <a href="WelcomePage.jsp?page=1">1</a>
-                    <a href="WelcomePage.jsp?page=2">2</a>
-                    <a href="WelcomePage.jsp?page=3">3</a>
-                    <a href="WelcomePage.jsp?page=4">4</a>
-                    <a href="WelcomePage.jsp?page=5">5</a>
-                    <a href="WelcomePage.jsp?page=6">6</a>
-                    <a href="WelcomePage.jsp?page=<%= pageId + 1%>">&raquo;</a>
+                    <a href="WelcomePage.jsp?page=<%= pageId - 1%>&&selectedValue=<%=request.getParameter("selectedValue") %>">&laquo;</a>
+                    <a href="WelcomePage.jsp?page=1&&selectedValue=<%=request.getParameter("selectedValue") %>">1</a>
+                    <a href="WelcomePage.jsp?page=2&&selectedValue=<%=request.getParameter("selectedValue") %>">2</a>
+                    <a href="WelcomePage.jsp?page=3&&selectedValue=<%=request.getParameter("selectedValue") %>">3</a>
+                    <a href="WelcomePage.jsp?page=4&&selectedValue=<%=request.getParameter("selectedValue") %>">4</a>
+                    <a href="WelcomePage.jsp?page=5&&selectedValue=<%=request.getParameter("selectedValue") %>">5</a>
+                    <a href="WelcomePage.jsp?page=6&&selectedValue=<%=request.getParameter("selectedValue") %>">6</a>
+                    <a href="WelcomePage.jsp?page=<%= pageId + 1%>&&selectedValue=<%=request.getParameter("selectedValue") %>">&raquo;</a>
                 </div>
                 <div class="sort-by">
                     Sort by:
                     <select name="sort" id="sortSelect">
                         <option value="none" selected disabled hidden>Select an Option</option>
-                        <option value="new">New</option>
+                        <option value="default">Default</option>
                         <option value="high-to-low">Price (High to low)</option>
                         <option value="low-to-high">Price (Low to high)</option>
                     </select>
@@ -81,7 +81,7 @@
                 <script>
                     document.getElementById("sortSelect").addEventListener("change", function () {
                         var selectedValue = this.value;
-                        window.location.href = "WelcomePage.jsp?selectedValue=" + encodeURIComponent(selectedValue);
+                        window.location.href = "WelcomePage.jsp?page=<%= pageId%>&&selectedValue=" + encodeURIComponent(selectedValue);
                     });
                 </script>
                 <%
@@ -92,7 +92,7 @@
                     } else {
                         ArrayList<Watch> sortedWatches = new ArrayList<>(watches);
                         String sort = request.getParameter("selectedValue");
-                        if (sort == null || sort.equalsIgnoreCase("new")) {
+                        if (sort == null || sort.equalsIgnoreCase("default")) {
                             Collections.sort(sortedWatches, new Comparator<Watch>() {
                                 public int compare(Watch o1, Watch o2) {
                                     return (int) (o1.getWatchId() - o2.getWatchId());
