@@ -57,16 +57,23 @@
                     } catch (NumberFormatException e) {
                         pageId = 1;
                     }
+                    WatchDAO db = new WatchDAO();
+                    ArrayList<Watch> watches = db.getWatches();
+                    if (watches == null) {
+                        out.println("Cannot get the data");
+                    } else {
+                        int maxPage =(int) Math.ceil(watches.size()/8);
                 %>
                 <div class="pagination">
                     <p>Page</p>
                     <a href="WelcomePage.jsp?page=<%= pageId - 1%>&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">&laquo;</a>
-                    <a href="WelcomePage.jsp?page=1&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">1</a>
-                    <a href="WelcomePage.jsp?page=2&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">2</a>
-                    <a href="WelcomePage.jsp?page=3&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">3</a>
-                    <a href="WelcomePage.jsp?page=4&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">4</a>
-                    <a href="WelcomePage.jsp?page=5&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">5</a>
-                    <a href="WelcomePage.jsp?page=6&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">6</a>
+                    <%
+                        for (int i = 1; i <= maxPage; i++) {
+                    %>
+                    <a href="WelcomePage.jsp?page=<%= i%>&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>"><%= i%></a>
+                    <%
+                        }
+                    %>
                     <a href="WelcomePage.jsp?page=<%= pageId + 1%>&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">&raquo;</a>
                 </div>
                 <div class="sort-by">
@@ -85,39 +92,34 @@
                     });
                 </script>
                 <%
-                    WatchDAO db = new WatchDAO();
-                    ArrayList<Watch> watches = db.getWatches();
-                    if (watches == null) {
-                        out.println("Cannot get the data");
-                    } else {
-                        ArrayList<Watch> sortedWatches = new ArrayList<>(watches);
-                        String sort = request.getParameter("selectedValue");
-                        if (sort == null || sort.equalsIgnoreCase("default")) {
-                            Collections.sort(sortedWatches, new Comparator<Watch>() {
-                                public int compare(Watch o1, Watch o2) {
-                                    return (int) (o1.getWatchId() - o2.getWatchId());
-                                }
-                            });
-                        } else if (sort.equalsIgnoreCase("high-to-low")) {
-                            Collections.sort(sortedWatches, new Comparator<Watch>() {
-                                public int compare(Watch o1, Watch o2) {
-                                    return (int) (o2.getPrice() - o1.getPrice());
-                                }
-                            });
-                        } else if (sort.equalsIgnoreCase("low-to-high")) {
-                            Collections.sort(sortedWatches, new Comparator<Watch>() {
-                                public int compare(Watch o1, Watch o2) {
-                                    return (int) (o1.getPrice() - o2.getPrice());
-                                }
-                            });
-                        }
-                        String search = (String) request.getAttribute("searchResult");
-                        if (search == null) {
-                            search = "-";
-                        }
-                        search = search.toLowerCase();
-                        for (Watch w : sortedWatches) {
-                            if (w.getPageId() == pageId && w.getName().toLowerCase().contains(search)) {
+                    ArrayList<Watch> sortedWatches = new ArrayList<>(watches);
+                    String sort = request.getParameter("selectedValue");
+                    if (sort == null || sort.equalsIgnoreCase("default")) {
+                        Collections.sort(sortedWatches, new Comparator<Watch>() {
+                            public int compare(Watch o1, Watch o2) {
+                                return (int) (o1.getWatchId() - o2.getWatchId());
+                            }
+                        });
+                    } else if (sort.equalsIgnoreCase("high-to-low")) {
+                        Collections.sort(sortedWatches, new Comparator<Watch>() {
+                            public int compare(Watch o1, Watch o2) {
+                                return (int) (o2.getPrice() - o1.getPrice());
+                            }
+                        });
+                    } else if (sort.equalsIgnoreCase("low-to-high")) {
+                        Collections.sort(sortedWatches, new Comparator<Watch>() {
+                            public int compare(Watch o1, Watch o2) {
+                                return (int) (o1.getPrice() - o2.getPrice());
+                            }
+                        });
+                    }
+                    String search = (String) request.getAttribute("searchResult");
+                    if (search == null) {
+                        search = "-";
+                    }
+                    search = search.toLowerCase();
+                    for (Watch w : sortedWatches) {
+                        if (w.getPageId() == pageId && w.getName().toLowerCase().contains(search)) {
                 %>
                 <div class="item-list" >
                     <a class="itembox"href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>" id="<%= w.getWatchId()%>">
