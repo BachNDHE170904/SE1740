@@ -40,8 +40,8 @@
                 </ul>
 
 
-                <form class="navbar-form navbar-right" action="" role="search">
-                    <input id="searchbar" type="text" placeholder="Search">
+                <form class="navbar-form navbar-right" action="SearchServlet" method="GET" role="search">
+                    <input name="searchResult" type="text" placeholder="Search">
                 </form>
                 <script src="js/search.js"></script>
             </div>
@@ -60,14 +60,14 @@
                 %>
                 <div class="pagination">
                     <p>Page</p>
-                    <a href="WelcomePage.jsp?page=<%= pageId - 1%>&&selectedValue=<%=request.getParameter("selectedValue") %>">&laquo;</a>
-                    <a href="WelcomePage.jsp?page=1&&selectedValue=<%=request.getParameter("selectedValue") %>">1</a>
-                    <a href="WelcomePage.jsp?page=2&&selectedValue=<%=request.getParameter("selectedValue") %>">2</a>
-                    <a href="WelcomePage.jsp?page=3&&selectedValue=<%=request.getParameter("selectedValue") %>">3</a>
-                    <a href="WelcomePage.jsp?page=4&&selectedValue=<%=request.getParameter("selectedValue") %>">4</a>
-                    <a href="WelcomePage.jsp?page=5&&selectedValue=<%=request.getParameter("selectedValue") %>">5</a>
-                    <a href="WelcomePage.jsp?page=6&&selectedValue=<%=request.getParameter("selectedValue") %>">6</a>
-                    <a href="WelcomePage.jsp?page=<%= pageId + 1%>&&selectedValue=<%=request.getParameter("selectedValue") %>">&raquo;</a>
+                    <a href="WelcomePage.jsp?page=<%= pageId - 1%>&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">&laquo;</a>
+                    <a href="WelcomePage.jsp?page=1&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">1</a>
+                    <a href="WelcomePage.jsp?page=2&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">2</a>
+                    <a href="WelcomePage.jsp?page=3&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">3</a>
+                    <a href="WelcomePage.jsp?page=4&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">4</a>
+                    <a href="WelcomePage.jsp?page=5&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">5</a>
+                    <a href="WelcomePage.jsp?page=6&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">6</a>
+                    <a href="WelcomePage.jsp?page=<%= pageId + 1%>&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">&raquo;</a>
                 </div>
                 <div class="sort-by">
                     Sort by:
@@ -81,7 +81,7 @@
                 <script>
                     document.getElementById("sortSelect").addEventListener("change", function () {
                         var selectedValue = this.value;
-                        window.location.href = "WelcomePage.jsp?page=<%= pageId%>&&selectedValue=" + encodeURIComponent(selectedValue);
+                        window.location.href = "WelcomePage.jsp?searchResult=<%=request.getParameter("searchResult")%>&&page=<%= pageId%>&&selectedValue=" + encodeURIComponent(selectedValue);
                     });
                 </script>
                 <%
@@ -111,8 +111,13 @@
                                 }
                             });
                         }
+                        String search = (String) request.getAttribute("searchResult");
+                        if (search == null) {
+                            search = "-";
+                        }
+                        search = search.toLowerCase();
                         for (Watch w : sortedWatches) {
-                            if (w.getPageId() == pageId) {
+                            if (w.getPageId() == pageId && w.getName().toLowerCase().contains(search)) {
                 %>
                 <div class="item-list" >
                     <a class="itembox"href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>" id="<%= w.getWatchId()%>">

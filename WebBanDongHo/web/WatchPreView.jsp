@@ -48,7 +48,7 @@
                     Watch w = (Watch) request.getAttribute("previewwatch");
                 %>
                 <div class="redirectwatch">
-                    <h5><a href=WelcomePage.jsp>Home</a>/<a href=PreviewWatch?watchid=<%= w.getId() - 1%>><%= w.getName()%></a></h5>
+                    <h5><a href=WelcomePage.jsp>Home</a>/<a href=PreviewWatch?watchid=<%= w.getWatchId()- 1%>><%= w.getName()%></a></h5>
                 </div>
                 <div class="col-md-6 section-left">   
                     <h3><%= w.getName()%></h3>
