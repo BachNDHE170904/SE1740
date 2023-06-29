@@ -37,10 +37,17 @@ public class AddToCartServlet extends HttpServlet {
                 request.getRequestDispatcher("Login.jsp").forward(request, response);
             } else {
                 Watch w = (Watch) request.getAttribute("previewwatch");
-                ArrayList<Watch> orders = new ArrayList();
-                orders.add(w);
-                session.setAttribute("orders", orders);
-                request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+                if (session.getAttribute("orders") != null) {
+                    ArrayList<Watch> orders = (ArrayList<Watch>) session.getAttribute("orders");
+                    orders.add(w);
+                    session.setAttribute("orders", orders);
+                    request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+                } else {
+                    ArrayList<Watch> orders = new ArrayList();
+                    orders.add(w);
+                    session.setAttribute("orders", orders);
+                    request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+                }
             }
         }
     }
