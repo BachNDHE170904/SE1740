@@ -1,4 +1,5 @@
 
+<%@page import="model.Order"%>
 <%@page import="model.Account"%>
 <%@page import="model.Watch"%>
 <%@page import="java.util.ArrayList"%>
@@ -44,9 +45,37 @@
         </div>
         <div class="watchesContainer">
             <div class="row2">
-                
-            </div>
+                <%
+                    ArrayList<Order> orders = (ArrayList<Order>) session.getAttribute("orders");
+                %>
+                <div class="col-md-6 section-left">   
+                    <%
+                        if (orders != null) {
+                            float total = 0;
+                            for (Order order : orders) {
+                                Watch w = order.getWatch();
+                                total += order.getQuantity() * w.getPrice();
+                    %>
+                    <h3><%= w.getName()%></h3>
+                    <div class="itemprice">
+                        <p>Price: $<%= w.getPrice()%></p>
+                    </div>
+                    <div class="itemquantity">
+                        <p>Quantity: </p> $<%= order.getQuantity()%>
+                    </div>
+                    <%
+                        }
+                    %>
+                    <div class="totalPrice">
+                        <p>Total: <%= total %></p>
+                    </div>
+                    <%
+                        }
+                    %>
+                </div>
+                <div class="col-md-6 section-right">
 
-        </div>
+                </div>
+            </div>
     </body>
 </html>

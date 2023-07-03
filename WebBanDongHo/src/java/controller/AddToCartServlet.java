@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.Account;
+import model.Order;
 import model.Watch;
 
 /**
@@ -36,15 +37,17 @@ public class AddToCartServlet extends HttpServlet {
             if (acc == null) {
                 request.getRequestDispatcher("Login.jsp").forward(request, response);
             } else {
-                Watch w = (Watch) request.getAttribute("previewwatch");
+                Watch w = (Watch) session.getAttribute("previewwatch");
+                int quantity=Integer.parseInt(request.getParameter("quantity"));
+                Order ord=new Order(w,quantity);
                 if (session.getAttribute("orders") != null) {
-                    ArrayList<Watch> orders = (ArrayList<Watch>) session.getAttribute("orders");
-                    orders.add(w);
+                    ArrayList<Order> orders = (ArrayList<Order>) session.getAttribute("orders");
+                    orders.add(ord);
                     session.setAttribute("orders", orders);
                     request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
                 } else {
-                    ArrayList<Watch> orders = new ArrayList();
-                    orders.add(w);
+                    ArrayList<Order> orders = new ArrayList();
+                    orders.add(ord);
                     session.setAttribute("orders", orders);
                     request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
                 }
