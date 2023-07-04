@@ -62,7 +62,7 @@
                     if (watches == null) {
                         out.println("Cannot get the data");
                     } else {
-                        int maxPage =(int) Math.ceil(watches.size()/8);
+                        int maxPage = (int) Math.ceil(watches.size() / 8);
                 %>
                 <div class="pagination">
                     <p>Page</p>
@@ -79,7 +79,6 @@
                 <div class="sort-by">
                     Sort by:
                     <select name="sort" id="sortSelect">
-                        <option value="none" selected disabled hidden>Select an Option</option>
                         <option value="default">Default</option>
                         <option value="high-to-low">Price (High to low)</option>
                         <option value="low-to-high">Price (Low to high)</option>
@@ -115,11 +114,13 @@
                     }
                     String search = (String) request.getAttribute("searchResult");
                     if (search == null) {
-                        search = "-";
+                        search = (String) request.getParameter("searchResult");
+                        if (search == null) {
+                            search = "-";
+                        }
                     }
-                    search = search.toLowerCase();
                     for (Watch w : sortedWatches) {
-                        if (w.getPageId() == pageId && w.getName().toLowerCase().contains(search)) {
+                        if (w.getPageId() == pageId && w.getName().toLowerCase().contains(search.toLowerCase())) {
                 %>
                 <div class="item-list" >
                     <a class="itembox"href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>" id="<%= w.getWatchId()%>">
