@@ -46,34 +46,44 @@
             <div class="row2">
                 <%
                     ArrayList<Order> orders = (ArrayList<Order>) session.getAttribute("orders");
+                    float subTotal = 0;
                 %>
-                <div class="col-md-6 section-left">   
+                <div class="col-md-9 section-left">   
+                    <h3>My Cart</h3>
                     <%
                         if (orders != null) {
-                            float total = 0;
                             for (Order order : orders) {
+                                float totalWatch = 0;
                                 Watch w = order.getWatch();
-                                total += order.getQuantity() * w.getPrice();
+                                totalWatch += order.getQuantity() * w.getPrice();
+                                subTotal += totalWatch;
                     %>
-                    <h3><%= w.getName()%></h3>
-                    <div class="itemprice">
-                        <p>Price: $<%= w.getPrice()%></p>
-                    </div>
-                    <div class="itemquantity">
-                        <p>Quantity: </p> $<%= order.getQuantity()%>
+                    <div class="item-info">
+                        <img class="itemimg" src="images/<%= w.getName()%>.jpg" width="150" height="150"/>
+                        <ul>
+                            <li><p><%= w.getName()%></p></li><br>
+                            <li><p>Price: $<%= w.getPrice()%></p></li><br>
+                            <li><p>Quantity:<%= order.getQuantity()%></p></li><br>
+                            <li><p>Total:$<%= totalWatch%></p></li>
+                        </ul>
                     </div>
                     <%
                         }
                     %>
-                    <div class="totalPrice">
-                        <p>Total: <%= total %></p>
-                    </div>
+                    <%
+                    } else {
+                    %>
+                    <p>You have nothing in your cart</p>
                     <%
                         }
                     %>
                 </div>
-                <div class="col-md-6 section-right">
-
+                <div class="col-md-3 section-right">
+                    <h3>Order Summary</h3>
+                    <div class="sub-total">
+                        <p>Sub Total:$<%= subTotal%></p>
+                        <input type="submit" value="Checkout"/>
+                    </div>
                 </div>
             </div>
     </body>
