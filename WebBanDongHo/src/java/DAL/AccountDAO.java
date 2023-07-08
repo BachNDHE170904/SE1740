@@ -18,7 +18,7 @@ import model.Account;
  */
 public class AccountDAO extends BaseDAO<Account> {
 
-    public ArrayList<Account> getAccountes() {
+    public ArrayList<Account> getAccounts() {
         ArrayList<Account> accounts = new ArrayList<>();
         try {
             String sql = "SELECT * FROM Accounts s\n";
@@ -36,13 +36,12 @@ public class AccountDAO extends BaseDAO<Account> {
         return accounts;
     }
 
-    public Account getAccount(String username,String password) {
+    public Account getAccount(String username) {
         try {
             String sql = "SELECT * FROM Accounts s\n"
-                    + "WHERE s.username = ? and s.password=?";
+                    + "WHERE s.username = ? ";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, username);
-            statement.setString(2, password);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 Account s = new Account();

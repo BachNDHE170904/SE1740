@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         AccountDAO db = new AccountDAO();
-        Account account = db.getAccount(username, password);
+        Account account = db.getAccount(username);
         if (account != null) // login successful!
         {
             Cookie c_user = new Cookie("username", account.getUsername());

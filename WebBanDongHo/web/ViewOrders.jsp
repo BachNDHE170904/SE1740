@@ -1,4 +1,5 @@
 
+<%@page import="DAL.OrderDAO"%>
 <%@page import="model.Order"%>
 <%@page import="model.Account"%>
 <%@page import="model.Watch"%>
@@ -45,7 +46,8 @@
         <div class="watchesContainer">
             <div class="row2">
                 <%
-                    ArrayList<Order> orders = (ArrayList<Order>) session.getAttribute("orders");
+                    OrderDAO db=new OrderDAO();
+                    ArrayList<Order> orders = db.getOrders(acc.getUsername());
                     float subTotal = 0;
                 %>
                 <div class="col-md-9 section-left">   

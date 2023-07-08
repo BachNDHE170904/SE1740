@@ -4,6 +4,7 @@
  */
 package controller;
 
+import DAL.OrderDAO;
 import DAL.WatchDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,8 +27,9 @@ public class AddToCartServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        WatchDAO db = new WatchDAO();
-        ArrayList<Watch> watches = db.getWatches();
+        WatchDAO watchDb = new WatchDAO();
+        OrderDAO orderDb=new OrderDAO();
+        ArrayList<Watch> watches = watchDb.getWatches();
         HttpSession session = request.getSession();
         Account acc = (Account) session.getAttribute("user");
         if (watches == null) {
@@ -38,19 +40,9 @@ public class AddToCartServlet extends HttpServlet {
                 request.getRequestDispatcher("Login.jsp").forward(request, response);
             } else {
                 Watch w = (Watch) session.getAttribute("previewwatch");
-                int quantity=Integer.parseInt(request.getParameter("quantity"));
-                Order ord=new Order(w,quantity);
-                if (session.getAttribute("orders") != null) {
-                    ArrayList<Order> orders = (ArrayList<Order>) session.getAttribute("orders");
-                    orders.add(ord);
-                    session.setAttribute("orders", orders);
-                    request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
-                } else {
-                    ArrayList<Order> orders = new ArrayList();
-                    orders.add(ord);
-                    session.setAttribute("orders", orders);
-                    request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
-                }
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
+                orderDb.insertOrder(w, quantity, acc);
+                request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
             }
         }
     }

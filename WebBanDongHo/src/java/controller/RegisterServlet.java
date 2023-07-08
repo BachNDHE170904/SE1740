@@ -34,7 +34,7 @@ public class RegisterServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         AccountDAO db = new AccountDAO();
-        Account account =  db.getAccount(username, password);
+        Account account =  db.getAccount(username);
         if(account == null) // No account found
         {
             db.insertAccount(new Account(username,password));
