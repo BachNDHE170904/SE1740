@@ -37,8 +37,8 @@
                 </ul>
 
 
-                <form class="navbar-form navbar-right" role="search">
-                    <input type="text" placeholder="Search">
+                <form class="navbar-form navbar-right" action="SearchServlet" method="GET" role="search">
+                    <input name="searchResult" type="text" placeholder="Search">
                 </form>
 
             </div>
@@ -46,14 +46,14 @@
         <div class="watchesContainer">
             <div class="row2">
                 <%
-                    OrderDAO db=new OrderDAO();
+                    OrderDAO db = new OrderDAO();
                     ArrayList<Order> orders = db.getOrders(acc.getUsername());
                     float subTotal = 0;
                 %>
                 <div class="col-md-9 section-left">   
                     <h3>My Cart</h3>
                     <%
-                        if (orders != null) {
+                        if (orders.size() != 0) {
                             for (Order order : orders) {
                                 float totalWatch = 0;
                                 Watch w = order.getWatch();
@@ -66,19 +66,14 @@
                             <li><p><%= w.getName()%></p></li><br>
                             <li><p>Price: $<%= w.getPrice()%></p></li><br>
                             <li><p>Quantity:<%= order.getQuantity()%></p></li><br>
-                            <li><p>Total:$<%= totalWatch%></p></li>
+                            <li><p>Total:$<%= totalWatch%></p></li><br>
                         </ul>
+                        <a href="RemoveOrderServlet?id=<%= order.getId()%>">Remove</a>
                     </div>
                     <%
                         }
                     %>
-                    <%
-                    } else {
-                    %>
-                    <p>You have nothing in your cart</p>
-                    <%
-                        }
-                    %>
+
                 </div>
                 <div class="col-md-3 section-right">
                     <h3>Order Summary</h3>
@@ -87,6 +82,15 @@
                         <input type="submit" value="Checkout"/>
                     </div>
                 </div>
+                <%
+                } else {
+                %>
+                <div class="empty-cart">
+                    <p>You have nothing in your cart!<a href="WelcomePage.jsp">Shop now</a></p>
+                </div>
+                <%
+                    }
+                %>
             </div>
     </body>
 </html>

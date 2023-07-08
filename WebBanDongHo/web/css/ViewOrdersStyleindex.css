@@ -66,6 +66,11 @@
 .item-info img{
     float: left;
 }
+.item-info a{
+    position: absolute;
+    padding-top: 20px;
+    padding-left: 50%;
+}
 .sub-total{
     border-top: 1px solid silver;
 }
@@ -90,4 +95,7 @@ input[type="submit"]{
 input[type="submit"]:hover{
     border-color: #2691d9;
     transition: .5s;
+}
+.empty-cart {
+    font-size: 30px;
 }

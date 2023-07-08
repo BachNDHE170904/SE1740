@@ -42,7 +42,6 @@
                 <form class="navbar-form navbar-right" action="SearchServlet" method="GET" role="search">
                     <input name="searchResult" type="text" placeholder="Search">
                 </form>
-                <script src="js/search.js"></script>
             </div>
         </div>
         <div class="watchesContainer">

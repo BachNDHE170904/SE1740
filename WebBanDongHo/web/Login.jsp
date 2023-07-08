@@ -21,8 +21,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 </ul>
 
 
-                <form class="navbar-form navbar-right" role="search">
-                    <input type="text" placeholder="Search">
+                <form class="navbar-form navbar-right" action="SearchServlet" method="GET" role="search">
+                    <input name="searchResult" type="text" placeholder="Search">
                 </form>
 
             </div>

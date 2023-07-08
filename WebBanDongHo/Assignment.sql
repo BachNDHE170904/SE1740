@@ -7,7 +7,7 @@ CREATE TABLE Watches (
    price float	NOT NULL,
    PRIMARY KEY (id),
 );
-drop table Accounts
+
 SET IDENTITY_INSERT Watches OFF
 insert into Watches(name,sku,price) values ('Inverness - Walnut & Black Leather','f4fc9661',124.00);
 insert into Watches(name,sku,price) values ('Inverness SS - Walnut','a21ad935#1',148.00);
@@ -22,4 +22,15 @@ CREATE TABLE Accounts (
    password NVARCHAR (50)     NOT NULL,
    PRIMARY KEY (username),
 );
+CREATE TABLE Orders (
+   id   INT    NOT NULL identity(1,1),
+   username NVARCHAR (50)     NOT NULL,
+   watchid   INT    NOT NULL,
+   quantity   INT    NOT NULL
+   PRIMARY KEY (id),
+   FOREIGN KEY (username) REFERENCES Accounts(username),
+   FOREIGN KEY (watchid) REFERENCES Watches(id),
+);
 select * from Watches
+select * from Accounts
+select o.id,o.quantity,o.username,o.watchid,w.name,w.price,w.sku from Orders o,Accounts a,Watches w where o.username=a.username and o.watchid=w.id;

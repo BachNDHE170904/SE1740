@@ -9,15 +9,20 @@ package model;
  * @author ADMIN
  */
 public class Order {
-
     private Watch watch;
-    private int quantity;
+    private int id,quantity;
 
     public Order() {
     }
 
     public Order(Watch watch, int quantity) {
         this.watch = watch;
+        this.quantity = quantity;
+    }
+
+    public Order(Watch watch, int id, int quantity) {
+        this.watch = watch;
+        this.id = id;
         this.quantity = quantity;
     }
 
@@ -35,6 +40,14 @@ public class Order {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

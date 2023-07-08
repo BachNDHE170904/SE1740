@@ -18,7 +18,8 @@ import model.Watch;
  *
  * @author ADMIN
  */
-public class OrderDAO extends BaseDAO<Order>{
+public class OrderDAO extends BaseDAO<Order> {
+    
     public ArrayList<Order> getOrders(String username) {
         ArrayList<Order> orders = new ArrayList<>();
         try {
@@ -27,14 +28,15 @@ public class OrderDAO extends BaseDAO<Order>{
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Order o = new Order();
-                Watch w=new Watch();
+                Watch w = new Watch();
                 w.setWatchId(rs.getInt("watchid"));
-                w.setPageId((w.getWatchId()/9)+1);
+                w.setPageId((w.getWatchId() / 9) + 1);
                 w.setName(rs.getString("name"));
                 w.setSku(rs.getString("sku"));
                 w.setPrice(rs.getFloat("price"));
                 o.setQuantity(rs.getInt("quantity"));
                 o.setWatch(w);
+                o.setId(rs.getInt("id"));
                 orders.add(o);
             }
         } catch (SQLException ex) {
@@ -42,13 +44,25 @@ public class OrderDAO extends BaseDAO<Order>{
         }
         return orders;
     }
-    public void insertOrder(Watch w,int quantity,Account a) {
+    
+    public void insertOrder(Watch w, int quantity, Account a) {
         try {
-            String sql ="insert into Orders(username,watchid,quantity) values(?,?,?)\n;";
+            String sql = "insert into Orders(username,watchid,quantity) values(?,?,?)\n;";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, a.getUsername());
             statement.setInt(2, w.getWatchId());
             statement.setInt(3, quantity);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void deleteOrder(int id) {
+        try {
+            String sql = "DELETE Orders WHERE id=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
