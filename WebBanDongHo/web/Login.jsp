@@ -18,7 +18,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     <li><a href="WelcomePage.jsp">Shop</a></li>
                     <li><a href="Login.jsp">Login</a></li>
                     <li><a href="Register.jsp">Register</a></li>
-                    <li><a href="about.jsp">About us</a></li>
                 </ul>
 
 

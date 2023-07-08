@@ -36,7 +36,6 @@
                         <%
                             }
                         %>
-                    <li><a href="about.jsp">About us</a></li>
                 </ul>
 
 
@@ -66,7 +65,13 @@
                 %>
                 <div class="pagination">
                     <p>Page</p>
+                    <%
+                        if (pageId > 1) {
+                    %>
                     <a href="WelcomePage.jsp?page=<%= pageId - 1%>&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">&laquo;</a>
+                    <%
+                        }
+                    %>
                     <%
                         for (int i = 1; i <= maxPage; i++) {
                     %>
@@ -74,7 +79,13 @@
                     <%
                         }
                     %>
+                    <%
+                        if (pageId < maxPage) {
+                    %>
                     <a href="WelcomePage.jsp?page=<%= pageId + 1%>&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">&raquo;</a>
+                    <%
+                        }
+                    %>
                 </div>
                 <div class="sort-by">
                     Sort by:

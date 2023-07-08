@@ -49,7 +49,7 @@ public class WatchDAO extends BaseDAO<Watch> {
             if (rs.next()) {
                 Watch s = new Watch();
                 s.setWatchId(rs.getInt("id"));
-                s.setPageId((s.getWatchId()/12)+1);
+                s.setPageId((s.getWatchId()/9)+1);
                 s.setName(rs.getString("name"));
                 s.setSku(rs.getString("sku"));
                 s.setPrice(rs.getFloat("price"));

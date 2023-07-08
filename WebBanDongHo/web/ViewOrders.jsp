@@ -33,7 +33,6 @@
                         <%
                             }
                         %>
-                    <li><a href="about.jsp">About us</a></li>
                 </ul>
 
 
