@@ -56,6 +56,13 @@
                     } catch (NumberFormatException e) {
                         pageId = 1;
                     }
+                    String search = (String) request.getAttribute("searchResult");
+                    if (search == null) {
+                        search = request.getParameter("searchResult");
+                    }
+                    if (search == null||search.equalsIgnoreCase("null")) {
+                        search = "-";
+                    }
                     WatchDAO db = new WatchDAO();
                     ArrayList<Watch> watches = db.getWatches();
                     if (watches == null) {
@@ -90,6 +97,7 @@
                 <div class="sort-by">
                     Sort by:
                     <select name="sort" id="sortSelect">
+                        <option value="sort" selected hidden>Select an option</option>
                         <option value="default">Default</option>
                         <option value="high-to-low">Price (High to low)</option>
                         <option value="low-to-high">Price (Low to high)</option>
@@ -122,13 +130,6 @@
                                 return (int) (o1.getPrice() - o2.getPrice());
                             }
                         });
-                    }
-                    String search = (String) request.getAttribute("searchResult");
-                    if (search == null) {
-                        search = (String) request.getParameter("searchResult");
-                        if (search == null) {
-                            search = "-";
-                        }
                     }
                     for (Watch w : sortedWatches) {
                         if (w.getPageId() == pageId && w.getName().toLowerCase().contains(search.toLowerCase())) {
