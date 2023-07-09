@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import model.Watch;
+import model.WatchSpecs;
 
 /**
  *
@@ -24,12 +25,14 @@ public class PreviewWatch extends HttpServlet {
             throws ServletException, IOException {
         WatchDAO db = new WatchDAO();
         ArrayList<Watch> watches = db.getWatches();
+        ArrayList<WatchSpecs> watchSpecs=db.getWatchesSpecs();
         if (watches == null) {
             PrintWriter out = response.getWriter();
             out.println("Cannot get the data");
         } else {
             int id = Integer.parseInt(request.getParameter("watchid"));
             request.setAttribute("previewwatch", watches.get(id));
+            request.setAttribute("previewwatchspec", watchSpecs.get(id));
             request.getRequestDispatcher("WatchPreview.jsp").forward(request, response);
         }
     }

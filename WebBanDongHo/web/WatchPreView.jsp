@@ -1,4 +1,5 @@
 
+<%@page import="model.WatchSpecs"%>
 <%@page import="model.Account"%>
 <%@page import="model.Watch"%>
 <%@page import="java.util.ArrayList"%>
@@ -32,7 +33,6 @@
                         <%
                             }
                         %>
-                    <li><a href="about.jsp">About us</a></li>
                 </ul>
 
 
@@ -48,6 +48,7 @@
                     <%
                         Watch w = (Watch) request.getAttribute("previewwatch");
                         session.setAttribute("previewwatch", w);
+                        WatchSpecs ws=(WatchSpecs) request.getAttribute("previewwatchspec");
                     %>
                     <div class="redirectwatch">
                         <h5><a href=WelcomePage.jsp>Home</a>/<a href=PreviewWatch?watchid=<%= w.getWatchId() - 1%>><%= w.getName()%></a></h5>
@@ -64,6 +65,13 @@
                             <p>Quantity</p>
                             <input type="number" pattern="[0-9]*" data-hook="number-input-spinner-input" value="1" aria-label="Quantity" max="50" min="1" name="quantity"><br>
                         </div>
+                        <p>Watch Specs</p>
+                        <p>BEZEL| <%= ws.getBezel()%></p>
+                        <p>MOVEMENT| <%= ws.getMovement()%></p>
+                        <p>DIAL| <%= ws.getMovement()%></p>
+                        <p>CASE| <%= ws.getWatchCase()%></p>
+                        <p>GLASS| <%= ws.getGlass()%></p>
+                        <p>STRAP| <%= ws.getStrap()%></p>
                         <div class="addtocart">
                             <button type="submit">Add to cart</button>
                         </div>

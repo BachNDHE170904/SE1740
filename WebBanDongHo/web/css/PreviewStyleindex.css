@@ -53,14 +53,8 @@
 .itemquantity{
     margin-top: 20px;
 }
-.itemquantity p{
-    color: #40BCA8;
-}
-.itemprice p{
-    color: #40BCA8;
-}
-.itemsku p{
-    color: #40BCA8;
+.section-left p{
+    color: #40BCA8; 
 }
 .addtocart button{
     margin-top: 100px;

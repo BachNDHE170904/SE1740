@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Watch;
+import model.WatchSpecs;
 
 /**
  *
@@ -38,6 +39,29 @@ public class WatchDAO extends BaseDAO<Watch> {
             Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return watches;
+    }
+    public ArrayList<WatchSpecs> getWatchesSpecs() {
+        ArrayList<WatchSpecs> watchesSpecs = new ArrayList<>();
+        try {
+            String sql =  "select * from Watches w,WatchSpecs ws where w.id=ws.id \n";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next())
+            {
+                WatchSpecs s = new WatchSpecs();
+                s.setId(rs.getInt("id"));
+                s.setBezel(rs.getString("bezel"));
+                s.setMovement(rs.getString("movement"));
+                s.setDial(rs.getString("dial"));
+                s.setWatchCase(rs.getString("watchCase"));
+                s.setGlass(rs.getString("glass"));
+                s.setStrap(rs.getString("strap"));
+                watchesSpecs.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return watchesSpecs;
     }
     public Watch getWatch(int id) {
         try {
