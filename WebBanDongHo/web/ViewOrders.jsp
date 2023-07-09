@@ -1,4 +1,3 @@
-
 <%@page import="DAL.OrderDAO"%>
 <%@page import="model.Order"%>
 <%@page import="model.Account"%>
@@ -35,8 +34,8 @@
                             }
                         %>
                 </ul>
-
-
+                
+                <!-- Search form -->
                 <form class="navbar-form navbar-right" action="SearchServlet" method="GET" role="search">
                     <input name="searchResult" type="text" placeholder="Search">
                 </form>
@@ -46,6 +45,7 @@
         <div class="watchesContainer">
             <div class="row2">
                 <%
+                    // Retrieving orders from the database for the logged-in user
                     OrderDAO db = new OrderDAO();
                     ArrayList<Order> orders = db.getOrders(acc.getUsername());
                     float subTotal = 0;
@@ -53,6 +53,7 @@
                 <div class="col-md-9 section-left">   
                     <h3>My Cart</h3>
                     <%
+                        // Displaying the orders if there are any
                         if (orders.size() != 0) {
                             for (Order order : orders) {
                                 float totalWatch = 0;
@@ -68,6 +69,7 @@
                             <li><p>Quantity:<%= order.getQuantity()%></p></li><br>
                             <li><p>Total:$<%= totalWatch%></p></li><br>
                         </ul>
+                        <!-- Allow user to remove order -->
                         <a href="RemoveOrderServlet?id=<%= order.getId()%>">Remove</a>
                     </div>
                     <%
@@ -85,6 +87,7 @@
                 <%
                 } else {
                 %>
+                <!-- Display a message if the cart is empty -->
                 <div class="empty-cart">
                     <p>You have nothing in your cart!<a href="WelcomePage.jsp">Shop now</a></p>
                 </div>

@@ -18,36 +18,38 @@ import model.Account;
 import model.Watch;
 
 /**
- *
- * @author ADMIN
+ * Servlet responsible for removing an order from the cart.
  */
 public class RemoveOrderServlet extends HttpServlet {
 
-    protected void processRequest(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response)
-            throws jakarta.servlet.ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         WatchDAO watchDb = new WatchDAO();
         OrderDAO orderDb = new OrderDAO();
         ArrayList<Watch> watches = watchDb.getWatches();
         HttpSession session = request.getSession();
         Account acc = (Account) session.getAttribute("user");
         if (acc == null) {
+            // Redirect to login page if user is not logged in
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         } else {
-            int id=Integer.parseInt(request.getParameter("id"));
+            int id = Integer.parseInt(request.getParameter("id"));
+            // Delete the order from the database
             orderDb.deleteOrder(id);
+            // Redirect to the view orders page after removing the order
             request.getRequestDispatcher("ViewOrders.jsp").forward(request, response);
         }
     }
 
     @Override
-    protected void doGet(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response)
-            throws jakarta.servlet.ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
     @Override
-    protected void doPost(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response)
-            throws jakarta.servlet.ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 

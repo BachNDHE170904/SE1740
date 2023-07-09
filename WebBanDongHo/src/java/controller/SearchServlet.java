@@ -15,8 +15,7 @@ import java.util.ArrayList;
 import model.Watch;
 
 /**
- *
- * @author ADMIN
+ * Servlet responsible for handling search requests.
  */
 public class SearchServlet extends HttpServlet {
 
@@ -29,7 +28,9 @@ public class SearchServlet extends HttpServlet {
             out.println("Cannot get the data");
         } else {
             String searchResult = request.getParameter("searchResult");
+            // Set the search result as a request attribute
             request.setAttribute("searchResult", searchResult);
+            // Forward the request to the welcome page
             request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
         }
     }

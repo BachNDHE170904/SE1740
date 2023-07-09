@@ -20,8 +20,7 @@ import model.Order;
 import model.Watch;
 
 /**
- *
- * @author ADMIN
+ * Servlet responsible for adding items to the cart.
  */
 public class AddToCartServlet extends HttpServlet {
 
@@ -37,11 +36,14 @@ public class AddToCartServlet extends HttpServlet {
             out.println("Cannot get the data");
         } else {
             if (acc == null) {
+                // Redirect to login page if user is not logged in
                 request.getRequestDispatcher("Login.jsp").forward(request, response);
             } else {
+                // Get watch and quantity from session and add order to the database
                 Watch w = (Watch) session.getAttribute("previewwatch");
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
                 orderDb.insertOrder(w, quantity, acc);
+                // Redirect to the welcome page after adding the item to the cart
                 request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
             }
         }

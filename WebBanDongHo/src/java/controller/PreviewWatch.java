@@ -16,8 +16,7 @@ import model.Watch;
 import model.WatchSpecs;
 
 /**
- *
- * @author ADMIN
+ * Servlet responsible for previewing a watch.
  */
 public class PreviewWatch extends HttpServlet {
 
@@ -31,8 +30,10 @@ public class PreviewWatch extends HttpServlet {
             out.println("Cannot get the data");
         } else {
             int id = Integer.parseInt(request.getParameter("watchid"));
+            // Set the preview watch and watch specs as request attributes
             request.setAttribute("previewwatch", watches.get(id));
             request.setAttribute("previewwatchspec", watchSpecs.get(id));
+            // Forward the request to the watch preview page
             request.getRequestDispatcher("WatchPreview.jsp").forward(request, response);
         }
     }

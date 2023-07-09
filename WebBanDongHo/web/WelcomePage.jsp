@@ -1,5 +1,3 @@
-
-
 <%@page import="java.util.Comparator"%>
 <%@page import="java.util.Collections"%>
 <%@page import="model.Account"%>
@@ -23,6 +21,7 @@
                     <li><a href="WelcomePage.jsp">Home</a></li>
                     <li><a href="WelcomePage.jsp">Shop</a></li>
                         <%
+                            //check if the user is logged in or not
                             Account acc = (Account) session.getAttribute("user");
                             if (acc == null) {
                         %>
@@ -38,28 +37,30 @@
                         %>
                 </ul>
 
-
+                <!-- Search form -->
                 <form class="navbar-form navbar-right" action="SearchServlet" method="GET" role="search">
                     <input name="searchResult" type="text" placeholder="Search">
                 </form>
             </div>
         </div>
         <div class="watchesContainer">
-            <img class="itemimg" src="images/11062b_2a28ff5b16904be5bde7a89ad3d5fc25~mv2_d_3000_2000_s_2.webp"width="500" height="500px"/>
+            <img class="itemimg" src="images/11062b_2a28ff5b16904be5bde7a89ad3d5fc25~mv2_d_3000_2000_s_2.webp" width="500" height="500px"/>
             <div class="sectioc-middle">
                 <h3>Wrist Watches</h3>
                 <%
                     int pageId;
+                    //retrieve page, page is set to 1 by default
                     try {
                         pageId = Integer.parseInt(request.getParameter("page"));
                     } catch (NumberFormatException e) {
                         pageId = 1;
                     }
+                    //get search result, it is set to "-" by default to get all watches
                     String search = (String) request.getAttribute("searchResult");
                     if (search == null) {
                         search = request.getParameter("searchResult");
                     }
-                    if (search == null||search.equalsIgnoreCase("null")) {
+                    if (search == null || search.equalsIgnoreCase("null")) {
                         search = "-";
                     }
                     WatchDAO db = new WatchDAO();
@@ -67,11 +68,13 @@
                     if (watches == null) {
                         out.println("Cannot get the data");
                     } else {
+                        //set max number of page
                         int maxPage = (int) Math.ceil(watches.size() / 8);
                 %>
                 <div class="pagination">
                     <p>Page</p>
                     <%
+                        //when should ">>" and "<<" signs appear
                         if (pageId > 1) {
                     %>
                     <a href="WelcomePage.jsp?page=<%= pageId - 1%>&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">&laquo;</a>
@@ -103,12 +106,14 @@
                     </select>
                 </div>
                 <script>
+                    //script to check the user choice in the sort By dropdown menu 
                     document.getElementById("sortSelect").addEventListener("change", function () {
                         var selectedValue = this.value;
                         window.location.href = "WelcomePage.jsp?searchResult=<%=request.getParameter("searchResult")%>&&page=<%= pageId%>&&selectedValue=" + encodeURIComponent(selectedValue);
                     });
                 </script>
                 <%
+                    //sort the watches, they are sorted by id by default
                     ArrayList<Watch> sortedWatches = new ArrayList<>(watches);
                     String sort = request.getParameter("selectedValue");
                     if (sort == null || sort.equalsIgnoreCase("default")) {
@@ -130,12 +135,13 @@
                             }
                         });
                     }
+                    //show all the watches 
                     for (Watch w : sortedWatches) {
                         if (w.getPageId() == pageId && w.getName().toLowerCase().contains(search.toLowerCase())) {
                 %>
                 <div class="item-list" >
-                    <a class="itembox"href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>" id="<%= w.getWatchId()%>">
-                        <img class="itemimg" src="images/<%= w.getName()%>.jpg"width="194" height="250"/>
+                    <a class="itembox" href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>" id="<%= w.getWatchId()%>">
+                        <img class="itemimg" src="images/<%= w.getName()%>.jpg" width="194" height="250"/>
                         <div class="iteminfo">
                             <div class="itemcontent">
                                 <h5 class="itemname"><%= w.getName()%></h5>

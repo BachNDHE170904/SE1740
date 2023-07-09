@@ -19,15 +19,16 @@ import model.Account;
 import model.Watch;
 
 /**
- *
- * @author ADMIN
+ * Servlet responsible for logging out the user.
  */
 public class LogOutServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        // Clear the user session attribute to log out the user
         session.setAttribute("user", null);
+        // Redirect to the welcome page after logging out
         request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
     }
 

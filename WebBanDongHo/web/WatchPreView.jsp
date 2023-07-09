@@ -1,4 +1,3 @@
-
 <%@page import="model.WatchSpecs"%>
 <%@page import="model.Account"%>
 <%@page import="model.Watch"%>
@@ -34,8 +33,8 @@
                             }
                         %>
                 </ul>
-
-
+                
+                <!-- Search form -->
                 <form class="navbar-form navbar-right" action="SearchServlet" method="GET" role="search">
                     <input name="searchResult" type="text" placeholder="Search">
                 </form>
@@ -46,12 +45,13 @@
             <div class="row2">
                 <form action="AddToCartServlet?method="GET">
                     <%
+                        // Retrieving the watch and its specifications from the request attributes
                         Watch w = (Watch) request.getAttribute("previewwatch");
                         session.setAttribute("previewwatch", w);
                         WatchSpecs ws=(WatchSpecs) request.getAttribute("previewwatchspec");
                     %>
                     <div class="redirectwatch">
-                        <h5><a href=WelcomePage.jsp>Home</a>/<a href=PreviewWatch?watchid=<%= w.getWatchId() - 1%>><%= w.getName()%></a></h5>
+                        <h5><a href="WelcomePage.jsp">Home</a>/<a href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>"><%= w.getName()%></a></h5>
                     </div>
                     <div class="col-md-6 section-left">   
                         <h3><%= w.getName()%></h3>

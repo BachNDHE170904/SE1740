@@ -19,8 +19,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     <li><a href="Login.jsp">Login</a></li>
                     <li><a href="Register.jsp">Register</a></li>
                 </ul>
-
-
+                
+                <!-- Search form -->
                 <form class="navbar-form navbar-right" action="SearchServlet" method="GET" role="search">
                     <input name="searchResult" type="text" placeholder="Search">
                 </form>
@@ -30,22 +30,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <div class="Center">
             <h1>Register</h1>
             <form action="RegisterServlet" method="POST">
+                <!-- Username input -->
                 <div class="txt_field">
                     <input type="text" name="username" required /> 
                     <span></span>
                     <label>Username</label>
                 </div>
+                <!-- Password input -->
                 <div class="txt_field">
                     <input type="password" name="password" required />
                     <span></span>
                     <label>Password</label>
                 </div>
                 <input type="submit" value="Register"/>
-                <%
+                <% 
+                    // Server-side code to handle failed registration attempt
                     String failedRegister = (String) request.getAttribute("failedRegister");
                     if (failedRegister != null) {
                         if (failedRegister.equalsIgnoreCase("fail")) {
                 %> 
+                <!-- Display error message for failed registration -->
                 <div class="WrongRegister">
                     <p>Account already existed, please choose another username</p>
                 </div>
