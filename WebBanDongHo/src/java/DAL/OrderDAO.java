@@ -23,8 +23,9 @@ public class OrderDAO extends BaseDAO<Order> {
     public ArrayList<Order> getOrders(String username) {
         ArrayList<Order> orders = new ArrayList<>();
         try {
-            String sql = "select o.id,o.quantity,o.username,o.watchid,w.name,w.price,w.sku from Orders o,Accounts a,Watches w where o.username=a.username and o.watchid=w.id;\n";
+            String sql = "select o.id,o.quantity,o.username,o.watchid,w.name,w.price,w.sku from Orders o,Accounts a,Watches w where o.username=a.username and o.watchid=w.id and o.username=?;\n";
             PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Order o = new Order();
