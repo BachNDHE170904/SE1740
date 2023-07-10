@@ -135,6 +135,10 @@
                             }
                         });
                     }
+                    for(int i=0;i<sortedWatches.size();i++){
+                        int pageID= i/8+1;
+                        sortedWatches.get(i).setPageId(pageID);
+                    }
                     //show all the watches 
                     for (Watch w : sortedWatches) {
                         if (w.getPageId() == pageId && w.getName().toLowerCase().contains(search.toLowerCase())) {
