@@ -33,7 +33,7 @@
                             }
                         %>
                 </ul>
-                
+
                 <!-- Search form -->
                 <form class="navbar-form navbar-right" action="SearchServlet" method="GET" role="search">
                     <input name="searchResult" type="text" placeholder="Search">
@@ -48,7 +48,7 @@
                         // Retrieving the watch and its specifications from the request attributes
                         Watch w = (Watch) request.getAttribute("previewwatch");
                         session.setAttribute("previewwatch", w);
-                        WatchSpecs ws=(WatchSpecs) request.getAttribute("previewwatchspec");
+                        WatchSpecs ws = (WatchSpecs) request.getAttribute("previewwatchspec");
                     %>
                     <div class="redirectwatch">
                         <h5><a href="WelcomePage.jsp">Home</a>/<a href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>"><%= w.getName()%></a></h5>
@@ -65,7 +65,7 @@
                             <p>Quantity</p>
                             <input type="number" pattern="[0-9]*" data-hook="number-input-spinner-input" value="1" aria-label="Quantity" max="50" min="1" name="quantity"><br>
                         </div>
-                        <p>Watch Specs</p>
+                        <h4>Watch Specs</h4>
                         <p>BEZEL| <%= ws.getBezel()%></p>
                         <p>MOVEMENT| <%= ws.getMovement()%></p>
                         <p>DIAL| <%= ws.getMovement()%></p>

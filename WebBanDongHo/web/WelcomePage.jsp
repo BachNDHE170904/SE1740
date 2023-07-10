@@ -55,13 +55,13 @@
                     } catch (NumberFormatException e) {
                         pageId = 1;
                     }
-                    //get search result, it is set to "-" by default to get all watches
+                    //get search result, it is set to "" by default to get all watches
                     String search = (String) request.getAttribute("searchResult");
                     if (search == null) {
                         search = request.getParameter("searchResult");
                     }
                     if (search == null || search.equalsIgnoreCase("null")) {
-                        search = "-";
+                        search = "";
                     }
                     WatchDAO db = new WatchDAO();
                     ArrayList<Watch> watches = db.getWatches();
@@ -69,7 +69,7 @@
                         out.println("Cannot get the data");
                     } else {
                         //set max number of page
-                        int maxPage = (int) Math.ceil(watches.size() / 8);
+                        int maxPage = (int) watches.size()/9+1;
                 %>
                 <div class="pagination">
                     <p>Page</p>

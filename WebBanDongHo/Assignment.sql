@@ -17,6 +17,10 @@ insert into Watches(name,sku,price) values ('Inverness - Multi Bamboo & Brown Le
 insert into Watches(name,sku,price) values ('Inverness - Multi Bamboo Limited Edition','ac20a290',148.00);
 insert into Watches(name,sku,price) values ('Kylemore - Bamboo Black Leather','f73fcfca',86.75);
 insert into Watches(name,sku,price) values ('Inverness SS - Walnut','a21ad935',148.00);
+insert into Watches(name,sku,price) values ('Inverness - Multi Bamboo & Black Leather','b78cb90f',124.00);
+insert into Watches(name,sku,price) values ('Inverness - Zebrawood & Brown Leather','e30fed33',124.00);
+insert into Watches(name,sku,price) values ('Auburn','23c94900',46.00);
+insert into Watches(name,sku,price) values ('Women Lev','99369b79#3',479.00);
 CREATE TABLE Accounts (
    username NVARCHAR (50)     NOT NULL,
    password NVARCHAR (50)     NOT NULL,
@@ -78,6 +82,23 @@ insert into WatchSpecs(bezel,movement,dial,watchCase,glass,strap)values('Walnut'
 'Features applied indices, printed seconds track, and custom molded hands',
 '45mm, 50 meter water resistant 316L stainless steel case, and caseback',
 'Hardened Mineral Crystal','Stainless steel adjustable strap with stainless steel clasp');
+insert into WatchSpecs(bezel,movement,dial,watchCase,glass,strap)values(' Multi Colored Bamboo','Miyota Japanese Quartz 3 hand with date',
+'Features applied indices, printed seconds track, and custom molded hands',
+'45mm, 50 meter water resistant 316L stainless steel case, and caseback',
+'Hardened Mineral Crystal','quick release leather adjustable strap with memory lock stainless steel clasp');
+insert into WatchSpecs(bezel,movement,dial,watchCase,glass,strap)values(' Zebrawood','Miyota Japanese Quartz 3 hand with date',
+'Features applied indices, printed seconds track, and custom molded hands',
+'45mm, 50 meter water resistant 316L stainless steel case, and caseback',
+'Hardened Mineral Crystal','quick release leather adjustable strap with memory lock stainless steel clasp');
+insert into WatchSpecs(bezel,movement,dial,watchCase,glass,strap)values(' Zebrawood','Miyota Japanese Quartz 3 hand with date',
+'Features applied indices, printed seconds track, and custom molded hands',
+'45mm, 50 meter water resistant 316L stainless steel case, and caseback',
+'Hardened Mineral Crystal','quick release leather adjustable strap with memory lock stainless steel clasp');
+insert into WatchSpecs(bezel,movement,dial,watchCase,glass,strap)values(' Zebrawood','Miyota Japanese Quartz 3 hand with date',
+'Features applied indices, printed seconds track, and custom molded hands',
+'45mm, 50 meter water resistant 316L stainless steel case, and caseback',
+'Hardened Mineral Crystal','quick release leather adjustable strap with memory lock stainless steel clasp');
+
 CREATE TABLE Address (
    id   INT    NOT NULL identity(1,1),
    username NVARCHAR (50)     NOT NULL,
@@ -88,4 +109,4 @@ CREATE TABLE Address (
    PRIMARY KEY (id),
    FOREIGN KEY (username) REFERENCES Accounts(username),
 );
-select * from Address
+select * from Orders
