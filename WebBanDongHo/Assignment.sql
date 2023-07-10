@@ -25,12 +25,14 @@ CREATE TABLE Accounts (
 CREATE TABLE Orders (
    id   INT    NOT NULL identity(1,1),
    username NVARCHAR (50)     NOT NULL,
+   paid bit,
    watchid   INT    NOT NULL,
    quantity   INT    NOT NULL
    PRIMARY KEY (id),
    FOREIGN KEY (username) REFERENCES Accounts(username),
    FOREIGN KEY (watchid) REFERENCES Watches(id),
 );
+
 CREATE TABLE WatchSpecs (
    id   INT    NOT NULL identity(1,1),
    bezel NVARCHAR (80)     NOT NULL,
@@ -76,6 +78,14 @@ insert into WatchSpecs(bezel,movement,dial,watchCase,glass,strap)values('Walnut'
 'Features applied indices, printed seconds track, and custom molded hands',
 '45mm, 50 meter water resistant 316L stainless steel case, and caseback',
 'Hardened Mineral Crystal','Stainless steel adjustable strap with stainless steel clasp');
-select * from Watches w,WatchSpecs ws where w.id=ws.id 
-select * from Accounts
-select o.id,o.quantity,o.username,o.watchid,w.name,w.price,w.sku from Orders o,Accounts a,Watches w where o.username=a.username and o.watchid=w.id;
+CREATE TABLE Address (
+   id   INT    NOT NULL identity(1,1),
+   username NVARCHAR (50)     NOT NULL,
+   firstName NVARCHAR (50)     NOT NULL,
+   lastName NVARCHAR (50)     NOT NULL,
+   phone NVARCHAR (50)     NOT NULL,
+   customerAddress NVARCHAR (80)     NOT NULL,
+   PRIMARY KEY (id),
+   FOREIGN KEY (username) REFERENCES Accounts(username),
+);
+select * from Address

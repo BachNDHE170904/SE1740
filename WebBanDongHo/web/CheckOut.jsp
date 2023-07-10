@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>View Orders Page</title>
-        <link rel="stylesheet" href="css/ViewOrdersStyleindex.css">
+        <link rel="stylesheet" href="css/CheckOutStyleIndex.css">
         <link href="css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
@@ -42,58 +42,54 @@
 
             </div>
         </div>
-        <div class="watchesContainer">
+        <div class="Center">
             <div class="row2">
                 <%
                     // Retrieving orders from the database for the logged-in user
                     OrderDAO db = new OrderDAO();
                     ArrayList<Order> orders = db.getOrders(acc.getUsername());
-                    float subTotal = 0;
+                    float subTotal=0;
+                    try {
+                         subTotal = Float.parseFloat(request.getParameter("subTotal"));
+                    } catch (Exception e) {
+                         subTotal = 0;
+                    }
                 %>
                 <div class="col-md-9 section-left">   
-                    <h3>My Cart</h3>
-                    <%
-                        // Displaying the orders if there are any
-                        if (orders.size() != 0) {
-                            for (Order order : orders) {
-                                float totalWatch = 0;
-                                Watch w = order.getWatch();
-                                totalWatch += order.getQuantity() * w.getPrice();
-                                subTotal += totalWatch;
-                    %>
-                    <div class="item-info">
-                        <img class="itemimg" src="images/<%= w.getName()%>.jpg" width="150" height="150"/>
-                        <ul>
-                            <li><p><%= w.getName()%></p></li><br>
-                            <li><p>Price: $<%= w.getPrice()%></p></li><br>
-                            <li><p>Quantity:<%= order.getQuantity()%></p></li><br>
-                            <li><p>Total:$<%= totalWatch%></p></li><br>
-                        </ul>
-                        <!-- Allow user to remove order -->
-                        <a href="RemoveOrderServlet?id=<%= order.getId()%>">Remove</a>
-                    </div>
-                    <%
-                        }
-                    %>
+                    <h1>Shipping Details</h1>
+                    <form action="CheckOutServlet" method="POST">
+                        <!-- Username input -->
+                        <div class="txt_field">
+                            <input type="text" name="firstname" required /> 
+                            <span></span>
+                            <label>First Name</label>
+                        </div>
+                        <!-- Password input -->
+                        <div class="txt_field">
+                            <input type="text" name="lastname" required />
+                            <span></span>
+                            <label>Last name</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="text" name="phone" required />
+                            <span></span>
+                            <label>Phone</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="text" name="address" required />
+                            <span></span>
+                            <label>Address</label>
+                        </div>
+                        <input type="submit" value="Save address and order"/>
+                    </form>
 
                 </div>
                 <div class="col-md-3 section-right">
                     <h3>Order Summary</h3>
                     <div class="sub-total">
                         <p>Sub Total:$<%= subTotal%></p>
-                        <a href="CheckOut.jsp?subTotal=<%= subTotal%>">Check Out</a>
                     </div>
                 </div>
-                <%
-                } else {
-                %>
-                <!-- Display a message if the cart is empty -->
-                <div class="empty-cart">
-                    <p>You have nothing in your cart!<a href="WelcomePage.jsp">Shop now</a></p>
-                </div>
-                <%
-                    }
-                %>
             </div>
         </div>
     </body>

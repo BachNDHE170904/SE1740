@@ -28,6 +28,10 @@
         <servlet-name>RemoveOrderServlet</servlet-name>
         <servlet-class>controller.RemoveOrderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckOutServlet</servlet-name>
+        <servlet-class>controller.CheckOutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>RemoveOrderServlet</servlet-name>
         <url-pattern>/RemoveOrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOutServlet</servlet-name>
+        <url-pattern>/CheckOutServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
