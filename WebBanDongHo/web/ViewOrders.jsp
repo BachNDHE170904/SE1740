@@ -56,10 +56,12 @@
                         // Displaying the orders if there are any
                         if (orders.size() != 0) {
                             for (Order order : orders) {
-                                float totalWatch = 0;
-                                Watch w = order.getWatch();
-                                totalWatch += order.getQuantity() * w.getPrice();
-                                subTotal += totalWatch;
+                            //show not paid orders
+                                if (!order.isStatus()) {
+                                    float totalWatch = 0;
+                                    Watch w = order.getWatch();
+                                    totalWatch += order.getQuantity() * w.getPrice();
+                                    subTotal += totalWatch;
                     %>
                     <div class="item-info">
                         <img class="itemimg" src="images/<%= w.getName()%>.jpg" width="150" height="150"/>
@@ -73,6 +75,7 @@
                         <a href="RemoveOrderServlet?id=<%= order.getId()%>">Remove</a>
                     </div>
                     <%
+                            }
                         }
                     %>
 

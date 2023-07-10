@@ -5,6 +5,7 @@
 package controller;
 
 import DAL.AddressDAO;
+import DAL.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -39,11 +40,11 @@ public class CheckOutServlet extends HttpServlet {
         String phone =  request.getParameter("phone");
         String address =  request.getParameter("address");
         Address add = new Address(acc.getUsername(), firstName, lastName, phone, address);
-        AddressDAO db = new AddressDAO();
-        db.insertAddress(add);
-        PrintWriter out = response.getWriter();
-        out.print(add.toString());
-//        request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+        AddressDAO addDB = new AddressDAO();
+        addDB.insertAddress(add);
+        OrderDAO orderDB=new OrderDAO();
+        orderDB.updateOrders(acc.getUsername());
+        request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
