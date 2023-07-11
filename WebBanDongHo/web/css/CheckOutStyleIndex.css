@@ -1,11 +1,4 @@
 
-.Center{
-    margin-left: 300px;
-    margin-right: 300px;
-    background: white;
-    border-radius: 10px;
-    
-}
 .Center h1{
     text-align: center;
     padding: 0 0 20px 0;
@@ -87,14 +80,9 @@ input[type="submit"]:hover{
 .signup_link a:hover{
     text-decoration: underline;
 }
-.WrongLogin {
-    margin: 30px 0;
-    text-align: left;
-    font-size: 16px;
-    color: #666666;
-}
+
 .sub-total p{
-    color: #40BCA8;
+    color: #000000;
     font-size: 20px;
     padding:20px 0px;
     border-bottom:  1px solid silver;

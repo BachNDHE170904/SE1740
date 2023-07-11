@@ -61,8 +61,8 @@
                 </div>
             </nav>
         </div>
-        <div class="Center">
-            <div class="row2">
+        <div class="container Center">
+            <div class="row">
                 <%
                     // Retrieving orders from the database for the logged-in user
                     OrderDAO db = new OrderDAO();
