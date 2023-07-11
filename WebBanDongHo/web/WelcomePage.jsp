@@ -179,7 +179,7 @@
                         <img src="images/<%= w.getName()%>.jpg" class="card-img-top" alt="<%= w.getName()%>">
                         <div class="card-body">
                             <h5 class="card-title"><%= w.getName()%></h5>
-                            <p class="card-text"><%= w.getPrice()%></p>
+                            <p class="card-text">$<%= w.getPrice()%></p>
                             <a href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>" id="<%= w.getWatchId()%>" class="btn btn-primary">Preview watch</a>
                         </div>
                     </div>

@@ -60,19 +60,19 @@
                 </div>
             </nav>
         </div>
-        <div class="watchesContainer">
-            <div class="row2">
-                <form action="AddToCartServlet?method="GET">
-                    <%
-                        // Retrieving the watch and its specifications from the request attributes
-                        Watch w = (Watch) request.getAttribute("previewwatch");
-                        session.setAttribute("previewwatch", w);
-                        WatchSpecs ws = (WatchSpecs) request.getAttribute("previewwatchspec");
-                    %>
-                    <div class="redirectwatch">
-                        <h5><a href="WelcomePage.jsp">Home</a>/<a href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>"><%= w.getName()%></a></h5>
-                    </div>
-                    <div class="col-md-6 section-left">   
+        <div class="container">
+            <form action="AddToCartServlet?method="GET">
+                <%
+                    // Retrieving the watch and its specifications from the request attributes
+                    Watch w = (Watch) request.getAttribute("previewwatch");
+                    session.setAttribute("previewwatch", w);
+                    WatchSpecs ws = (WatchSpecs) request.getAttribute("previewwatchspec");
+                %>
+                <div class="redirectwatch">
+                    <h5><a href="WelcomePage.jsp">Home</a>/<a href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>"><%= w.getName()%></a></h5>
+                </div>
+                <div class="row">
+                    <div class="col-6 section-left">   
                         <h3><%= w.getName()%></h3>
                         <div class="itemsku">
                             <p>Sku: <%= w.getSku()%>  </p>
@@ -92,15 +92,15 @@
                         <p>GLASS| <%= ws.getGlass()%></p>
                         <p>STRAP| <%= ws.getStrap()%></p>
                         <div class="addtocart">
-                            <button type="submit">Add to cart</button>
+                            <button class="btn btn-primary" type="submit">Add to cart</button>
                         </div>
                     </div>
-                    <div class="col-md-6 section-right">
+                    <div class="col-6 section-right">
                         <img class="itemimg" src="images/<%= w.getName()%>.jpg" width="500" height="500"/>
                     </div>
-                </form>
-            </div>
-
+            </form>
         </div>
-    </body>
+
+    </div>
+</body>
 </html>
