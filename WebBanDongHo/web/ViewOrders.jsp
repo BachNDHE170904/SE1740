@@ -61,8 +61,8 @@
                 </div>
             </nav>
         </div>
-        <div class="watchesContainer">
-            <div class="row2">
+        <div class="container">
+            <div class="row">
                 <%
                     // Retrieving orders from the database for the logged-in user
                     OrderDAO db = new OrderDAO();
@@ -75,23 +75,28 @@
                         // Displaying the orders if there are any
                         if (orders.size() != 0) {
                             for (Order order : orders) {
-                            //show not paid orders
+                                //show not paid orders
                                 if (!order.isStatus()) {
                                     float totalWatch = 0;
                                     Watch w = order.getWatch();
                                     totalWatch += order.getQuantity() * w.getPrice();
                                     subTotal += totalWatch;
                     %>
-                    <div class="item-info">
-                        <img class="itemimg" src="images/<%= w.getName()%>.jpg" width="150" height="150"/>
-                        <ul>
-                            <li><p><%= w.getName()%></p></li><br>
-                            <li><p>Price: $<%= w.getPrice()%></p></li><br>
-                            <li><p>Quantity:<%= order.getQuantity()%></p></li><br>
-                            <li><p>Total:$<%= totalWatch%></p></li><br>
-                        </ul>
-                        <!-- Allow user to remove order -->
-                        <a href="RemoveOrderServlet?id=<%= order.getId()%>">Remove</a>
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="images/<%= w.getName()%>.jpg" class="img-fluid rounded-start" alt="item img">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h6 class="card-title"><%= w.getName()%>  <a href="RemoveOrderServlet?id=<%= order.getId()%>">&#10005</a></h6>
+                                    <p class="card-text">Price: $<%= w.getPrice()%></p>
+                                    <p class="card-text">Quantity:<%= order.getQuantity()%></p>
+                                    <p class="card-text">Total:$<%= totalWatch%></p>
+                                    <!-- Allow user to remove order -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <%
                             }
@@ -103,7 +108,7 @@
                     <h3>Order Summary</h3>
                     <div class="sub-total">
                         <p>Sub Total:$<%= subTotal%></p>
-                        <a href="CheckOut.jsp?subTotal=<%= subTotal%>">Check Out</a>
+                        <a class="btn btn-primary" href="CheckOut.jsp?subTotal=<%= subTotal%>">Check Out</a>
                     </div>
                 </div>
                 <%
