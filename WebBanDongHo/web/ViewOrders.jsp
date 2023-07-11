@@ -37,7 +37,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="ViewOrders.jsp">View Orders</a></li>
-                                    <li><a class="dropdown-item" href="LogOutServlet">View My Order History</a></li>
+                                    <li><a class="dropdown-item" href="ViewOrdersHistory.jsp">View My Order History</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="LogOutServlet">Log Out</a></li>
                                 </ul>
@@ -75,12 +75,10 @@
                         // Displaying the orders if there are any
                         if (orders.size() != 0) {
                             for (Order order : orders) {
-                                //show not paid orders
-                                if (!order.isStatus()) {
-                                    float totalWatch = 0;
-                                    Watch w = order.getWatch();
-                                    totalWatch += order.getQuantity() * w.getPrice();
-                                    subTotal += totalWatch;
+                                float totalWatch = 0;
+                                Watch w = order.getWatch();
+                                totalWatch += order.getQuantity() * w.getPrice();
+                                subTotal += totalWatch;
                     %>
                     <div class="card mb-3" style="max-width: 540px;">
                         <div class="row g-0">
@@ -99,7 +97,6 @@
                         </div>
                     </div>
                     <%
-                            }
                         }
                     %>
 
@@ -123,5 +120,6 @@
                 %>
             </div>
         </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
 </html>

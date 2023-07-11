@@ -46,7 +46,32 @@ public class OrderDAO extends BaseDAO<Order> {
         }
         return orders;
     }
-    
+    public ArrayList<Order> getOrdersHistory(String username) {
+        ArrayList<Order> orders = new ArrayList<>();
+        try {
+            String sql = "select o.id,o.quantity,o.username,o.paid,o.watchid,w.name,w.price,w.sku from Orders o,Accounts a,Watches w where o.username=a.username and o.watchid=w.id and o.username=?;\n";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Order o = new Order();
+                Watch w = new Watch();
+                w.setWatchId(rs.getInt("watchid"));
+                w.setPageId((w.getWatchId() / 9) + 1);
+                w.setName(rs.getString("name"));
+                w.setSku(rs.getString("sku"));
+                w.setPrice(rs.getFloat("price"));
+                o.setQuantity(rs.getInt("quantity"));
+                o.setWatch(w);
+                o.setId(rs.getInt("id"));
+                o.setStatus(rs.getBoolean("paid"));
+                if(o.isStatus())orders.add(o);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return orders;
+    }
     public void insertOrder(Watch w, int quantity, Account a) {
         try {
             String sql = "insert into Orders(username,paid,watchid,quantity) values(?,?,?,?)\n;";

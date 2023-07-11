@@ -15,16 +15,6 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     </head>
     <body>
-        <!--        <div class="row1">
-                    <div class="collapse navbar-collapse" id="navbar">
-                        <ul>
-                            <li><a href="WelcomePage.jsp">Home</a></li>
-                            <li><a href="WelcomePage.jsp">Shop</a></li>
-    <li><a href="Login.jsp">Login</a></li>
-    <li><a href="Register.jsp">Register</a></li>
-    <li><p>Welcome </p></li>
-    <li><a href="LogOutServlet">Log out</a></li>
-    <li><a href="ViewOrders.jsp">View Orders</a></li>-->
         <div class="hero-image">
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
@@ -48,7 +38,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="ViewOrders.jsp">View Orders</a></li>
-                                    <li><a class="dropdown-item" href="LogOutServlet">View My Order History</a></li>
+                                    <li><a class="dropdown-item" href="ViewOrdersHistory.jsp">View My Order History</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="LogOutServlet">Log Out</a></li>
                                 </ul>
