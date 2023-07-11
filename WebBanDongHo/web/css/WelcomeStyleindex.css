@@ -1,59 +1,18 @@
-.row1{
-    overflow: hidden;
-    background-color: #353535;
-}
-.navbar-collapse ul{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-.navbar-collapse li {
-    display: inline;
-}
-.navbar-collapse{
-    padding-left: 500px;
-}
-.navbar-collapse p{
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-}
-.navbar-collapse a{
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-}
-.navbar-collapse a:hover{
-    background-color: #ddd;
-    color: black;
-}
-.navbar-collapse input[type=text] {
-    float: right;
-    padding: 6px;
-    border: none;
-    margin-top: 8px;
-    margin-right: 16px;
-    font-size: 17px;
+
+.hero-image {
+  background-image: url("http://localhost:8080/WebBanDongHo/images/11062b_2a28ff5b16904be5bde7a89ad3d5fc25~mv2_d_3000_2000_s_2.webp");
+  background-color: #cccccc;
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
 }
 .itembox{
     float: left;
     width: 20%;
     height: 372px;
     margin:10px 10px;
-}
-.itemimg{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
 }
 .itembox {
     border: 2px solid #73AD21;
@@ -68,42 +27,12 @@
     text-align:center;
     text-transform:uppercase;
 }
-.pagination p{
-    float: left;
-    margin-left: 200px;
-    color: #3d4246;
-    line-height: 24px;
-}
-.pagination a {
-    color: black;
-    float: left;
-    padding: 0px 16px;
-    text-decoration: none;
-    transition: background-color .3s;
-}
-
-/* Style the active/current link */
-.pagination a.active {
-    background-color: dodgerblue;
-    color: white;
-}
-
-/* Add a grey background color on mouse-over */
-.pagination a:hover:not(.active) {
-    background-color: #ddd;
-}
 .sort-by{
     float: right;
-    padding-right: 200px;
-    margin: 20px 0px;
 }
 .sort-by select{
     border: none;
     text-align: center;
-}
-.item-list{
-    margin-top: 10px;
-    margin-left: 200px;
 }
 .itembox:hover {
     border: 1px solid #777;
@@ -114,9 +43,6 @@
     text-align: center;
     padding: 16px 15px 15px;
     color: #353535;
-}
-.itemcontent{
-    align-items: flex-start;
 }
 .addtocart:hover{
     border-color: #2691d9;

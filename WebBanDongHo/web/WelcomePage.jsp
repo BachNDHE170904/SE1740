@@ -12,90 +12,119 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Welcome Page</title>
         <link rel="stylesheet" href="css/WelcomeStyleindex.css">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     </head>
     <body>
-        <div class="row1">
-            <div class="collapse navbar-collapse" id="navbar">
-                <ul>
-                    <li><a href="WelcomePage.jsp">Home</a></li>
-                    <li><a href="WelcomePage.jsp">Shop</a></li>
-                        <%
-                            //check if the user is logged in or not
-                            Account acc = (Account) session.getAttribute("user");
-                            if (acc == null) {
-                        %>
-                    <li><a href="Login.jsp">Login</a></li>
-                    <li><a href="Register.jsp">Register</a></li>
-                        <%} else {
-                        %>
-                    <li><p>Welcome <%= acc.getUsername()%></p></li>
-                    <li><a href="LogOutServlet">Log out</a></li>
-                    <li><a href="ViewOrders.jsp">View Orders</a></li>
-                        <%
-                            }
-                        %>
-                </ul>
-
-                <!-- Search form -->
-                <form class="navbar-form navbar-right" action="SearchServlet" method="GET" role="search">
-                    <input name="searchResult" type="text" placeholder="Search">
-                </form>
-            </div>
-        </div>
-        <div class="watchesContainer">
-            <img class="itemimg" src="images/11062b_2a28ff5b16904be5bde7a89ad3d5fc25~mv2_d_3000_2000_s_2.webp" width="500" height="500px"/>
-            <div class="sectioc-middle">
-                <h3>Wrist Watches</h3>
-                <%
-                    int pageId;
-                    //retrieve page, page is set to 1 by default
-                    try {
-                        pageId = Integer.parseInt(request.getParameter("page"));
-                    } catch (NumberFormatException e) {
-                        pageId = 1;
-                    }
-                    //get search result, it is set to "" by default to get all watches
-                    String search = (String) request.getAttribute("searchResult");
-                    if (search == null) {
-                        search = request.getParameter("searchResult");
-                    }
-                    if (search == null || search.equalsIgnoreCase("null")) {
-                        search = "";
-                    }
-                    WatchDAO db = new WatchDAO();
-                    ArrayList<Watch> watches = db.getWatches();
-                    if (watches == null) {
-                        out.println("Cannot get the data");
-                    } else {
-                        //set max number of page
-                        int maxPage = (int) watches.size()/9+1;
-                %>
-                <div class="pagination">
-                    <p>Page</p>
-                    <%
-                        //when should ">>" and "<<" signs appear
-                        if (pageId > 1) {
-                    %>
-                    <a href="WelcomePage.jsp?page=<%= pageId - 1%>&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">&laquo;</a>
-                    <%
-                        }
-                    %>
-                    <%
-                        for (int i = 1; i <= maxPage; i++) {
-                    %>
-                    <a href="WelcomePage.jsp?page=<%= i%>&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>"><%= i%></a>
-                    <%
-                        }
-                    %>
-                    <%
-                        if (pageId < maxPage) {
-                    %>
-                    <a href="WelcomePage.jsp?page=<%= pageId + 1%>&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">&raquo;</a>
-                    <%
-                        }
-                    %>
+        <!--        <div class="row1">
+                    <div class="collapse navbar-collapse" id="navbar">
+                        <ul>
+                            <li><a href="WelcomePage.jsp">Home</a></li>
+                            <li><a href="WelcomePage.jsp">Shop</a></li>
+    <li><a href="Login.jsp">Login</a></li>
+    <li><a href="Register.jsp">Register</a></li>
+    <li><p>Welcome </p></li>
+    <li><a href="LogOutServlet">Log out</a></li>
+    <li><a href="ViewOrders.jsp">View Orders</a></li>-->
+        <div class="hero-image">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Watch shop</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="WelcomePage.jsp">Home</a>
+                            </li>
+                            <%
+                                //check if the user is logged in or not
+                                Account acc = (Account) session.getAttribute("user");
+                                if (acc != null) {
+                            %>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <%= acc.getUsername()%>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="ViewOrders.jsp">View Orders</a></li>
+                                    <li><a class="dropdown-item" href="LogOutServlet">View My Order History</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="LogOutServlet">Log Out</a></li>
+                                </ul>
+                            </li>
+                            <%} else {
+                            %>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="Login.jsp">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="Register.jsp">Register</a>
+                            </li>
+                            <%
+                                }
+                            %>
+                        </ul>
+                        <form class="navbar-form navbar-right" action="SearchServlet" method="GET" role="search">
+                            <input name="searchResult" type="text" placeholder="Search">
+                        </form>
+                    </div>
                 </div>
+            </nav>
+        </div>
+        <div class="container watchesContainer">
+            <h3 class="pt-3">Wrist Watches</h3>
+            <%
+                int pageId;
+                //retrieve page, page is set to 1 by default
+                try {
+                    pageId = Integer.parseInt(request.getParameter("page"));
+                } catch (NumberFormatException e) {
+                    pageId = 1;
+                }
+                //get search result, it is set to "" by default to get all watches
+                String search = (String) request.getAttribute("searchResult");
+                if (search == null) {
+                    search = request.getParameter("searchResult");
+                }
+                if (search == null || search.equalsIgnoreCase("null")) {
+                    search = "";
+                }
+                WatchDAO db = new WatchDAO();
+                ArrayList<Watch> watches = db.getWatches();
+                if (watches == null) {
+                    out.println("Cannot get the data");
+                } else {
+                    //set max number of page
+                    int maxPage = (int) watches.size() / 9 + 1;
+            %>
+            <div class="d-flex justify-content-between">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <%
+                            //when should ">>" and "<<" signs appear
+                            if (pageId > 1) {
+                        %>
+                        <li class="page-item"><a class="page-link" href="WelcomePage.jsp?page=<%= pageId - 1%>&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">&laquo;</a></li>
+                            <%
+                                }
+                            %>
+                            <%
+                                for (int i = 1; i <= maxPage; i++) {
+                            %>
+                        <li class="page-item"><a class="page-link" href="WelcomePage.jsp?page=<%= i%>&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>"><%= i%></a></li>
+                            <%
+                                }
+                            %>
+                            <%
+                                if (pageId < maxPage) {
+                            %>
+                        <li class="page-item"><a class="page-link" href="WelcomePage.jsp?page=<%= pageId + 1%>&&selectedValue=<%=request.getParameter("selectedValue")%>&&searchResult=<%=request.getParameter("searchResult")%>">&raquo;</a></li>
+                            <%
+                                }
+                            %>
+                    </ul>
+                </nav>
                 <div class="sort-by">
                     Sort by:
                     <select name="sort" id="sortSelect">
@@ -105,13 +134,15 @@
                         <option value="low-to-high">Price (Low to high)</option>
                     </select>
                 </div>
-                <script>
-                    //script to check the user choice in the sort By dropdown menu 
-                    document.getElementById("sortSelect").addEventListener("change", function () {
-                        var selectedValue = this.value;
-                        window.location.href = "WelcomePage.jsp?searchResult=<%=request.getParameter("searchResult")%>&&page=<%= pageId%>&&selectedValue=" + encodeURIComponent(selectedValue);
-                    });
-                </script>
+            </div>
+            <script>
+                //script to check the user choice in the sort By dropdown menu 
+                document.getElementById("sortSelect").addEventListener("change", function () {
+                    var selectedValue = this.value;
+                    window.location.href = "WelcomePage.jsp?searchResult=<%=request.getParameter("searchResult")%>&&page=<%= pageId%>&&selectedValue=" + encodeURIComponent(selectedValue);
+                });
+            </script>
+            <div class="row">
                 <%
                     //sort the watches, they are sorted by id by default
                     ArrayList<Watch> sortedWatches = new ArrayList<>(watches);
@@ -135,26 +166,23 @@
                             }
                         });
                     }
-                    for(int i=0;i<sortedWatches.size();i++){
-                        int pageID= i/8+1;
+                    for (int i = 0; i < sortedWatches.size(); i++) {
+                        int pageID = i / 8 + 1;
                         sortedWatches.get(i).setPageId(pageID);
                     }
                     //show all the watches 
                     for (Watch w : sortedWatches) {
                         if (w.getPageId() == pageId && w.getName().toLowerCase().contains(search.toLowerCase())) {
                 %>
-                <div class="item-list" >
-                    <a class="itembox" href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>" id="<%= w.getWatchId()%>">
-                        <img class="itemimg" src="images/<%= w.getName()%>.jpg" width="194" height="250"/>
-                        <div class="iteminfo">
-                            <div class="itemcontent">
-                                <h5 class="itemname"><%= w.getName()%></h5>
-                                <div class="itemprice">
-                                    <strong>$<%= w.getPrice()%></strong>
-                                </div>
-                            </div>
+                <div class="col-3 mb-4">
+                    <div class="card">
+                        <img src="images/<%= w.getName()%>.jpg" class="card-img-top" alt="<%= w.getName()%>">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= w.getName()%></h5>
+                            <p class="card-text"><%= w.getPrice()%></p>
+                            <a href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>" id="<%= w.getWatchId()%>" class="btn btn-primary">Preview watch</a>
                         </div>
-                    </a>
+                    </div>
                 </div>
                 <%
                             }
@@ -164,5 +192,6 @@
             </div>
 
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
 </html>

@@ -11,36 +11,55 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>View Orders Page</title>
         <link rel="stylesheet" href="css/CheckOutStyleIndex.css">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     </head>
     <body>
-        <div class="row1">
-            <div class="collapse navbar-collapse" id="navbar">
-                <ul>
-                    <li><a href="WelcomePage.jsp">Home</a></li>
-                    <li><a href="WelcomePage.jsp">Shop</a></li>
-                        <%
-                            Account acc = (Account) session.getAttribute("user");
-                            if (acc == null) {
-                        %>
-                    <li><a href="Login.jsp">Login</a></li>
-                    <li><a href="Register.jsp">Register</a></li>
-                        <%} else {
-                        %>
-                    <li><p>Welcome <%= acc.getUsername()%></p></li>
-                    <li><a href="LogOutServlet">Log out</a></li>
-                    <li><a href="ViewOrders.jsp">View Orders</a></li>
-                        <%
-                            }
-                        %>
-                </ul>
-
-                <!-- Search form -->
-                <form class="navbar-form navbar-right" action="SearchServlet" method="GET" role="search">
-                    <input name="searchResult" type="text" placeholder="Search">
-                </form>
-
-            </div>
+        <div class="hero-image">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Watch shop</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="WelcomePage.jsp">Home</a>
+                            </li>
+                            <%
+                                //check if the user is logged in or not
+                                Account acc = (Account) session.getAttribute("user");
+                                if (acc != null) {
+                            %>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <%= acc.getUsername()%>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="ViewOrders.jsp">View Orders</a></li>
+                                    <li><a class="dropdown-item" href="LogOutServlet">View My Order History</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="LogOutServlet">Log Out</a></li>
+                                </ul>
+                            </li>
+                            <%} else {
+                            %>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="Login.jsp">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="Register.jsp">Register</a>
+                            </li>
+                            <%
+                                }
+                            %>
+                        </ul>
+                        <form class="navbar-form navbar-right" action="SearchServlet" method="GET" role="search">
+                            <input name="searchResult" type="text" placeholder="Search">
+                        </form>
+                    </div>
+                </div>
+            </nav>
         </div>
         <div class="Center">
             <div class="row2">

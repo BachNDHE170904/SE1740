@@ -1,5 +1,4 @@
-<%@page import="DAL.OrderDAO"%>
-<%@page import="model.Order"%>
+<%@page import="model.WatchSpecs"%>
 <%@page import="model.Account"%>
 <%@page import="model.Watch"%>
 <%@page import="java.util.ArrayList"%>
@@ -9,8 +8,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View Orders Page</title>
-        <link rel="stylesheet" href="css/ViewOrdersStyleindex.css">
+        <title>Preview Page</title>
+        <link rel="stylesheet" href="css/PreviewStyleindex.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     </head>
     <body>
@@ -63,60 +62,45 @@
         </div>
         <div class="watchesContainer">
             <div class="row2">
-                <%
-                    // Retrieving orders from the database for the logged-in user
-                    OrderDAO db = new OrderDAO();
-                    ArrayList<Order> orders = db.getOrders(acc.getUsername());
-                    float subTotal = 0;
-                %>
-                <div class="col-md-9 section-left">   
-                    <h3>My Cart</h3>
+                <form action="AddToCartServlet?method="GET">
                     <%
-                        // Displaying the orders if there are any
-                        if (orders.size() != 0) {
-                            for (Order order : orders) {
-                            //show not paid orders
-                                if (!order.isStatus()) {
-                                    float totalWatch = 0;
-                                    Watch w = order.getWatch();
-                                    totalWatch += order.getQuantity() * w.getPrice();
-                                    subTotal += totalWatch;
+                        // Retrieving the watch and its specifications from the request attributes
+                        Watch w = (Watch) request.getAttribute("previewwatch");
+                        session.setAttribute("previewwatch", w);
+                        WatchSpecs ws = (WatchSpecs) request.getAttribute("previewwatchspec");
                     %>
-                    <div class="item-info">
-                        <img class="itemimg" src="images/<%= w.getName()%>.jpg" width="150" height="150"/>
-                        <ul>
-                            <li><p><%= w.getName()%></p></li><br>
-                            <li><p>Price: $<%= w.getPrice()%></p></li><br>
-                            <li><p>Quantity:<%= order.getQuantity()%></p></li><br>
-                            <li><p>Total:$<%= totalWatch%></p></li><br>
-                        </ul>
-                        <!-- Allow user to remove order -->
-                        <a href="RemoveOrderServlet?id=<%= order.getId()%>">Remove</a>
+                    <div class="redirectwatch">
+                        <h5><a href="WelcomePage.jsp">Home</a>/<a href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>"><%= w.getName()%></a></h5>
                     </div>
-                    <%
-                            }
-                        }
-                    %>
-
-                </div>
-                <div class="col-md-3 section-right">
-                    <h3>Order Summary</h3>
-                    <div class="sub-total">
-                        <p>Sub Total:$<%= subTotal%></p>
-                        <a href="CheckOut.jsp?subTotal=<%= subTotal%>">Check Out</a>
+                    <div class="col-md-6 section-left">   
+                        <h3><%= w.getName()%></h3>
+                        <div class="itemsku">
+                            <p>Sku: <%= w.getSku()%>  </p>
+                        </div>
+                        <div class="itemprice">
+                            <p>Price: $<%= w.getPrice()%></p>
+                        </div>
+                        <div class="itemquantity">
+                            <p>Quantity</p>
+                            <input type="number" pattern="[0-9]*" data-hook="number-input-spinner-input" value="1" aria-label="Quantity" max="50" min="1" name="quantity"><br>
+                        </div>
+                        <h4>Watch Specs</h4>
+                        <p>BEZEL| <%= ws.getBezel()%></p>
+                        <p>MOVEMENT| <%= ws.getMovement()%></p>
+                        <p>DIAL| <%= ws.getMovement()%></p>
+                        <p>CASE| <%= ws.getWatchCase()%></p>
+                        <p>GLASS| <%= ws.getGlass()%></p>
+                        <p>STRAP| <%= ws.getStrap()%></p>
+                        <div class="addtocart">
+                            <button type="submit">Add to cart</button>
+                        </div>
                     </div>
-                </div>
-                <%
-                } else {
-                %>
-                <!-- Display a message if the cart is empty -->
-                <div class="empty-cart">
-                    <p>You have nothing in your cart!<a href="WelcomePage.jsp">Shop now</a></p>
-                </div>
-                <%
-                    }
-                %>
+                    <div class="col-md-6 section-right">
+                        <img class="itemimg" src="images/<%= w.getName()%>.jpg" width="500" height="500"/>
+                    </div>
+                </form>
             </div>
+
         </div>
     </body>
 </html>
