@@ -86,7 +86,7 @@
                     out.println("Cannot get the data");
                 } else {
                     //set max number of page
-                    int maxPage = (int) watches.size() / 9 + 1;
+                    int maxPage = (int) watches.size() / 8 + 1;
             %>
             <div class="d-flex justify-content-between">
                 <nav aria-label="Page navigation example">
