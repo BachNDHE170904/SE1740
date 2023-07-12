@@ -85,28 +85,28 @@ public class WatchDAO extends BaseDAO<Watch> {
         }
         return null;
     }
-//    
-//    public void insertWatch(Watch s) {
-//        try {
-//            String sql = "SET IDENTITY_INSERT Watches on\n"+
-//                    "INSERT INTO [Watches]\n"
-//                    + "           ([name]\n"
-//                    + "           ,[sku]\n"
-//                    + "           ,[price]\n"
-//                    + "     VALUES\n"
-//                    + "           (?\n"
-//                    + "           ,?\n"
-//                    + "           ,?)"
-//            +"\nSET IDENTITY_INSERT Watches off";
-//            PreparedStatement statement = connection.prepareStatement(sql);
-//            statement.setString(1, s.getName());
-//            statement.setString(2, s.getSku());
-//            statement.setFloat(3, s.getPrice());
-//            statement.executeUpdate();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+    
+    public void insertWatch(Watch s) {
+        try {
+            String sql = "SET IDENTITY_INSERT Watches off\n"+
+                    "INSERT INTO [Watches]\n"
+                    + "           ([name]\n"
+                    + "           ,[sku]\n"
+                    + "           ,[price]\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?)"
+            +"\nSET IDENTITY_INSERT Watches on";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, s.getName());
+            statement.setString(2, s.getSku());
+            statement.setFloat(3, s.getPrice());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 //
 //    public void updateWatch(Watch s) {
 //        try {
