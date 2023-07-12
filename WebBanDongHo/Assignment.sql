@@ -136,3 +136,4 @@ CREATE TABLE Address (
    PRIMARY KEY (id),
    FOREIGN KEY (username) REFERENCES Accounts(username),
 );
+select *from Watches

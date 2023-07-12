@@ -33,11 +33,15 @@ public class RemoveOrderServlet extends HttpServlet {
             // Redirect to login page if user is not logged in
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         } else {
-            int id = Integer.parseInt(request.getParameter("id"));
-            // Delete the order from the database
+            try{
+                int id = Integer.parseInt(request.getParameter("id"));
+                // Delete the order from the database
             orderDb.deleteOrder(id);
             // Redirect to the view orders page after removing the order
             request.getRequestDispatcher("ViewOrders.jsp").forward(request, response);
+            }catch(Exception e){
+                request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+            }
         }
     }
 

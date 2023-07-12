@@ -29,20 +29,19 @@ public class AddNewItemServlet extends HttpServlet {
         // Get watch and quantity from session and add order to the database
         String name = request.getParameter("name");
         String sku = request.getParameter("sku");
-        float price;
-        try{
-             price=Float.parseFloat(request.getParameter("price"));
-        }catch(Exception e){
-             price=0;
+        try {
+            float price = Float.parseFloat(request.getParameter("price"));
+            Watch newWatch = new Watch();
+            newWatch.setName(name);
+            newWatch.setPrice(price);
+            newWatch.setSku(sku);
+            WatchDAO db = new WatchDAO();
+            db.insertWatch(newWatch);
+            // Redirect to the welcome page after adding the item to the cart
+            request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
         }
-        Watch newWatch=new Watch();
-        newWatch.setName(name);
-        newWatch.setPrice(price);
-        newWatch.setSku(sku);
-        WatchDAO db=new WatchDAO();
-        db.insertWatch(newWatch);
-        // Redirect to the welcome page after adding the item to the cart
-        request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
     }
 
     @Override

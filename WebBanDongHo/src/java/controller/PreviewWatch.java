@@ -24,17 +24,21 @@ public class PreviewWatch extends HttpServlet {
             throws ServletException, IOException {
         WatchDAO db = new WatchDAO();
         ArrayList<Watch> watches = db.getWatches();
-        ArrayList<WatchSpecs> watchSpecs=db.getWatchesSpecs();
+        ArrayList<WatchSpecs> watchSpecs = db.getWatchesSpecs();
         if (watches == null) {
             PrintWriter out = response.getWriter();
             out.println("Cannot get the data");
         } else {
-            int id = Integer.parseInt(request.getParameter("watchid"));
-            // Set the preview watch and watch specs as request attributes
-            request.setAttribute("previewwatch", watches.get(id));
-            request.setAttribute("previewwatchspec", watchSpecs.get(id));
-            // Forward the request to the watch preview page
-            request.getRequestDispatcher("WatchPreview.jsp").forward(request, response);
+            try {
+                int id = Integer.parseInt(request.getParameter("watchid"));
+                // Set the preview watch and watch specs as request attributes
+                request.setAttribute("previewwatch", watches.get(id));
+                request.setAttribute("previewwatchspec", watchSpecs.get(id));
+                // Forward the request to the watch preview page
+                request.getRequestDispatcher("WatchPreview.jsp").forward(request, response);
+            } catch (Exception e) {
+                request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+            }
         }
     }
 
