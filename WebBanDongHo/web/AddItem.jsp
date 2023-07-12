@@ -89,7 +89,21 @@
                         <label>Address</label>
                     </div>
                     <label for="myfile">Select an image</label>
-                    <input type="file" id="myfile" name="myfile">
+                    <input type="file" id="file" name="file">
+                    <script>
+                        const fileInput = document.getElementById("file");
+
+                        fileInput.addEventListener("change", (event) => {
+                            const file = event.target.files[0];
+                            const fileType = file["type"];
+                            const validImageTypes = ["image/jpeg", "image/png", "image/gif"];
+
+                            if (!validImageTypes.includes(fileType)) {
+                                alert("Invalid file type. Please upload an image file.");
+                                event.target.value = "";
+                            }
+                        });
+                    </script>
                     <input type="submit" onclick="return confirm('Are you sure you want to add this item?');" value="Add new item"/>
                 </form>
 
