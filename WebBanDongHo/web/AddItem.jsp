@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>View Orders Page</title>
-        <link rel="stylesheet" href="css/CheckOutStyleIndex.css">
+        <link rel="stylesheet" href="css/AddItemStyleIndex.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     </head>
     <body>
@@ -66,47 +66,83 @@
         </div>
         <div class="container Center">
             <div class="row">
-                <h1>New Item Details</h1>
-                <form action="AddNewItemServlet" method="POST">
-                    <div class="txt_field">
-                        <input type="text" name="name" required /> 
-                        <span></span>
-                        <label>Name</label>
-                    </div>
-                    <div class="txt_field">
-                        <input type="text" name="sku" required />
-                        <span></span>
-                        <label>Sku</label>
-                    </div>
-                    <div class="txt_field">
-                        <input type="number" step="0.01" name="price" required />
-                        <span></span>
-                        <label>Price</label>
-                    </div>
-                    <div class="txt_field">
-                        <input type="text" name="address" required />
-                        <span></span>
-                        <label>Address</label>
-                    </div>
-                    <label for="myfile">Select an image</label>
-                    <input type="file" id="file" name="file">
-                    <script>
-                        const fileInput = document.getElementById("file");
+                <form class="row" action="AddNewItemServlet" method="POST">
+                    <div class="col-md-6 section-left">
+                        <h1>New Item Details</h1>
+                        <div class="txt_field">
+                            <input type="text" name="name" required /> 
+                            <span></span>
+                            <label>Name</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="text" name="sku" required />
+                            <span></span>
+                            <label>Sku</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="number" step="0.01" name="price" required />
+                            <span></span>
+                            <label>Price</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="text" name="address" required />
+                            <span></span>
+                            <label>Address</label>
+                        </div>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="myfile">Upload an image</label>
+                            <input type="file" class="form-control" id="myFile" name="myFile">
+                        </div>
+                        <script>
+                            const fileInput = document.getElementById("file");
 
-                        fileInput.addEventListener("change", (event) => {
-                            const file = event.target.files[0];
-                            const fileType = file["type"];
-                            const validImageTypes = ["image/jpeg", "image/png", "image/gif"];
+                            fileInput.addEventListener("change", (event) => {
+                                const file = event.target.files[0];
+                                const fileType = file["type"];
+                                const validImageTypes = ["image/jpeg", "image/png", "image/gif"];
 
-                            if (!validImageTypes.includes(fileType)) {
-                                alert("Invalid file type. Please upload an image file.");
-                                event.target.value = "";
-                            }
-                        });
-                    </script>
+                                if (!validImageTypes.includes(fileType)) {
+                                    alert("Invalid file type. Please upload an image file.");
+                                    event.target.value = "";
+                                }
+                            });
+                        </script>
+                    </div>
+                    <div class="col-md-6 section-right">
+                        <h1>New Item Specs</h1>
+                        <div class="txt_field">
+                            <input type="text" name="bezel" required /> 
+                            <span></span>
+                            <label>Bezel</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="text" name="movement" required />
+                            <span></span>
+                            <label>Movement</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="text" name="dial" required />
+                            <span></span>
+                            <label>Dial</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="text" name="case" required />
+                            <span></span>
+                            <label>Case</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="text" name="glass" required />
+                            <span></span>
+                            <label>Glass</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="text" name="strap" required />
+                            <span></span>
+                            <label>Strap</label>
+                        </div>
+                    </div>
                     <input type="submit" onclick="return confirm('Are you sure you want to add this item?');" value="Add new item"/>
-                </form>
-
+                </form>    
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>

@@ -29,7 +29,12 @@ public class AddNewItemServlet extends HttpServlet {
         // Get watch and quantity from session and add order to the database
         String name = request.getParameter("name");
         String sku = request.getParameter("sku");
-        float price=Float.parseFloat(request.getParameter("price"));
+        float price;
+        try{
+             price=Float.parseFloat(request.getParameter("price"));
+        }catch(Exception e){
+             price=0;
+        }
         Watch newWatch=new Watch();
         newWatch.setName(name);
         newWatch.setPrice(price);

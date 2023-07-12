@@ -29,8 +29,10 @@ SET IDENTITY_INSERT Watches ON
 CREATE TABLE Accounts (
    username NVARCHAR (50)     NOT NULL,
    password NVARCHAR (50)     NOT NULL,
+   fieldRole NVARCHAR (50)     NOT NULL
    PRIMARY KEY (username),
 );
+insert into Accounts(username,password,fieldRole) values('Admin','123','Administrator');
 CREATE TABLE Orders (
    id   INT    NOT NULL identity(1,1),
    username NVARCHAR (50)     NOT NULL,
@@ -123,7 +125,7 @@ insert into WatchSpecs(bezel,movement,dial,watchCase,glass,strap)values(' Zebraw
 'Features applied indices, printed seconds track, and custom molded hands',
 '45mm, 50 meter water resistant 316L stainless steel case, and caseback',
 'Hardened Mineral Crystal','quick release leather adjustable strap with memory lock stainless steel clasp');
-SET IDENTITY_INSERT WatchSpecs ON
+SET IDENTITY_INSERT WatchSpecs on
 CREATE TABLE Address (
    id   INT    NOT NULL identity(1,1),
    username NVARCHAR (50)     NOT NULL,
