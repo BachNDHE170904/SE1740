@@ -37,6 +37,9 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="ViewOrders.jsp">View Orders</a></li>
                                     <li><a class="dropdown-item" href="ViewOrdersHistory.jsp">View My Order History</a></li>
+                                        <% if (acc.getRole().equalsIgnoreCase("Administrator")) { %>
+                                    <li><a class="dropdown-item" href="AddItem.jsp">Add New Item</a></li>
+                                        <%}%>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="LogOutServlet">Log Out</a></li>
                                 </ul>
@@ -84,13 +87,15 @@
                             <p>Quantity</p>
                             <input type="number" pattern="[0-9]*" data-hook="number-input-spinner-input" value="1" aria-label="Quantity" max="50" min="1" name="quantity"><br>
                         </div>
-                        <h4>Watch Specs</h4>
-                        <p>BEZEL| <%= ws.getBezel()%></p>
-                        <p>MOVEMENT| <%= ws.getMovement()%></p>
-                        <p>DIAL| <%= ws.getMovement()%></p>
-                        <p>CASE| <%= ws.getWatchCase()%></p>
-                        <p>GLASS| <%= ws.getGlass()%></p>
-                        <p>STRAP| <%= ws.getStrap()%></p>
+                        <div class="watch-specs">
+                            <h4>Watch Specs</h4>
+                            <p>BEZEL - <%= ws.getBezel()%></p>
+                            <p>MOVEMENT - <%= ws.getMovement()%></p>
+                            <p>DIAL - <%= ws.getMovement()%></p>
+                            <p>CASE - <%= ws.getWatchCase()%></p>
+                            <p>GLASS - <%= ws.getGlass()%></p>
+                            <p>STRAP - <%= ws.getStrap()%></p>
+                        </div>
                         <div class="addtocart">
                             <button class="btn btn-primary" type="submit">Add to cart</button>
                         </div>
@@ -102,6 +107,6 @@
         </div>
 
     </div>
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>

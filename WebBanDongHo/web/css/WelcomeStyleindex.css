@@ -8,15 +8,6 @@
   background-size: cover;
   position: relative;
 }
-.itembox{
-    float: left;
-    width: 20%;
-    height: 372px;
-    margin:10px 10px;
-}
-.itembox {
-    border: 2px solid #73AD21;
-}
 .watchesContainer h3:first-child{
     text-align: center;
     color: #3d4246;
@@ -27,24 +18,13 @@
     text-align:center;
     text-transform:uppercase;
 }
+.card {
+    text-align: center;
+}
 .sort-by{
     float: right;
 }
 .sort-by select{
     border: none;
     text-align: center;
-}
-.itembox:hover {
-    border: 1px solid #777;
-}
-.iteminfo{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    padding: 16px 15px 15px;
-    color: #353535;
-}
-.addtocart:hover{
-    border-color: #2691d9;
-    transition: .5s;
 }

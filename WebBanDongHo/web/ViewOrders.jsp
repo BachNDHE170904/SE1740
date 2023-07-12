@@ -38,6 +38,9 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="ViewOrders.jsp">View Orders</a></li>
                                     <li><a class="dropdown-item" href="ViewOrdersHistory.jsp">View My Order History</a></li>
+                                        <% if (acc.getRole().equalsIgnoreCase("Administrator")) { %>
+                                    <li><a class="dropdown-item" href="AddItem.jsp">Add New Item</a></li>
+                                        <%}%>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="LogOutServlet">Log Out</a></li>
                                 </ul>
@@ -87,11 +90,10 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h6 class="card-title"><%= w.getName()%>  <a href="RemoveOrderServlet?id=<%= order.getId()%>">&#10005</a></h6>
+                                    <h6 class="card-title"><%= w.getName()%>  <a href = "RemoveOrderServlet?id=<%= order.getId()%>" onclick="return confirm('Are you sure you want to delete this order?');">&#10005</a></h6>
                                     <p class="card-text">Price: $<%= w.getPrice()%></p>
                                     <p class="card-text">Quantity:<%= order.getQuantity()%></p>
                                     <p class="card-text">Total:$<%= totalWatch%></p>
-                                    <!-- Allow user to remove order -->
                                 </div>
                             </div>
                         </div>
@@ -120,6 +122,6 @@
                 %>
             </div>
         </div>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
 </html>

@@ -39,6 +39,9 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="ViewOrders.jsp">View Orders</a></li>
                                     <li><a class="dropdown-item" href="ViewOrdersHistory.jsp">View My Order History</a></li>
+                                        <% if (acc.getRole().equalsIgnoreCase("Administrator")) { %>
+                                    <li><a class="dropdown-item" href="AddItem.jsp">Add New Item</a></li>
+                                        <%}%>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="LogOutServlet">Log Out</a></li>
                                 </ul>
@@ -168,7 +171,7 @@
                     <div class="card">
                         <img src="images/<%= w.getName()%>.jpg" class="card-img-top" alt="<%= w.getName()%>">
                         <div class="card-body">
-                            <h5 class="card-title"><%= w.getName()%></h5>
+                            <h6 class="card-title"><%= w.getName()%></h6>
                             <p class="card-text">$<%= w.getPrice()%></p>
                             <a href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>" id="<%= w.getWatchId()%>" class="btn btn-primary">Preview watch</a>
                         </div>

@@ -38,6 +38,9 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="ViewOrders.jsp">View Orders</a></li>
                                     <li><a class="dropdown-item" href="ViewOrdersHistory.jsp">View My Order History</a></li>
+                                        <% if (acc.getRole().equalsIgnoreCase("Administrator")) { %>
+                                    <li><a class="dropdown-item" href="AddItem.jsp">Add New Item</a></li>
+                                        <%}%>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="LogOutServlet">Log Out</a></li>
                                 </ul>
@@ -69,7 +72,7 @@
                     ArrayList<Order> orders = db.getOrdersHistory(acc.getUsername());
                     float subTotal = 0;
                 %> 
-                <h3>My Cart</h3>
+                <h3>My order history</h3>
                 <%
                     // Displaying the orders if there are any
                     if (orders.size() != 0) {
@@ -108,6 +111,6 @@
                 %>
             </div>
         </div>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
 </html>

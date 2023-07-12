@@ -38,7 +38,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="ViewOrders.jsp">View Orders</a></li>
                                     <li><a class="dropdown-item" href="ViewOrdersHistory.jsp">View My Order History</a></li>
-                                        <% if (acc.getUsername().equalsIgnoreCase("Admin")) { %>
+                                        <% if (acc.getRole().equalsIgnoreCase("Administrator")) { %>
                                     <li><a class="dropdown-item" href="AddItem.jsp">Add New Item</a></li>
                                         <%}%>
                                     <li><hr class="dropdown-divider"></li>

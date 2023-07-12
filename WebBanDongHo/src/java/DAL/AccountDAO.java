@@ -28,6 +28,7 @@ public class AccountDAO extends BaseDAO<Account> {
                 Account s = new Account();
                 s.setUsername(rs.getString("name"));
                 s.setPassword(rs.getString("pass"));
+                s.setRole(rs.getString("fieldRole"));
                 accounts.add(s);
             }
         } catch (SQLException ex) {
@@ -47,6 +48,7 @@ public class AccountDAO extends BaseDAO<Account> {
                 Account s = new Account();
                 s.setUsername(rs.getString("username"));
                 s.setPassword(rs.getString("password"));
+                s.setRole(rs.getString("fieldRole"));
                 return s;
             }
 
@@ -58,10 +60,11 @@ public class AccountDAO extends BaseDAO<Account> {
 
     public void insertAccount(Account s) {
         try {
-            String sql ="insert into Accounts(username,password) values(?,?)\n;";
+            String sql ="insert into Accounts(username,password,fieldRole) values(?,?,?)\n;";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, s.getUsername());
             statement.setString(2, s.getPassword());
+            statement.setString(3, "User");
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);

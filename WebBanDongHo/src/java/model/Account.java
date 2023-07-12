@@ -9,7 +9,7 @@ package model;
  * @author ADMIN
  */
 public class Account {
-    private String username, password;
+    private String username, password,role;
 
     public Account() {
     }
@@ -17,6 +17,14 @@ public class Account {
     public Account(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getUsername() {
