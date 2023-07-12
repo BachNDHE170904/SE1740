@@ -38,6 +38,9 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="ViewOrders.jsp">View Orders</a></li>
                                     <li><a class="dropdown-item" href="ViewOrdersHistory.jsp">View My Order History</a></li>
+                                        <% if (acc.getUsername().equalsIgnoreCase("Admin")) { %>
+                                    <li><a class="dropdown-item" href="AddItem.jsp">Add New Item</a></li>
+                                        <%}%>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="LogOutServlet">Log Out</a></li>
                                 </ul>
@@ -67,11 +70,11 @@
                     // Retrieving orders from the database for the logged-in user
                     OrderDAO db = new OrderDAO();
                     ArrayList<Order> orders = db.getOrders(acc.getUsername());
-                    float subTotal=0;
+                    float subTotal = 0;
                     try {
-                         subTotal = Float.parseFloat(request.getParameter("subTotal"));
+                        subTotal = Float.parseFloat(request.getParameter("subTotal"));
                     } catch (Exception e) {
-                         subTotal = 0;
+                        subTotal = 0;
                     }
                 %>
                 <div class="col-md-9 section-left">   
@@ -111,6 +114,6 @@
                 </div>
             </div>
         </div>
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
 </html>
