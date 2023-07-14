@@ -40,6 +40,10 @@
         <servlet-name>DeleteItemServlet</servlet-name>
         <servlet-class>controller.DeleteItemServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateItemServlet</servlet-name>
+        <servlet-class>controller.UpdateItemServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>DeleteItemServlet</servlet-name>
         <url-pattern>/DeleteItemServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateItemServlet</servlet-name>
+        <url-pattern>/UpdateItemServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

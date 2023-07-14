@@ -78,7 +78,7 @@
                     <% if (acc!=null&&acc.getRole().equalsIgnoreCase("Administrator")) {%>
                     <div class="del-update-watch">
                         <div class="update-watch">
-                            <a href="UpdateItemServlet?watchid=<%= w.getWatchId()%>">Update watch</a>
+                            <a href="UpdateItemServlet?watchid=<%= w.getWatchId()-1%>">Update watch</a>
                         </div>
                         <div class="del-watch">
                             <a href="DeleteItemServlet?watchid=<%= w.getWatchId()%>">Delete watch</a>
