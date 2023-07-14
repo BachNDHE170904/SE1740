@@ -4,29 +4,23 @@
  */
 package controller;
 
-import DAL.OrderDAO;
 import DAL.WatchDAO;
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.io.File;
-import java.util.ArrayList;
-import model.Account;
+import jakarta.servlet.http.Part;
 import java.io.IOException;
-import model.Order;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import model.Watch;
 import model.WatchSpecs;
 
 /**
  * Servlet responsible for adding items to the cart.
  */
+@MultipartConfig
 public class AddNewItemServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -55,6 +49,14 @@ public class AddNewItemServlet extends HttpServlet {
             WatchDAO db = new WatchDAO();
             db.insertWatch(newWatch);
             db.insertWatchSpecs(newWatchSpecs);
+            
+            Part part=request.getPart("myFile");
+            String realPath=request.getServletContext().getRealPath("/images");
+            String filename=name+".jpg";
+            if(!Files.exists(Paths.get(realPath))){
+                Files.createDirectory(Paths.get(realPath));
+            }
+            part.write(realPath+"/"+filename);
             // Redirect to the welcome page after adding the item 
             request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
         } catch (Exception e) {

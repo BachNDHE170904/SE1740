@@ -12,6 +12,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import model.Account;
 import model.Watch;
@@ -77,6 +80,14 @@ public class UpdateItemServlet extends HttpServlet {
             WatchDAO db = new WatchDAO();
             db.updateWatch(newWatch, id);
             db.updateWatchSpecs(newWatchSpecs, id);
+            
+            Part part=request.getPart("myFile");
+            String realPath=request.getServletContext().getRealPath("/images");
+            String filename=name+".jpg";
+            if(!Files.exists(Paths.get(realPath))){
+                Files.createDirectory(Paths.get(realPath));
+            }
+            part.write(realPath+"/"+filename);
             // Redirect to the welcome page after adding the item 
             request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
         } catch (Exception e) {

@@ -91,7 +91,7 @@
                         </div>
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="myfile">Upload an image</label>
-                            <input type="file" class="form-control" id="myFile" name="myFile">
+                            <input type="file" class="form-control" id="myFile" name="myFile" required>
                         </div>
                         <script>
                             const fileInput = document.getElementById("file");

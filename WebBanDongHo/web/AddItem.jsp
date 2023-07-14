@@ -66,7 +66,7 @@
         </div>
         <div class="container Center">
             <div class="row">
-                <form class="row" action="AddNewItemServlet" method="POST">
+                <form class="row" action="AddNewItemServlet" method="POST" enctype="multipart/form-data">
                     <div class="col-md-6 section-left">
                         <h1>New Item Details</h1>
                         <div class="txt_field">
@@ -86,7 +86,7 @@
                         </div>
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="myfile">Upload an image</label>
-                            <input type="file" class="form-control" id="myFile" name="myFile">
+                            <input type="file" class="form-control" id="myFile" name="myFile" required>
                         </div>
                         <script>
                             const fileInput = document.getElementById("file");
