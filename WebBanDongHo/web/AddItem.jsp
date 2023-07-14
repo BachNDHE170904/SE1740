@@ -84,11 +84,6 @@
                             <span></span>
                             <label>Price</label>
                         </div>
-                        <div class="txt_field">
-                            <input type="text" name="address" required />
-                            <span></span>
-                            <label>Address</label>
-                        </div>
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="myfile">Upload an image</label>
                             <input type="file" class="form-control" id="myFile" name="myFile">

@@ -1,4 +1,4 @@
-CREATE DATABASE WatchDb
+
 USE WatchDb
 CREATE TABLE Watches (
    id   INT    NOT NULL identity(1,1),

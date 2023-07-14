@@ -22,14 +22,13 @@ public class WatchDAO extends BaseDAO<Watch> {
     public ArrayList<Watch> getWatches() {
         ArrayList<Watch> watches = new ArrayList<>();
         try {
-            String sql =  "SELECT * FROM Watches s\n";
+            String sql = "SELECT * FROM Watches s\n";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 Watch s = new Watch();
                 s.setWatchId(rs.getInt("id"));
-                s.setPageId((s.getWatchId()/9)+1);
+                s.setPageId((s.getWatchId() / 9) + 1);
                 s.setName(rs.getString("name"));
                 s.setSku(rs.getString("sku"));
                 s.setPrice(rs.getFloat("price"));
@@ -40,14 +39,14 @@ public class WatchDAO extends BaseDAO<Watch> {
         }
         return watches;
     }
+
     public ArrayList<WatchSpecs> getWatchesSpecs() {
         ArrayList<WatchSpecs> watchesSpecs = new ArrayList<>();
         try {
-            String sql =  "select * from Watches w,WatchSpecs ws where w.id=ws.id \n";
+            String sql = "select * from Watches w,WatchSpecs ws where w.id=ws.id \n";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 WatchSpecs s = new WatchSpecs();
                 s.setId(rs.getInt("id"));
                 s.setBezel(rs.getString("bezel"));
@@ -63,6 +62,7 @@ public class WatchDAO extends BaseDAO<Watch> {
         }
         return watchesSpecs;
     }
+
     public Watch getWatch(int id) {
         try {
             String sql = "SELECT * FROM Watch s\n"
@@ -73,7 +73,7 @@ public class WatchDAO extends BaseDAO<Watch> {
             if (rs.next()) {
                 Watch s = new Watch();
                 s.setWatchId(rs.getInt("id"));
-                s.setPageId((s.getWatchId()/9)+1);
+                s.setPageId((s.getWatchId() / 9) + 1);
                 s.setName(rs.getString("name"));
                 s.setSku(rs.getString("sku"));
                 s.setPrice(rs.getFloat("price"));
@@ -85,23 +85,53 @@ public class WatchDAO extends BaseDAO<Watch> {
         }
         return null;
     }
-    
+
     public void insertWatch(Watch s) {
         try {
-            String sql = "SET IDENTITY_INSERT Watches off\n"+
-                    "INSERT INTO [Watches]\n"
+            String sql = "SET IDENTITY_INSERT Watches off\n"
+                    + "INSERT INTO [Watches]\n"
                     + "           ([name]\n"
                     + "           ,[sku]\n"
-                    + "           ,[price]\n"
+                    + "           ,[price])\n"
                     + "     VALUES\n"
                     + "           (?\n"
                     + "           ,?\n"
                     + "           ,?)"
-            +"\nSET IDENTITY_INSERT Watches on";
+                    + "\nSET IDENTITY_INSERT Watches on";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, s.getName());
             statement.setString(2, s.getSku());
             statement.setFloat(3, s.getPrice());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void insertWatchSpecs(WatchSpecs s) {
+        try {
+            String sql = "SET IDENTITY_INSERT Watches off\n"
+                    + "INSERT INTO [WatchSpecs]\n"
+                    + "           ([bezel]\n"
+                    + "           ,[movement]\n"
+                    + "           ,[dial]\n"
+                    + "           ,[watchCase]\n"
+                    + "           ,[glass]\n"
+                    + "           ,[strap])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?)"
+                    + "\nSET IDENTITY_INSERT Watches on";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, s.getBezel());
+            statement.setString(2, s.getMovement());
+            statement.setString(3, s.getDial());
+            statement.setString(4, s.getWatchCase());
+            statement.setString(5, s.getGlass());
+            statement.setString(6, s.getStrap());
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -136,12 +166,12 @@ public class WatchDAO extends BaseDAO<Watch> {
 //            Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 ////    }
-//        public static void main(String[] args) {
-//        WatchDAO db=new WatchDAO();
-//         ArrayList<Watch> watches = db.getWatches();db.getWatches();
-//         for(Watch w:watches){
-//             System.out.println(w.getPageId());
-//         }
+//
+//    public static void main(String[] args) {
+//        WatchDAO db = new WatchDAO();
+//        ArrayList<Watch> watches = db.getWatches();
+//        for (Watch w : watches) {
+//            System.out.println(w.getName());
+//        }
 //    }
 }
-

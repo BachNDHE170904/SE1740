@@ -35,16 +35,20 @@ public class CheckOutServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Account acc = (Account) session.getAttribute("user");
-        String firstName =  request.getParameter("firstname");
-        String lastName =  request.getParameter("lastname");
-        String phone =  request.getParameter("phone");
-        String address =  request.getParameter("address");
-        Address add = new Address(acc.getUsername(), firstName, lastName, phone, address);
-        AddressDAO addDB = new AddressDAO();
-        addDB.insertAddress(add);
-        OrderDAO orderDB=new OrderDAO();
-        orderDB.updateOrders(acc.getUsername());
-        request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+        String firstName = request.getParameter("firstname");
+        String lastName = request.getParameter("lastname");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        if (acc != null) {
+            Address add = new Address(acc.getUsername(), firstName, lastName, phone, address);
+            AddressDAO addDB = new AddressDAO();
+            addDB.insertAddress(add);
+            OrderDAO orderDB = new OrderDAO();
+            orderDB.updateOrders(acc.getUsername());
+            request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
