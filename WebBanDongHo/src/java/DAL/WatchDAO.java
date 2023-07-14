@@ -88,16 +88,14 @@ public class WatchDAO extends BaseDAO<Watch> {
 
     public void insertWatch(Watch s) {
         try {
-            String sql = "SET IDENTITY_INSERT Watches off\n"
-                    + "INSERT INTO [Watches]\n"
+            String sql ="INSERT INTO [Watches]\n"
                     + "           ([name]\n"
                     + "           ,[sku]\n"
                     + "           ,[price])\n"
                     + "     VALUES\n"
                     + "           (?\n"
                     + "           ,?\n"
-                    + "           ,?)"
-                    + "\nSET IDENTITY_INSERT Watches on";
+                    + "           ,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, s.getName());
             statement.setString(2, s.getSku());
@@ -109,8 +107,7 @@ public class WatchDAO extends BaseDAO<Watch> {
     }
     public void insertWatchSpecs(WatchSpecs s) {
         try {
-            String sql = "SET IDENTITY_INSERT Watches off\n"
-                    + "INSERT INTO [WatchSpecs]\n"
+            String sql ="INSERT INTO [WatchSpecs]\n"
                     + "           ([bezel]\n"
                     + "           ,[movement]\n"
                     + "           ,[dial]\n"
@@ -123,8 +120,7 @@ public class WatchDAO extends BaseDAO<Watch> {
                     + "           ,?\n"
                     + "           ,?\n"
                     + "           ,?\n"
-                    + "           ,?)"
-                    + "\nSET IDENTITY_INSERT Watches on";
+                    + "           ,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, s.getBezel());
             statement.setString(2, s.getMovement());
@@ -156,22 +152,35 @@ public class WatchDAO extends BaseDAO<Watch> {
 //        }
 //    }
 //
-//    public void deleteWatch(int id) {
-//        try {
-//            String sql = "DELETE Watch WHERE id=?";
-//            PreparedStatement statement = connection.prepareStatement(sql);
-//            statement.setInt(1, id);
-//            statement.executeUpdate();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-////    }
-//
+    public void deleteWatch(int id) {
+        try {
+            String sql = "DELETE Watches WHERE id=?\n"
+                    +"DBCC CHECKIDENT ('[Watches]', RESEED, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.setInt(2, id-1);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void deleteWatchSpecs(int id) {
+        try {
+            String sql = "DELETE WatchSpecs WHERE id=?\n"
+                    +"DBCC CHECKIDENT ('[WatchSpecs]', RESEED, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.setInt(2, id-1);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 //    public static void main(String[] args) {
 //        WatchDAO db = new WatchDAO();
 //        ArrayList<Watch> watches = db.getWatches();
-//        for (Watch w : watches) {
-//            System.out.println(w.getName());
-//        }
+//       db.deleteWatch(18);
+//       db.deleteWatchSpecs(18);
 //    }
 }

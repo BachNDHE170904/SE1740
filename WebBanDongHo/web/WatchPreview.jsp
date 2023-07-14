@@ -71,8 +71,20 @@
                     session.setAttribute("previewwatch", w);
                     WatchSpecs ws = (WatchSpecs) request.getAttribute("previewwatchspec");
                 %>
-                <div class="redirectwatch">
-                    <h5><a href="WelcomePage.jsp">Home</a>/<a href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>"><%= w.getName()%></a></h5>
+                <div class="d-flex justify-content-between">
+                    <div class="redirectwatch">
+                        <h5><a href="WelcomePage.jsp">Home</a>/<a href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>"><%= w.getName()%></a></h5>
+                    </div>
+                    <% if (acc!=null&&acc.getRole().equalsIgnoreCase("Administrator")) {%>
+                    <div class="del-update-watch">
+                        <div class="update-watch">
+                            <a href="UpdateItemServlet?watchid=<%= w.getWatchId()%>">Update watch</a>
+                        </div>
+                        <div class="del-watch">
+                            <a href="DeleteItemServlet?watchid=<%= w.getWatchId()%>">Delete watch</a>
+                        </div>
+                    </div>
+                    <%}%>
                 </div>
                 <div class="row">
                     <div class="col-6 section-left">   

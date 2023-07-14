@@ -4,43 +4,42 @@
  */
 package controller;
 
+import DAL.OrderDAO;
 import DAL.WatchDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.File;
 import java.util.ArrayList;
 import model.Account;
+import java.io.IOException;
+import model.Order;
 import model.Watch;
 import model.WatchSpecs;
 
 /**
- * Servlet responsible for previewing a watch.
+ * Servlet responsible for adding items to the cart.
  */
-public class PreviewWatch extends HttpServlet {
+public class DeleteItemServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        WatchDAO db = new WatchDAO();
-        ArrayList<Watch> watches = db.getWatches();
-        ArrayList<WatchSpecs> watchSpecs = db.getWatchesSpecs();
-        if (watches == null) {
-            PrintWriter out = response.getWriter();
-            out.println("Cannot get the data");
-        } else {
-            try {
-                int id = Integer.parseInt(request.getParameter("watchid"));
-                // Set the preview watch and watch specs as request attributes
-                request.setAttribute("previewwatch", watches.get(id));
-                request.setAttribute("previewwatchspec", watchSpecs.get(id));
-                // Forward the request to the watch preview page
-                request.getRequestDispatcher("WatchPreview.jsp").forward(request, response);
-            } catch (Exception e) {
-                request.getRequestDispatcher("WatchPreview.jsp").forward(request, response);
-            }
+        try {
+            int id=Integer.parseInt(request.getParameter("watchid"));
+            WatchDAO db=new WatchDAO();
+            db.deleteWatchSpecs(id);
+            db.deleteWatch(id);
+            // Redirect to the welcome page after deleting the item 
+            request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
         }
     }
 

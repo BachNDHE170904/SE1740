@@ -1,4 +1,5 @@
 
+create database WatchDb
 USE WatchDb
 CREATE TABLE Watches (
    id   INT    NOT NULL identity(1,1),
@@ -7,7 +8,7 @@ CREATE TABLE Watches (
    price float	NOT NULL,
    PRIMARY KEY (id),
 );
-
+SET IDENTITY_INSERT Watches off
 insert into Watches(name,sku,price) values ('Inverness - Walnut & Black Leather','f4fc9661',124.00);
 insert into Watches(name,sku,price) values ('Inverness SS - Walnut','a21ad935#1',148.00);
 insert into Watches(name,sku,price) values ('Inverness - Walnut & Brown Leather','02cd1266',124.00);
@@ -25,7 +26,6 @@ insert into Watches(name,sku,price) values ('Albany','8253c7f8',46.00);
 insert into Watches(name,sku,price) values ('Gutierrez','1b02d19f',46.00);
 insert into Watches(name,sku,price) values ('Atlanta','e008edf1',46.00);
 insert into Watches(name,sku,price) values ('Andersonville','4b5dbba9',46.00);
-SET IDENTITY_INSERT Watches ON
 CREATE TABLE Accounts (
    username NVARCHAR (50)     NOT NULL,
    password NVARCHAR (50)     NOT NULL,
@@ -55,7 +55,6 @@ CREATE TABLE WatchSpecs (
    PRIMARY KEY (id),
    FOREIGN KEY (id) REFERENCES Watches(id),
 );
-
 insert into WatchSpecs(bezel,movement,dial,watchCase,glass,strap)values('Walnut','Miyota Japanese Quartz 3 hand with date',
 'Features applied indices, printed seconds track, and custom molded hands',
 '45mm, 50 meter water resistant 316L stainless steel case, and caseback',
@@ -125,7 +124,6 @@ insert into WatchSpecs(bezel,movement,dial,watchCase,glass,strap)values(' Zebraw
 'Features applied indices, printed seconds track, and custom molded hands',
 '45mm, 50 meter water resistant 316L stainless steel case, and caseback',
 'Hardened Mineral Crystal','quick release leather adjustable strap with memory lock stainless steel clasp');
-SET IDENTITY_INSERT WatchSpecs on
 CREATE TABLE Address (
    id   INT    NOT NULL identity(1,1),
    username NVARCHAR (50)     NOT NULL,
@@ -136,4 +134,5 @@ CREATE TABLE Address (
    PRIMARY KEY (id),
    FOREIGN KEY (username) REFERENCES Accounts(username),
 );
+select *from WatchSpecs
 select *from Watches
