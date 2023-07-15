@@ -8,6 +8,7 @@ import DAL.WatchDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,27 +24,22 @@ import model.WatchSpecs;
 /**
  * Servlet responsible for previewing a watch.
  */
+@MultipartConfig
 public class UpdateItemServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         WatchDAO db = new WatchDAO();
-        ArrayList<Watch> watches = db.getWatches();
-        ArrayList<WatchSpecs> watchSpecs = db.getWatchesSpecs();
-        if (watches == null) {
-            PrintWriter out = response.getWriter();
-            out.println("Cannot get the data");
-        } else {
-            try {
+        try {
             int id = Integer.parseInt(request.getParameter("watchid"));
             // Set the preview watch and watch specs as request attributes
-            request.setAttribute("previewwatch", watches.get(id));
-            request.setAttribute("previewwatchspec", watchSpecs.get(id));
+            request.setAttribute("previewwatch", db.getWatch(id));
+            request.setAttribute("previewwatchspec", db.getWatchSpecs(id));
             request.getRequestDispatcher("UpdateItem.jsp").forward(request, response);
-            } catch (Exception e) {
-               request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
-            }
+        } catch (Exception e) {
+            request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
         }
+
     }
 
     @Override
@@ -80,20 +76,21 @@ public class UpdateItemServlet extends HttpServlet {
             WatchDAO db = new WatchDAO();
             db.updateWatch(newWatch, id);
             db.updateWatchSpecs(newWatchSpecs, id);
-            
-            Part part=request.getPart("myFile");
-            String realPath=request.getServletContext().getRealPath("/images");
-            String filename=name+".jpg";
-            if(!Files.exists(Paths.get(realPath))){
+
+            Part part = request.getPart("myFile");
+            String realPath = request.getServletContext().getRealPath("/images");
+            String filename = name + ".jpg";
+            if (!Files.exists(Paths.get(realPath))) {
                 Files.createDirectory(Paths.get(realPath));
             }
-            Files.deleteIfExists(Paths.get(realPath+"/"+filename));
-            part.write(realPath+"/"+filename);
+            Files.deleteIfExists(Paths.get(realPath + "/" + filename));
+            part.write(realPath + "/" + filename);
             // Redirect to the welcome page after adding the item 
             request.getRequestDispatcher("Products.jsp").forward(request, response);
         } catch (Exception e) {
-            request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+            request.getRequestDispatcher("Products.jsp").forward(request, response);
         }
+
     }
 
     @Override

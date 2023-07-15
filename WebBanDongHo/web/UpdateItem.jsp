@@ -75,8 +75,10 @@
         <div class="container Center">
             <div class="row">
                 <%
-                    Watch w = (Watch) request.getAttribute("previewwatch");
-                    WatchSpecs ws = (WatchSpecs) request.getAttribute("previewwatchspec");
+                    int id=Integer.parseInt(request.getParameter("watchid"));
+                    WatchDAO db=new WatchDAO();
+                    Watch w = (Watch) db.getWatch(id);
+                    WatchSpecs ws = (WatchSpecs) db.getWatchSpecs(id);
                 %>
                 <form class="row" action="UpdateItemServlet?watchid=<%= w.getWatchId()%>" method="POST" enctype="multipart/form-data">
                     <div class="col-md-6 section-left">
@@ -94,64 +96,64 @@
                         <div class="txt_field">
                             <input type="number" step="0.01" name="price" value="<%= w.getPrice()%>" required />
                             <span></span>
-                            <label><Price</label>
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <label class="input-group-text" for="myfile">Upload an image</label>
-                                        <input type="file" class="form-control" id="myFile" name="myFile" required>
-                                    </div>
-                                    <script>
-                                        const fileInput = document.getElementById("file");
+                            <label>Price</label>
+                        </div>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="myfile">Upload an image</label>
+                            <input type="file" class="form-control" id="myFile" name="myFile" required>
+                        </div>
+                        <script>
+                            const fileInput = document.getElementById("file");
 
-                                        fileInput.addEventListener("change", (event) => {
-                                            const file = event.target.files[0];
-                                            const fileType = file["type"];
-                                            const validImageTypes = ["image/jpeg", "image/png", "image/gif"];
+                            fileInput.addEventListener("change", (event) => {
+                                const file = event.target.files[0];
+                                const fileType = file["type"];
+                                const validImageTypes = ["image/jpeg", "image/png", "image/gif"];
 
-                                            if (!validImageTypes.includes(fileType)) {
-                                                alert("Invalid file type. Please upload an image file.");
-                                                event.target.value = "";
-                                            }
-                                        });
-                                    </script>
-                                    </div>
-                                    <div class="col-md-6 section-right">
-                                        <h1>Item Specs</h1>
-                                        <div class="txt_field">
-                                            <input type="text" name="bezel" value="<%= ws.getBezel()%>" required /> 
-                                            <span></span>
-                                            <label>Bezel</label>
-                                        </div>
-                                        <div class="txt_field">
-                                            <input type="text" name="movement" value="<%= ws.getMovement()%>" required />
-                                            <span></span>
-                                            <label>Movement</label>
-                                        </div>
-                                        <div class="txt_field">
-                                            <input type="text" name="dial" value="<%= ws.getDial()%>" required />
-                                            <span></span>
-                                            <label>Dial</label>
-                                        </div>
-                                        <div class="txt_field">
-                                            <input type="text" name="case" value="<%= ws.getWatchCase()%>" required />
-                                            <span></span>
-                                            <label>Case</label>
-                                        </div>
-                                        <div class="txt_field">
-                                            <input type="text" name="glass" value="<%= ws.getGlass()%>" required />
-                                            <span></span>
-                                            <label>Glass</label>
-                                        </div>
-                                        <div class="txt_field">
-                                            <input type="text" name="strap" value="<%= ws.getStrap()%>" required />
-                                            <span></span>
-                                            <label>Strap</label>
-                                        </div>
-                                    </div>
-                                    <input type="submit" onclick="return confirm('Are you sure you want to update this item?');" value="Update item"/>
-                                    </form>    
-                                    </div>
-                                    </div>
-                                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-                                    </body>
-                                    </html>
+                                if (!validImageTypes.includes(fileType)) {
+                                    alert("Invalid file type. Please upload an image file.");
+                                    event.target.value = "";
+                                }
+                            });
+                        </script>
+                    </div>
+                    <div class="col-md-6 section-right">
+                        <h1>Item Specs</h1>
+                        <div class="txt_field">
+                            <input type="text" name="bezel" value="<%= ws.getBezel()%>" required /> 
+                            <span></span>
+                            <label>Bezel</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="text" name="movement" value="<%= ws.getMovement()%>" required />
+                            <span></span>
+                            <label>Movement</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="text" name="dial" value="<%= ws.getDial()%>" required />
+                            <span></span>
+                            <label>Dial</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="text" name="case" value="<%= ws.getWatchCase()%>" required />
+                            <span></span>
+                            <label>Case</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="text" name="glass" value="<%= ws.getGlass()%>" required />
+                            <span></span>
+                            <label>Glass</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="text" name="strap" value="<%= ws.getStrap()%>" required />
+                            <span></span>
+                            <label>Strap</label>
+                        </div>
+                    </div>
+                    <input type="submit" onclick="return confirm('Are you sure you want to update this item?');" value="Update item"/>
+                </form>    
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    </body>
+</html>

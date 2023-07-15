@@ -20,8 +20,8 @@
     </head>
     <body>
         <%
-            WatchDAO db=new WatchDAO();
-            ArrayList<Watch> watches=db.getWatches();
+            WatchDAO db = new WatchDAO();
+            ArrayList<Watch> watches = db.getWatches();
             Account acc = (Account) session.getAttribute("user");
         %>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -63,12 +63,12 @@
                         } else {
                         %>
                         <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="Login.jsp">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="Register.jsp">Register</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="Login.jsp">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="Register.jsp">Register</a>
+                            </li>
                         </ul>
                         <%
                             }
@@ -83,6 +83,9 @@
                     Id
                 </td>
                 <td>
+                    Image
+                </td>
+                <td>
                     Name
                 </td>
                 <td>
@@ -92,30 +95,33 @@
                     Sku
                 </td>
             </tr>
-        <% for (Watch s : watches) {
-        %>
-                <tr>
-                    <td>
-                        <%=s.getWatchId()%>
-                    </td> 
-                    <td>
-                        <%=s.getName()%>
-                    </td> 
-                    <td>
-                        <%=s.getPrice()%>
-                    </td>
-                    <td>
-                        <%=s.getSku()%>
-                    </td>                
-                    <td>   
-                    <a href="UpdateItemServlet?watchid=<%= s.getWatchId()-1%>" onclick="return confirm('Are you sure you want to update this item?');">Update watch</a>
+            <% for (Watch s : watches) {
+            %>
+            <tr>
+                <td>
+                    <%=s.getWatchId()%>
+                </td> 
+                <td>
+                    <img src="images/<%= s.getName()%>.jpg" width="100" height="100" alt="<%= s.getName()%>">
+                </td> 
+                <td>
+                    <%=s.getName()%>
+                </td> 
+                <td>
+                    <%=s.getPrice()%>
+                </td>
+                <td>
+                    <%=s.getSku()%>
+                </td>                
+                <td>   
+                    <a href="UpdateItemServlet?watchid=<%= s.getWatchId()%>" onclick="return confirm('Are you sure you want to update this item?');">Update watch</a>
                     <a href="DeleteItemServlet?watchid=<%= s.getWatchId()%>" onclick="return confirm('Are you sure you want to delete this item?');">Delete watch</a>
-                    </td>
-                    
-                </tr>
-        <%}%>
+                </td>
+
+            </tr>
+            <%}%>
         </table>
         <a href="AddItem.jsp">Add New Item</a>
-        
+
     </body>
 </html>

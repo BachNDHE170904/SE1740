@@ -65,7 +65,7 @@ public class WatchDAO extends BaseDAO<Watch> {
 
     public Watch getWatch(int id) {
         try {
-            String sql = "SELECT * FROM Watch s\n"
+            String sql = "SELECT * FROM Watches s\n"
                     + "WHERE s.id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
@@ -77,6 +77,30 @@ public class WatchDAO extends BaseDAO<Watch> {
                 s.setName(rs.getString("name"));
                 s.setSku(rs.getString("sku"));
                 s.setPrice(rs.getFloat("price"));
+                return s;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public WatchSpecs getWatchSpecs(int id) {
+        try {
+            String sql = "SELECT * FROM WatchSpecs s\n"
+                    + "WHERE s.id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                WatchSpecs s = new WatchSpecs();
+                s.setId(rs.getInt("id"));
+                s.setBezel(rs.getString("bezel"));
+                s.setMovement(rs.getString("movement"));
+                s.setDial(rs.getString("dial"));
+                s.setWatchCase(rs.getString("watchCase"));
+                s.setGlass(rs.getString("glass"));
+                s.setStrap(rs.getString("strap"));
                 return s;
             }
 
@@ -202,8 +226,6 @@ public class WatchDAO extends BaseDAO<Watch> {
 
 //    public static void main(String[] args) {
 //        WatchDAO db = new WatchDAO();
-//        ArrayList<Watch> w = db.getWatches();
-//       ArrayList<WatchSpecs> ws = db.getWatchesSpecs();
-//        System.out.println(ws.get(0).getBezel());
+//        System.out.println(db.getWatch(17).getName());
 //    }
 }
