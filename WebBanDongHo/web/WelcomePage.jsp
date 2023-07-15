@@ -26,7 +26,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="WelcomePage.jsp">Home</a>
                         </li>
@@ -34,36 +34,37 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="Products.jsp">Products</a>
                         </li>
-                        <% }if(acc==null) {
-                        %>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="Login.jsp">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="Register.jsp">Register</a>
-                        </li>
-                        <%
-                            }
-                        %>
+                        <% } %>
                     </ul>
-                    <form class="navbar-form navbar-right" action="SearchServlet" method="GET" role="search">
-                        <input name="searchResult" type="text" placeholder="Search">
+                    <form class="d-flex" action="SearchServlet" method="GET" role="search">
+                        <input class="form-control me-2" name="searchResult" type="text" placeholder="Search">
                         <%
-                            if(acc!=null){
+                            if (acc != null) {
                         %>
                         <div class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <%= acc.getUsername()%>
                             </a>
                             <ul class="dropdown-menu">
-                                 <% if (acc != null && !acc.getRole().equalsIgnoreCase("Administrator")) { %>
+                                <% if (acc != null && !acc.getRole().equalsIgnoreCase("Administrator")) { %>
                                 <li><a class="dropdown-item" href="ViewOrders.jsp">View Orders</a></li>
                                 <li><a class="dropdown-item" href="ViewOrdersHistory.jsp">View My Order History</a></li>
-                                <%}%>
+                                    <%}%>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="LogOutServlet">Log Out</a></li>
                             </ul>
                         </div>
+                        <%
+                        } else {
+                        %>
+                        <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="Login.jsp">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="Register.jsp">Register</a>
+                        </li>
+                        </ul>
                         <%
                             }
                         %>

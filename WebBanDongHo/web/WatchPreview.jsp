@@ -13,56 +13,63 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     </head>
     <body>
-        <div class="hero-image">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Watch shop</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="WelcomePage.jsp">Home</a>
-                            </li>
-                            <%
-                                //check if the user is logged in or not
-                                Account acc = (Account) session.getAttribute("user");
-                                if (acc != null) {
-                            %>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <%= acc.getUsername()%>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="ViewOrders.jsp">View Orders</a></li>
-                                    <li><a class="dropdown-item" href="ViewOrdersHistory.jsp">View My Order History</a></li>
-                                        <% if (acc.getRole().equalsIgnoreCase("Administrator")) { %>
-                                    <li><a class="dropdown-item" href="AddItem.jsp">Add New Item</a></li>
-                                        <%}%>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="LogOutServlet">Log Out</a></li>
-                                </ul>
-                            </li>
-                            <%} else {
-                            %>
+        <%
+            //check if the user is logged in or not
+            Account acc = (Account) session.getAttribute("user");
+        %>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Watch shop</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="WelcomePage.jsp">Home</a>
+                        </li>
+                        <% if (acc != null && acc.getRole().equalsIgnoreCase("Administrator")) { %>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="Products.jsp">Products</a>
+                        </li>
+                        <% } %>
+                    </ul>
+                    <form class="d-flex" action="SearchServlet" method="GET" role="search">
+                        <input class="form-control me-2" name="searchResult" type="text" placeholder="Search">
+                        <%
+                            if (acc != null) {
+                        %>
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <%= acc.getUsername()%>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <% if (acc != null && !acc.getRole().equalsIgnoreCase("Administrator")) { %>
+                                <li><a class="dropdown-item" href="ViewOrders.jsp">View Orders</a></li>
+                                <li><a class="dropdown-item" href="ViewOrdersHistory.jsp">View My Order History</a></li>
+                                    <%}%>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="LogOutServlet">Log Out</a></li>
+                            </ul>
+                        </div>
+                        <%
+                        } else {
+                        %>
+                        <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="Login.jsp">Login</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="Register.jsp">Register</a>
                             </li>
-                            <%
-                                }
-                            %>
                         </ul>
-                        <form class="navbar-form navbar-right" action="SearchServlet" method="GET" role="search">
-                            <input name="searchResult" type="text" placeholder="Search">
-                        </form>
-                    </div>
+                        <%
+                            }
+                        %>
+                    </form>
                 </div>
-            </nav>
-        </div>
+            </div>
+        </nav>
         <div class="container">
             <form action="AddToCartServlet?method="GET">
                 <%
@@ -75,10 +82,10 @@
                     <div class="redirectwatch">
                         <h5><a href="WelcomePage.jsp">Home</a>/<a href="PreviewWatch?watchid=<%= w.getWatchId() - 1%>"><%= w.getName()%></a></h5>
                     </div>
-                    <% if (acc!=null&&acc.getRole().equalsIgnoreCase("Administrator")) {%>
+                    <% if (acc != null && acc.getRole().equalsIgnoreCase("Administrator")) {%>
                     <div class="del-update-watch">
                         <div class="update-watch">
-                            <a href="UpdateItemServlet?watchid=<%= w.getWatchId()-1%>" onclick="return confirm('Are you sure you want to update this item?');">Update watch</a>
+                            <a href="UpdateItemServlet?watchid=<%= w.getWatchId() - 1%>" onclick="return confirm('Are you sure you want to update this item?');">Update watch</a>
                         </div>
                         <div class="del-watch">
                             <a href="DeleteItemServlet?watchid=<%= w.getWatchId()%>" onclick="return confirm('Are you sure you want to delete this item?');">Delete watch</a>

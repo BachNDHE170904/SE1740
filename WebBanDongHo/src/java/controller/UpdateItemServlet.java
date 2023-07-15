@@ -92,7 +92,7 @@ public class UpdateItemServlet extends HttpServlet {
             // Redirect to the welcome page after adding the item 
             request.getRequestDispatcher("Products.jsp").forward(request, response);
         } catch (Exception e) {
-            request.getRequestDispatcher("Products.jsp").forward(request, response);
+            request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
         }
     }
 

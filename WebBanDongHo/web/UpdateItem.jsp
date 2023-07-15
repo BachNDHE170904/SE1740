@@ -15,67 +15,74 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     </head>
     <body>
-        <div class="hero-image">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Watch shop</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="WelcomePage.jsp">Home</a>
-                            </li>
-                            <%
-                                //check if the user is logged in or not
-                                Account acc = (Account) session.getAttribute("user");
-                                if (acc != null) {
-                            %>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <%= acc.getUsername()%>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="ViewOrders.jsp">View Orders</a></li>
-                                    <li><a class="dropdown-item" href="ViewOrdersHistory.jsp">View My Order History</a></li>
-                                        <% if (acc.getRole().equalsIgnoreCase("Administrator")) { %>
-                                    <li><a class="dropdown-item" href="AddItem.jsp">Add New Item</a></li>
-                                        <%}%>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="LogOutServlet">Log Out</a></li>
-                                </ul>
-                            </li>
-                            <%} else {
-                            %>
+        <%
+            //check if the user is logged in or not
+            Account acc = (Account) session.getAttribute("user");
+        %>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Watch shop</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="WelcomePage.jsp">Home</a>
+                        </li>
+                        <% if (acc != null && acc.getRole().equalsIgnoreCase("Administrator")) { %>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="Products.jsp">Products</a>
+                        </li>
+                        <% } %>
+                    </ul>
+                    <form class="d-flex" action="SearchServlet" method="GET" role="search">
+                        <input class="form-control me-2" name="searchResult" type="text" placeholder="Search">
+                        <%
+                            if (acc != null) {
+                        %>
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <%= acc.getUsername()%>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <% if (acc != null && !acc.getRole().equalsIgnoreCase("Administrator")) { %>
+                                <li><a class="dropdown-item" href="ViewOrders.jsp">View Orders</a></li>
+                                <li><a class="dropdown-item" href="ViewOrdersHistory.jsp">View My Order History</a></li>
+                                    <%}%>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="LogOutServlet">Log Out</a></li>
+                            </ul>
+                        </div>
+                        <%
+                        } else {
+                        %>
+                        <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="Login.jsp">Login</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="Register.jsp">Register</a>
                             </li>
-                            <%
-                                }
-                            %>
                         </ul>
-                        <form class="navbar-form navbar-right" action="SearchServlet" method="GET" role="search">
-                            <input name="searchResult" type="text" placeholder="Search">
-                        </form>
-                    </div>
+                        <%
+                            }
+                        %>
+                    </form>
                 </div>
-            </nav>
-        </div>
+            </div>
+        </nav>
         <div class="container Center">
             <div class="row">
                 <%
-                    Watch w=(Watch)request.getAttribute("previewwatch");
-                    WatchSpecs ws=(WatchSpecs)request.getAttribute("previewwatchspec");
+                    Watch w = (Watch) request.getAttribute("previewwatch");
+                    WatchSpecs ws = (WatchSpecs) request.getAttribute("previewwatchspec");
                 %>
-                <form class="row" action="UpdateItemServlet?watchid=<%= w.getWatchId() %>" method="POST" enctype="multipart/form-data">
+                <form class="row" action="UpdateItemServlet?watchid=<%= w.getWatchId()%>" method="POST" enctype="multipart/form-data">
                     <div class="col-md-6 section-left">
                         <h1>Item </h1>
                         <div class="txt_field">
-                            <input type="text" name="name" value="<%= w.getName() %>" required /> 
+                            <input type="text" name="name" value="<%= w.getName()%>" required /> 
                             <span></span>
                             <label>Name</label>
                         </div>
@@ -88,63 +95,63 @@
                             <input type="number" step="0.01" name="price" value="<%= w.getPrice()%>" required />
                             <span></span>
                             <label><Price</label>
-                        </div>
-                        <div class="input-group mb-3">
-                            <label class="input-group-text" for="myfile">Upload an image</label>
-                            <input type="file" class="form-control" id="myFile" name="myFile" required>
-                        </div>
-                        <script>
-                            const fileInput = document.getElementById("file");
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <label class="input-group-text" for="myfile">Upload an image</label>
+                                        <input type="file" class="form-control" id="myFile" name="myFile" required>
+                                    </div>
+                                    <script>
+                                        const fileInput = document.getElementById("file");
 
-                            fileInput.addEventListener("change", (event) => {
-                                const file = event.target.files[0];
-                                const fileType = file["type"];
-                                const validImageTypes = ["image/jpeg", "image/png", "image/gif"];
+                                        fileInput.addEventListener("change", (event) => {
+                                            const file = event.target.files[0];
+                                            const fileType = file["type"];
+                                            const validImageTypes = ["image/jpeg", "image/png", "image/gif"];
 
-                                if (!validImageTypes.includes(fileType)) {
-                                    alert("Invalid file type. Please upload an image file.");
-                                    event.target.value = "";
-                                }
-                            });
-                        </script>
-                    </div>
-                    <div class="col-md-6 section-right">
-                        <h1>Item Specs</h1>
-                        <div class="txt_field">
-                            <input type="text" name="bezel" value="<%= ws.getBezel()%>" required /> 
-                            <span></span>
-                            <label>Bezel</label>
-                        </div>
-                        <div class="txt_field">
-                            <input type="text" name="movement" value="<%= ws.getMovement()%>" required />
-                            <span></span>
-                            <label>Movement</label>
-                        </div>
-                        <div class="txt_field">
-                            <input type="text" name="dial" value="<%= ws.getDial()%>" required />
-                            <span></span>
-                            <label>Dial</label>
-                        </div>
-                        <div class="txt_field">
-                            <input type="text" name="case" value="<%= ws.getWatchCase()%>" required />
-                            <span></span>
-                            <label>Case</label>
-                        </div>
-                        <div class="txt_field">
-                            <input type="text" name="glass" value="<%= ws.getGlass()%>" required />
-                            <span></span>
-                            <label>Glass</label>
-                        </div>
-                        <div class="txt_field">
-                            <input type="text" name="strap" value="<%= ws.getStrap()%>" required />
-                            <span></span>
-                            <label>Strap</label>
-                        </div>
-                    </div>
-                    <input type="submit" onclick="return confirm('Are you sure you want to update this item?');" value="Update item"/>
-                </form>    
-            </div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    </body>
-</html>
+                                            if (!validImageTypes.includes(fileType)) {
+                                                alert("Invalid file type. Please upload an image file.");
+                                                event.target.value = "";
+                                            }
+                                        });
+                                    </script>
+                                    </div>
+                                    <div class="col-md-6 section-right">
+                                        <h1>Item Specs</h1>
+                                        <div class="txt_field">
+                                            <input type="text" name="bezel" value="<%= ws.getBezel()%>" required /> 
+                                            <span></span>
+                                            <label>Bezel</label>
+                                        </div>
+                                        <div class="txt_field">
+                                            <input type="text" name="movement" value="<%= ws.getMovement()%>" required />
+                                            <span></span>
+                                            <label>Movement</label>
+                                        </div>
+                                        <div class="txt_field">
+                                            <input type="text" name="dial" value="<%= ws.getDial()%>" required />
+                                            <span></span>
+                                            <label>Dial</label>
+                                        </div>
+                                        <div class="txt_field">
+                                            <input type="text" name="case" value="<%= ws.getWatchCase()%>" required />
+                                            <span></span>
+                                            <label>Case</label>
+                                        </div>
+                                        <div class="txt_field">
+                                            <input type="text" name="glass" value="<%= ws.getGlass()%>" required />
+                                            <span></span>
+                                            <label>Glass</label>
+                                        </div>
+                                        <div class="txt_field">
+                                            <input type="text" name="strap" value="<%= ws.getStrap()%>" required />
+                                            <span></span>
+                                            <label>Strap</label>
+                                        </div>
+                                    </div>
+                                    <input type="submit" onclick="return confirm('Are you sure you want to update this item?');" value="Update item"/>
+                                    </form>    
+                                    </div>
+                                    </div>
+                                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+                                    </body>
+                                    </html>

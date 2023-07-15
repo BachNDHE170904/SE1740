@@ -1,4 +1,8 @@
 
+.d-flex input{
+    width: 700px;
+    margin-left: 350px;
+}
 .Center h1{
     text-align: center;
     padding: 0 0 20px 0;
