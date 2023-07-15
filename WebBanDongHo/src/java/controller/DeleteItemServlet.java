@@ -37,9 +37,9 @@ public class DeleteItemServlet extends HttpServlet {
             db.deleteWatchSpecs(id);
             db.deleteWatch(id);
             // Redirect to the welcome page after deleting the item 
-            request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+            request.getRequestDispatcher("Products.jsp").forward(request, response);
         } catch (Exception e) {
-            request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+            request.getRequestDispatcher("Products.jsp").forward(request, response);
         }
     }
 

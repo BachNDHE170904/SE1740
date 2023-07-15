@@ -90,9 +90,9 @@ public class UpdateItemServlet extends HttpServlet {
             Files.deleteIfExists(Paths.get(realPath+"/"+filename));
             part.write(realPath+"/"+filename);
             // Redirect to the welcome page after adding the item 
-            request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+            request.getRequestDispatcher("Products.jsp").forward(request, response);
         } catch (Exception e) {
-            request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+            request.getRequestDispatcher("Products.jsp").forward(request, response);
         }
     }
 

@@ -200,10 +200,10 @@ public class WatchDAO extends BaseDAO<Watch> {
         }
     }
 
-    public static void main(String[] args) {
-        WatchDAO db = new WatchDAO();
-        ArrayList<Watch> w = db.getWatches();
-       ArrayList<WatchSpecs> ws = db.getWatchesSpecs();
-        System.out.println(ws.get(0).getBezel());
-    }
+//    public static void main(String[] args) {
+//        WatchDAO db = new WatchDAO();
+//        ArrayList<Watch> w = db.getWatches();
+//       ArrayList<WatchSpecs> ws = db.getWatchesSpecs();
+//        System.out.println(ws.get(0).getBezel());
+//    }
 }
