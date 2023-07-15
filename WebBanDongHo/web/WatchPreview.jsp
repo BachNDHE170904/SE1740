@@ -78,10 +78,10 @@
                     <% if (acc!=null&&acc.getRole().equalsIgnoreCase("Administrator")) {%>
                     <div class="del-update-watch">
                         <div class="update-watch">
-                            <a href="UpdateItemServlet?watchid=<%= w.getWatchId()-1%>">Update watch</a>
+                            <a href="UpdateItemServlet?watchid=<%= w.getWatchId()-1%>" onclick="return confirm('Are you sure you want to update this item?');">Update watch</a>
                         </div>
                         <div class="del-watch">
-                            <a href="DeleteItemServlet?watchid=<%= w.getWatchId()%>">Delete watch</a>
+                            <a href="DeleteItemServlet?watchid=<%= w.getWatchId()%>" onclick="return confirm('Are you sure you want to delete this item?');">Delete watch</a>
                         </div>
                     </div>
                     <%}%>

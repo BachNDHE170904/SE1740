@@ -2,6 +2,11 @@
     text-decoration: none;
     color: #9b9b9b;
 }
+.del-update-watch a{
+    text-decoration: none;
+    color: #9b9b9b;
+    display: inline;
+}
 .section-left p{
     color: #585858; 
 }

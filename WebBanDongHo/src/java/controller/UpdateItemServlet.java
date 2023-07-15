@@ -87,6 +87,7 @@ public class UpdateItemServlet extends HttpServlet {
             if(!Files.exists(Paths.get(realPath))){
                 Files.createDirectory(Paths.get(realPath));
             }
+            Files.deleteIfExists(Paths.get(realPath+"/"+filename));
             part.write(realPath+"/"+filename);
             // Redirect to the welcome page after adding the item 
             request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);

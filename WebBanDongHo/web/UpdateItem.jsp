@@ -71,7 +71,7 @@
                     Watch w=(Watch)request.getAttribute("previewwatch");
                     WatchSpecs ws=(WatchSpecs)request.getAttribute("previewwatchspec");
                 %>
-                <form class="row" action="UpdateItemServlet?watchid=<%= w.getWatchId() %>" method="POST">
+                <form class="row" action="UpdateItemServlet?watchid=<%= w.getWatchId() %>" method="POST" enctype="multipart/form-data">
                     <div class="col-md-6 section-left">
                         <h1>Item </h1>
                         <div class="txt_field">

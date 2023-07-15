@@ -93,7 +93,7 @@
                             <label>Last name</label>
                         </div>
                         <div class="txt_field">
-                            <input type="text" name="phone" required />
+                            <input type="text" name="phone" id="phone"required />
                             <span></span>
                             <label>Phone</label>
                         </div>
@@ -102,7 +102,7 @@
                             <span></span>
                             <label>Address</label>
                         </div>
-                        <input type="submit" value="Save address and order"/>
+                        <input type="submit" value="Save address and order" onclick="return confirm('Are you sure you want to add this address?');"/>
                     </form>
 
                 </div>
