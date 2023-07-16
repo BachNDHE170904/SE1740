@@ -10,6 +10,7 @@ package model;
  */
 public class Order {
     private Watch watch;
+    private String orderedDate,user;
     private int id,quantity;
     private boolean status;
 
@@ -22,7 +23,23 @@ public class Order {
         this.quantity = quantity;
         this.status = status;
     }
-    
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getOrderedDate() {
+        return orderedDate;
+    }
+
+    public void setOrderedDate(String orderedDate) {
+        this.orderedDate = orderedDate;
+    }
+
 
     public Order(Watch watch, int id, int quantity) {
         this.watch = watch;

@@ -1,10 +1,7 @@
-<%-- 
-    Document   : Products
-    Created on : Jul 15, 2023, 8:59:34 AM
-    Author     : ADMIN
---%>
 
 
+<%@page import="DAL.OrderDAO"%>
+<%@page import="model.Order"%>
 <%@page import="model.Account"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Watch"%>
@@ -20,9 +17,9 @@
     </head>
     <body>
         <%
-            WatchDAO db = new WatchDAO();
-            ArrayList<Watch> watches = db.getWatches();
+            OrderDAO db = new OrderDAO();
             Account acc = (Account) session.getAttribute("user");
+            ArrayList<Order> orders = db.getOrdersHistoryAdmin();
         %>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -83,55 +80,51 @@
         <table class="table table-hover">
             <tr>
                 <td>
-                    Id
+                    User
                 </td>
                 <td>
-                    Image
+                    Order Date
                 </td>
                 <td>
-                    Name
+                    Watch name
                 </td>
                 <td>
                     Price
                 </td>
                 <td>
-                    Sku
+                    Quantity
                 </td>
                 <td>
-                    Update
-                </td>
-                <td>
-                    Delete
+                    Subtotal
                 </td>
             </tr>
-            <% for (Watch s : watches) {
+            <% for (Order s : orders) {
+                    float totalWatch = 0;
+                    Watch w = s.getWatch();
+                    totalWatch += s.getQuantity() * w.getPrice();
             %>
             <tr>
                 <td>
-                    <%=s.getWatchId()%>
+                    <%=s.getUser()%>
                 </td> 
                 <td>
-                    <img src="images/<%= s.getName()%>.jpg" width="100" height="100" alt="<%= s.getName()%>">
+                    <%=s.getOrderedDate()%>
                 </td> 
                 <td>
-                    <%=s.getName()%>
-                </td> 
-                <td>
-                    $<%=s.getPrice()%>
+                    <%=w.getName()%>
                 </td>
                 <td>
-                    <%=s.getSku()%>
-                </td>                
-                <td>   
-                    <a href="UpdateItemServlet?watchid=<%= s.getWatchId()%>" onclick="return confirm('Are you sure you want to update this item?');">Update watch</a>
-                </td>
-                <td>  
-                    <a href="DeleteItemServlet?watchid=<%= s.getWatchId()%>" onclick="return confirm('Are you sure you want to delete this item?');">Delete watch</a>
-                </td>
+                    $<%=w.getPrice()%>
+                </td>         
+                <td>
+                    <%=s.getQuantity()%>
+                </td>  
+                <td>
+                    $<%= totalWatch %>
+                </td>  
             </tr>
             <%}%>
         </table>
-        <a href="AddItem.jsp">Add New Item</a>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
 </html>

@@ -26,13 +26,16 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav content">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="WelcomePage.jsp">Home</a>
                         </li>
                         <% if (acc != null && acc.getRole().equalsIgnoreCase("Administrator")) { %>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="Products.jsp">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="OrdersAdmin.jsp">Orders</a>
                         </li>
                         <% } %>
                     </ul>

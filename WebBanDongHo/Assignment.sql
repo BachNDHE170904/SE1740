@@ -36,6 +36,7 @@ insert into Accounts(username,password,fieldRole) values('Admin','123','Administ
 CREATE TABLE Orders (
    id   INT    NOT NULL identity(1,1),
    username NVARCHAR (50)     NOT NULL,
+   orderedDate NVARCHAR (50)     NOT NULL,
    paid bit,
    watchid   INT    NOT NULL,
    quantity   INT    NOT NULL
@@ -136,3 +137,4 @@ CREATE TABLE Address (
 );
 select *from WatchSpecs
 select *from Watches
+select *from Orders
