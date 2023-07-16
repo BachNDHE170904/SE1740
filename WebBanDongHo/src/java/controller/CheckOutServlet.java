@@ -39,12 +39,22 @@ public class CheckOutServlet extends HttpServlet {
         String lastName = request.getParameter("lastname");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
+        AddressDAO db = new AddressDAO();
+        Address add = db.getAddress(acc.getUsername());
         if (acc != null) {
-            Address add = new Address(acc.getUsername(), firstName, lastName, phone, address);
-            AddressDAO addDB = new AddressDAO();
-            addDB.insertAddress(add);
-            OrderDAO orderDB = new OrderDAO();
-            orderDB.updateOrders(acc.getUsername());
+            if (add == null) {
+                Address newadd = new Address(acc.getUsername(), firstName, lastName, phone, address);
+                AddressDAO addDB = new AddressDAO();
+                addDB.insertAddress(newadd);
+                OrderDAO orderDB = new OrderDAO();
+                orderDB.updateOrders(acc.getUsername());
+            }else{
+                Address newadd = new Address(acc.getUsername(), firstName, lastName, phone, address);
+                AddressDAO addDB = new AddressDAO();
+                addDB.updateAddress(newadd,acc.getUsername());
+                OrderDAO orderDB = new OrderDAO();
+                orderDB.updateOrders(acc.getUsername());
+            }
             request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);

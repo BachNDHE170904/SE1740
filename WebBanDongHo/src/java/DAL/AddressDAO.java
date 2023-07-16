@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
 import model.Address;
+import model.Watch;
 
 /**
  *
@@ -32,7 +33,7 @@ public class AddressDAO extends BaseDAO<Address> {
                 s.setFirstname(rs.getString("firstName"));
                 s.setLastname(rs.getString("lastName"));
                 s.setPhone(rs.getString("phone"));
-                s.setAddress(rs.getString("address"));
+                s.setAddress(rs.getString("customerAddress"));
                 return s;
             }
 
@@ -41,9 +42,10 @@ public class AddressDAO extends BaseDAO<Address> {
         }
         return null;
     }
+
     public void insertAddress(Address s) {
         try {
-            String sql ="insert into Address(username,firstName,lastName,phone,customerAddress) values(?,?,?,?,?)\n;";
+            String sql = "insert into Address(username,firstName,lastName,phone,customerAddress) values(?,?,?,?,?)\n;";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, s.getUsername());
             statement.setString(2, s.getFirstname());
@@ -55,4 +57,25 @@ public class AddressDAO extends BaseDAO<Address> {
             Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void updateAddress(Address s, String username) {
+        try {
+            String sql = "UPDATE [Address]\n"
+                    + "   SET [firstName] = ?\n"
+                    + "      ,[lastName] = ?\n"
+                    + "      ,[phone] = ?\n"
+                    + "      ,[customerAddress] = ?\n"
+                    + " WHERE [username] = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, s.getFirstname());
+            statement.setString(2, s.getLastname());
+            statement.setString(3, s.getPhone());
+            statement.setString(4, s.getAddress());
+            statement.setString(5, s.getUsername());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

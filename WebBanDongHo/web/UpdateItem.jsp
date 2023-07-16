@@ -103,11 +103,11 @@
                             <input type="file" class="form-control" id="myFile" name="myFile" >
                         </div>
                         <script>
-                            const fileInput = document.getElementById("file");
+                            const fileInput = document.getElementById("myFile");
 
-                            fileInput.addEventListener("change", (event) => {
+                            fileInput.addEventListener("change", function (event) {
                                 const file = event.target.files[0];
-                                const fileType = file["type"];
+                                const fileType = file.type;
                                 const validImageTypes = ["image/jpeg", "image/png", "image/gif"];
 
                                 if (!validImageTypes.includes(fileType)) {

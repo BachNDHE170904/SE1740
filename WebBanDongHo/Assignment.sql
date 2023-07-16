@@ -1,5 +1,6 @@
 
 create database WatchDb
+go
 USE WatchDb
 CREATE TABLE Watches (
    id   INT    NOT NULL identity(1,1),
@@ -126,15 +127,15 @@ insert into WatchSpecs(bezel,movement,dial,watchCase,glass,strap)values(' Zebraw
 '45mm, 50 meter water resistant 316L stainless steel case, and caseback',
 'Hardened Mineral Crystal','quick release leather adjustable strap with memory lock stainless steel clasp');
 CREATE TABLE Address (
-   id   INT    NOT NULL identity(1,1),
    username NVARCHAR (50)     NOT NULL,
    firstName NVARCHAR (50)     NOT NULL,
    lastName NVARCHAR (50)     NOT NULL,
    phone NVARCHAR (50)     NOT NULL,
    customerAddress NVARCHAR (80)     NOT NULL,
-   PRIMARY KEY (id),
+   PRIMARY KEY (username),
    FOREIGN KEY (username) REFERENCES Accounts(username),
 );
 select *from WatchSpecs
 select *from Watches
 select *from Orders
+select *from Address where username='a'

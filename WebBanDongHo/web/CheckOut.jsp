@@ -1,3 +1,5 @@
+<%@page import="model.Address"%>
+<%@page import="DAL.AddressDAO"%>
 <%@page import="DAL.OrderDAO"%>
 <%@page import="model.Order"%>
 <%@page import="model.Account"%>
@@ -14,7 +16,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     </head>
     <body>
-                <%
+        <%
             //check if the user is logged in or not
             Account acc = (Account) session.getAttribute("user");
         %>
@@ -57,12 +59,12 @@
                         } else {
                         %>
                         <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="Login.jsp">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="Register.jsp">Register</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="Login.jsp">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="Register.jsp">Register</a>
+                            </li>
                         </ul>
                         <%
                             }
@@ -75,35 +77,96 @@
             <div class="row">
                 <%
                     // Retrieving orders from the database for the logged-in user
-                    OrderDAO db = new OrderDAO();
-                    ArrayList<Order> orders = db.getOrders(acc.getUsername());
                     float subTotal = 0;
+                    AddressDAO db = new AddressDAO();
+                    Address add = db.getAddress(acc.getUsername());
                     try {
                         subTotal = Float.parseFloat(request.getParameter("subTotal"));
                     } catch (Exception e) {
                         subTotal = 0;
                     }
+                    if (add != null) {
                 %>
                 <div class="col-md-9 section-left">   
                     <h1>Shipping Details</h1>
                     <form action="CheckOutServlet" method="POST">
                         <!-- Username input -->
                         <div class="txt_field">
-                            <input type="text" name="firstname" required /> 
+                            <input type="text" name="firstname" value="<%=add.getFirstname()%>" required /> 
                             <span></span>
                             <label>First Name</label>
                         </div>
                         <!-- Password input -->
                         <div class="txt_field">
-                            <input type="text" name="lastname" required />
+                            <input type="text" name="lastname" value="<%=add.getLastname()%>" required />
                             <span></span>
                             <label>Last name</label>
                         </div>
                         <div class="txt_field">
-                            <input type="text" name="phone" id="phone"required />
+                            <input type="text" name="phone" id="phone" value="<%=add.getPhone()%>"  required />
                             <span></span>
                             <label>Phone</label>
                         </div>
+                        <script>
+                            const phone = document.getElementById("phone");
+                            phone.addEventListener("change", (event) => {
+                                try {
+                                    const phoneInt = Number(phone.value);
+                                    if (phone.value.length !== 10) {
+                                        alert("Phone number should not exceed 10 digits.");
+                                        event.target.value = "";
+                                    }
+                                } catch (error) {
+                                    alert("Invalid phone number.");
+                                    event.target.value = "";
+                                }
+                            });
+                        </script>
+                        <div class="txt_field">
+                            <input type="text" name="address" value="<%=add.getAddress()%>" required />
+                            <span></span>
+                            <label>Address</label>
+                        </div>
+                        <input type="submit" value="Save address and order" onclick="return confirm('Are you sure you want to change this address?');"/>
+                    </form>
+
+                </div>
+                <%} else {%>
+                <div class="col-md-9 section-left">   
+                    <h1>Shipping Details</h1>
+                    <form action="CheckOutServlet" method="POST">
+                        <!-- Username input -->
+                        <div class="txt_field">
+                            <input type="text" name="firstname"  required /> 
+                            <span></span>
+                            <label>First Name</label>
+                        </div>
+                        <!-- Password input -->
+                        <div class="txt_field">
+                            <input type="text" name="lastname"  required />
+                            <span></span>
+                            <label>Last name</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="text" name="phone" id="phone"  required />
+                            <span></span>
+                            <label>Phone</label>
+                        </div>
+                        <script>
+                            const phone = document.getElementById("phone");
+                            phone.addEventListener("change", (event) => {
+                                try {
+                                    const phoneInt = Number(phone.value);
+                                    if (phone.value.length !== 10) {
+                                        alert("Phone number should not exceed 10 digits.");
+                                        event.target.value = "";
+                                    }
+                                } catch (error) {
+                                    alert("Invalid phone number.");
+                                    event.target.value = "";
+                                }
+                            });
+                        </script>
                         <div class="txt_field">
                             <input type="text" name="address" required />
                             <span></span>
@@ -113,6 +176,7 @@
                     </form>
 
                 </div>
+                <%}%>
                 <div class="col-md-3 section-right">
                     <h3>Order Summary</h3>
                     <div class="sub-total">
