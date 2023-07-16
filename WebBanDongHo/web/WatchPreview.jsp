@@ -35,7 +35,7 @@
                         <% } %>
                     </ul>
                     <form class="d-flex" action="SearchServlet" method="GET" role="search">
-                        <input class="form-control me-2" name="searchResult" type="text" placeholder="Search">
+                        <input class="form-control " name="searchResult" type="text" placeholder="Search">
                         <%
                             if (acc != null) {
                         %>

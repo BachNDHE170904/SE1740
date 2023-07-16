@@ -24,7 +24,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         </li>
                     </ul>
                     <form class="d-flex" action="SearchServlet" method="GET" role="search">
-                        <input class="form-control me-2" name="searchResult" type="text" placeholder="Search">
+                        <input class="form-control " name="searchResult" type="text" placeholder="Search">
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="Login.jsp">Login</a>

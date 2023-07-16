@@ -1,7 +1,7 @@
-
 .d-flex input{
-    width: 700px;
-    margin-left: 350px;
+    width: 800px;
+    margin-left: 200px;
+    margin-right: 100px;;
 }
 .card-body a{
     text-decoration: none;
