@@ -78,6 +78,7 @@ public class UpdateItemServlet extends HttpServlet {
             db.updateWatchSpecs(newWatchSpecs, id);
 
             Part part = request.getPart("myFile");
+            if(!part.getSubmittedFileName().isEmpty()){
             String realPath = request.getServletContext().getRealPath("/images");
             String filename = name + ".jpg";
             if (!Files.exists(Paths.get(realPath))) {
@@ -85,6 +86,7 @@ public class UpdateItemServlet extends HttpServlet {
             }
             Files.deleteIfExists(Paths.get(realPath + "/" + filename));
             part.write(realPath + "/" + filename);
+            }
             // Redirect to the welcome page after adding the item 
             request.getRequestDispatcher("Products.jsp").forward(request, response);
         } catch (Exception e) {

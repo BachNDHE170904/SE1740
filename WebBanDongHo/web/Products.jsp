@@ -94,6 +94,12 @@
                 <td>
                     Sku
                 </td>
+                <td>
+                    Update
+                </td>
+                <td>
+                    Delete
+                </td>
             </tr>
             <% for (Watch s : watches) {
             %>
@@ -104,7 +110,7 @@
                 <td>
                     <img src="images/<%= s.getName()%>.jpg" width="100" height="100" alt="<%= s.getName()%>">
                 </td> 
-                <td>
+                <td>S
                     <%=s.getName()%>
                 </td> 
                 <td>
@@ -115,9 +121,10 @@
                 </td>                
                 <td>   
                     <a href="UpdateItemServlet?watchid=<%= s.getWatchId()%>" onclick="return confirm('Are you sure you want to update this item?');">Update watch</a>
+                </td>
+                <td>  
                     <a href="DeleteItemServlet?watchid=<%= s.getWatchId()%>" onclick="return confirm('Are you sure you want to delete this item?');">Delete watch</a>
                 </td>
-
             </tr>
             <%}%>
         </table>

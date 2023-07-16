@@ -75,8 +75,8 @@
         <div class="container Center">
             <div class="row">
                 <%
-                    int id=Integer.parseInt(request.getParameter("watchid"));
-                    WatchDAO db=new WatchDAO();
+                    int id = Integer.parseInt(request.getParameter("watchid"));
+                    WatchDAO db = new WatchDAO();
                     Watch w = (Watch) db.getWatch(id);
                     WatchSpecs ws = (WatchSpecs) db.getWatchSpecs(id);
                 %>
@@ -100,7 +100,7 @@
                         </div>
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="myfile">Upload an image</label>
-                            <input type="file" class="form-control" id="myFile" name="myFile" required>
+                            <input type="file" class="form-control" id="myFile" name="myFile" >
                         </div>
                         <script>
                             const fileInput = document.getElementById("file");
