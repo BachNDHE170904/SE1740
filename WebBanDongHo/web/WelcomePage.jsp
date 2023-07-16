@@ -37,6 +37,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="OrdersAdmin.jsp">Orders</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="Customers.jsp">Customers</a>
+                        </li>
                         <% } %>
                     </ul>
                     <form class="d-flex" action="SearchServlet" method="GET" role="search">

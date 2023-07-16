@@ -19,7 +19,26 @@ import model.Watch;
  * @author ADMIN
  */
 public class AddressDAO extends BaseDAO<Address> {
-
+    public ArrayList<Address> getAddresses() {
+        ArrayList<Address> addresses = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM Address s\n";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Address s = new Address();
+                s.setUsername(rs.getString("username"));
+                s.setFirstname(rs.getString("firstName"));
+                s.setLastname(rs.getString("lastName"));
+                s.setPhone(rs.getString("phone"));
+                s.setAddress(rs.getString("customerAddress"));
+                addresses.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(WatchDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return addresses;
+    }
     public Address getAddress(String username) {
         try {
             String sql = "SELECT * FROM Address s\n"

@@ -1,5 +1,6 @@
 
-
+<%@page import="DAL.AddressDAO"%>
+<%@page import="model.Address"%>
 <%@page import="DAL.OrderDAO"%>
 <%@page import="model.Order"%>
 <%@page import="model.Account"%>
@@ -17,9 +18,9 @@
     </head>
     <body>
         <%
-            OrderDAO db = new OrderDAO();
+            AddressDAO db = new AddressDAO();
             Account acc = (Account) session.getAttribute("user");
-            ArrayList<Order> orders = db.getOrdersHistoryAdmin();
+            ArrayList<Address> addresses = db.getAddresses();
         %>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -86,44 +87,35 @@
                     User
                 </td>
                 <td>
-                    Order Date
+                    First Name
                 </td>
                 <td>
-                    Watch name
+                    Last name
                 </td>
                 <td>
-                    Price
+                    Phone
                 </td>
                 <td>
-                    Quantity
-                </td>
-                <td>
-                    Subtotal
+                    Address
                 </td>
             </tr>
-            <% for (Order s : orders) {
-                    float totalWatch = 0;
-                    Watch w = s.getWatch();
-                    totalWatch += s.getQuantity() * w.getPrice();
+            <% for (Address s : addresses) {
             %>
             <tr>
                 <td>
-                    <%=s.getUser()%>
+                    <%=s.getUsername()%>
                 </td> 
                 <td>
-                    <%=s.getOrderedDate()%>
+                    <%=s.getFirstname()%>
                 </td> 
                 <td>
-                    <%=w.getName()%>
+                    <%=s.getLastname()%>
                 </td>
                 <td>
-                    $<%=w.getPrice()%>
+                    <%=s.getPhone()%>
                 </td>         
                 <td>
-                    <%=s.getQuantity()%>
-                </td>  
-                <td>
-                    $<%= totalWatch %>
+                    <%=s.getAddress()%>
                 </td>  
             </tr>
             <%}%>
